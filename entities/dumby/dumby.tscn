@@ -549,11 +549,13 @@ autoplay = "flameLoop"
 speed_scale = 1.5
 
 [node name="pud" type="Sprite2D" parent="Plane"]
+unique_name_in_owner = true
 rotation = 1.5708
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("5_tl5jg")
 
 [node name="plr" type="Sprite2D" parent="Plane"]
+unique_name_in_owner = true
 visible = false
 texture = ExtResource("17_0bh43")
 
@@ -825,6 +827,14 @@ texture = ExtResource("20_hu6rb")
 texture_scale = 0.4
 
 [node name="rapid" parent="weapons_parent" instance=ExtResource("18_23fr6")]
+
+[node name="Newsprites" type="Sprite2D" parent="."]
+position = Vector2(8, -76)
+texture = ExtResource("19_hu6rb")
+centered = false
+offset = Vector2(0, -8)
+region_enabled = true
+region_rect = Rect2(32, 72, 32, 16)
 
 [connection signal="timeout" from="shootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="NewGun" from="GUI" to="." method="_on_gui_new_gun"]

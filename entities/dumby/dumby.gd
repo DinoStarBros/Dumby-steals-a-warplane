@@ -97,9 +97,12 @@ func Dead(_attack:Attack)->void:
 	%death.play("die")
 	%weapons_parent.process_mode = Node.PROCESS_MODE_DISABLED
 
+@onready var plane: Sprite2D = %Plane
 func plane_rotation_handling()->void:
-	%Plane.look_at(get_global_mouse_position())
-	#if %Plane.rotation_degrees >= 360:
-	#	%Plane.rotation_degrees = 0
-	#if %Plane.rotation_degrees <= 0:
-	#	%Plane.rotation_degrees = 360
+	plane.look_at(get_global_mouse_position())
+	if plane.rotation_degrees > 360:
+		plane.rotation_degrees = 0
+	if plane.rotation_degrees < 0:
+		plane.rotation_degrees = 360
+	
+	print(%Plane.rotation_degrees)

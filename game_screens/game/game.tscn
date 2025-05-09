@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://s8xb5hmfqgnq" path="res://resources/waves/wave1.tres" id="4_slubn"]
 [ext_resource type="Texture2D" uid="uid://ctfkn7tj5byx2" path="res://Art/STARS (2).png" id="5_ymunx"]
 [ext_resource type="PackedScene" uid="uid://cilaqubvkn2sv" path="res://CompositionStuff/Hitbox/hitbox_component.tscn" id="6_dt8y4"]
-[ext_resource type="AudioStream" uid="uid://djpnk4x0gd6y" path="res://Audio/planemusic/DnB stuffs.wav" id="7_nmb54"]
+[ext_resource type="AudioStream" uid="uid://bqwwqki11qjh8" path="res://Audio/planemusic/Mutronic Plague.mp3" id="8_slubn"]
 
 [sub_resource type="Curve2D" id="Curve2D_gy565"]
 _data = {
@@ -1025,8 +1025,8 @@ position = Vector2(5684, 543)
 shape = SubResource("RectangleShape2D_0ccf0")
 
 [node name="music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_nmb54")
-volume_db = -10.0
+stream = ExtResource("8_slubn")
+volume_db = -5.0
 autoplay = true
 bus = &"music"
 

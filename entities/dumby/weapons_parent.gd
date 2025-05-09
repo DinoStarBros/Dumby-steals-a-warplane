@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 		regen_speed = 0.5
 	else:
 		if health_component.hp < health_component.max_hp:
-			regen_speed += delta * 0.4
+			regen_speed += delta * 0.3
 			regen_time += delta * regen_speed
 		else:
 			regen_time = 0

@@ -13,7 +13,7 @@ func _process(_delta):
 	%yLost.visible = g.game_state == g.game_states.Lost
 	%score.text = str("Score:\n",g.score)
 	%"2next".text = str("Kills 'til next gun: \n", g.killscore, " / 10")
-	if g.killscore >= 10:
+	if g.killscore >= 20:
 		%newgunim.play("newgun")
 		g.killscore = 0
 		emit_signal("NewGun" )
