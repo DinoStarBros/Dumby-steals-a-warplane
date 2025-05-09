@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://hekqvagsvs2e"]
+
+[ext_resource type="Script" uid="uid://j7pbmf85cwmv" path="res://weapons/rapid/rapid.gd" id="1_ojx54"]
+[ext_resource type="Resource" uid="uid://0sigb3nq6ncr" path="res://resources/weapon_stats/RapidStats.tres" id="2_7cnad"]
+[ext_resource type="AudioStream" uid="uid://dtq0aduiy7nn4" path="res://Audio/gunshot.wav" id="3_svll7"]
+[ext_resource type="AudioStream" uid="uid://rfxisnyv0d1i" path="res://Audio/pistol-shot-233473.mp3" id="4_k5gtb"]
+
+[node name="rapid" type="Node2D"]
+script = ExtResource("1_ojx54")
+stats = ExtResource("2_7cnad")
+
+[node name="shootsfx" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_svll7")
+volume_db = -10.0
+pitch_scale = 0.6
+bus = &"sfx"
+
+[node name="shootsfx2" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_k5gtb")
+volume_db = -20.0
+pitch_scale = 1.2
+bus = &"sfx"

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c3pftmpvsmsan"
+path="res://.godot/imported/RocketFly.wav-215a8804fd852d8910a18b833a75588d.sample"
+
+[deps]
+
+source_file="res://Audio/jetslash sfx/SFX/RocketFly.wav"
+dest_files=["res://.godot/imported/RocketFly.wav-215a8804fd852d8910a18b833a75588d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

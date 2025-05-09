@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=3 uid="uid://c4npyu2732suj"]
+
+[ext_resource type="Script" uid="uid://w4fbnqem3jpc" path="res://projectiles/plr_bullet/bullet.gd" id="1_xqd8s"]
+[ext_resource type="Texture2D" uid="uid://bqubavsk5td7m" path="res://Art/newsprites.png" id="2_8vdfw"]
+[ext_resource type="PackedScene" uid="uid://cilaqubvkn2sv" path="res://CompositionStuff/Hitbox/hitbox_component.tscn" id="3_ekud1"]
+[ext_resource type="PackedScene" uid="uid://cg4l4fx01iia" path="res://classes/vis_on_screen/vis_on_screen.tscn" id="4_5dbsh"]
+
+[sub_resource type="Animation" id="Animation_8vyrs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("outline:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yfywj"]
+resource_name = "loop"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("outline:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.2, 1.2), Vector2(1.1, 1.1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8uk70"]
+_data = {
+&"RESET": SubResource("Animation_8vyrs"),
+&"loop": SubResource("Animation_yfywj")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_phsm6"]
+size = Vector2(34, 14)
+
+[node name="bullet" type="CharacterBody2D"]
+z_index = 2
+script = ExtResource("1_xqd8s")
+
+[node name="bulletsprite" type="Sprite2D" parent="."]
+modulate = Color(100, 100, 100, 1)
+texture = ExtResource("2_8vdfw")
+hframes = 3
+vframes = 3
+
+[node name="outline" type="Sprite2D" parent="."]
+modulate = Color(100, 100, 100, 0.757)
+z_index = -1
+texture = ExtResource("2_8vdfw")
+hframes = 3
+vframes = 3
+
+[node name="loop" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8uk70")
+}
+autoplay = "loop"
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_ekud1")]
+unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 2
+delete_after_hit = true
+
+[node name="hibc" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_phsm6")
+
+[node name="duration" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="vis_on_screen" parent="." instance=ExtResource("4_5dbsh")]
+
+[connection signal="timeout" from="duration" to="." method="_on_duration_timeout"]

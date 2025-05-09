@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bmxq1e4c6kemd"
+path="res://.godot/imported/Hurt.wav-f5b484315d0d06e2efd87a41a4f26663.sample"
+
+[deps]
+
+source_file="res://Audio/jetslash sfx/SFX/Hurt.wav"
+dest_files=["res://.godot/imported/Hurt.wav-f5b484315d0d06e2efd87a41a4f26663.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

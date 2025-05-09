@@ -1,0 +1,174 @@
+[gd_scene load_steps=13 format=3 uid="uid://dcdxb6boataee"]
+
+[ext_resource type="Script" uid="uid://dgnq6cs28tcsy" path="res://entities/air_defense/air_defense.gd" id="1_tanqj"]
+[ext_resource type="Texture2D" uid="uid://ctlbui32673t1" path="res://Art/planestuff/Anti Air.png" id="2_3jeyg"]
+[ext_resource type="AudioStream" uid="uid://dtq0aduiy7nn4" path="res://Audio/gunshot.wav" id="3_i3ppk"]
+[ext_resource type="AudioStream" uid="uid://rfxisnyv0d1i" path="res://Audio/pistol-shot-233473.mp3" id="4_2a1v1"]
+[ext_resource type="PackedScene" uid="uid://gs3fdbhnlc5o" path="res://CompositionStuff/Hurtbox/hurtbox_component.tscn" id="5_0c283"]
+[ext_resource type="PackedScene" uid="uid://dydkhhqkwcgfw" path="res://CompositionStuff/Health/health_component.tscn" id="6_ilt0u"]
+[ext_resource type="Texture2D" uid="uid://cb00doqsxr2ay" path="res://Art/Stuff2/shockwave-Sheet.png" id="7_ae45x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gcw7a"]
+size = Vector2(138, 133)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnseo"]
+size = Vector2(154, 149)
+
+[sub_resource type="Animation" id="Animation_jvujv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shockwave-sheet:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shockwave-sheet:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AntiAir:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_w2mpi"]
+resource_name = "die"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shockwave-sheet:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shockwave-sheet:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AntiAir:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"disable"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t3oan"]
+_data = {
+&"RESET": SubResource("Animation_jvujv"),
+&"die": SubResource("Animation_w2mpi")
+}
+
+[node name="air_defense" type="CharacterBody2D" groups=["AirDefense", "Enemy"]]
+script = ExtResource("1_tanqj")
+
+[node name="AntiAir" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("2_3jeyg")
+
+[node name="shoot" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_i3ppk")
+volume_db = -20.0
+pitch_scale = 0.7
+bus = &"sfx"
+
+[node name="shoot2" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_2a1v1")
+volume_db = -25.0
+bus = &"sfx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_gcw7a")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_0c283")]
+collision_layer = 2
+collision_mask = 2
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_nnseo")
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_ilt0u")]
+max_hp = 20.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+autostart = true
+
+[node name="Shockwave-sheet" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(100, 100, 100, 1)
+scale = Vector2(2, 2)
+texture = ExtResource("7_ae45x")
+hframes = 3
+vframes = 3
+frame = 1
+
+[node name="death" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_t3oan")
+}
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

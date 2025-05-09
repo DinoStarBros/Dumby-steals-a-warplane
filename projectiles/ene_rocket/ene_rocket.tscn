@@ -1,0 +1,113 @@
+[gd_scene load_steps=9 format=3 uid="uid://dk4uoss5ur21j"]
+
+[ext_resource type="Script" uid="uid://7gw4trspdrrg" path="res://projectiles/ene_rocket/ene_rocket.gd" id="1_j5t3p"]
+[ext_resource type="Texture2D" uid="uid://bqubavsk5td7m" path="res://Art/newsprites.png" id="2_3th8a"]
+[ext_resource type="PackedScene" uid="uid://cilaqubvkn2sv" path="res://CompositionStuff/Hitbox/hitbox_component.tscn" id="3_v2t7y"]
+
+[sub_resource type="Animation" id="Animation_8vyrs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("outline:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yfywj"]
+resource_name = "loop"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("outline:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.2, 1.2), Vector2(1.1, 1.1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8uk70"]
+_data = {
+&"RESET": SubResource("Animation_8vyrs"),
+&"loop": SubResource("Animation_yfywj")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ted0"]
+radius = 13.8067
+
+[sub_resource type="Curve" id="Curve_c68tw"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, -304.615), 0.0, 0.0, 0, 0, Vector2(0.983146, 296.703), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="ene_rocket" type="CharacterBody2D" groups=["Enemy"]]
+z_index = 2
+scale = Vector2(0.8, 0.8)
+script = ExtResource("1_j5t3p")
+
+[node name="bulletsprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_3th8a")
+hframes = 3
+vframes = 3
+
+[node name="outline" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(100, 100, 100, 1)
+z_index = -1
+texture = ExtResource("2_3th8a")
+hframes = 3
+vframes = 3
+
+[node name="loop" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8uk70")
+}
+autoplay = "loop"
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_v2t7y")]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 4
+delete_after_hit = true
+
+[node name="hibc" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_7ted0")
+
+[node name="dur" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Newsprites" type="Sprite2D" parent="."]
+self_modulate = Color(100, 0, 0, 1)
+scale = Vector2(2, 2)
+texture = ExtResource("2_3th8a")
+hframes = 3
+vframes = 3
+frame = 2
+
+[node name="trailparticle" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(1.2, 1.2)
+amount = 10
+lifetime = 0.5
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+angular_velocity_curve = SubResource("Curve_c68tw")
+scale_amount_min = 4.0
+scale_amount_max = 5.0
+
+[connection signal="timeout" from="dur" to="." method="_on_dur_timeout"]

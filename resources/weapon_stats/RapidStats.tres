@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://0sigb3nq6ncr"]
+
+[ext_resource type="Script" uid="uid://2egkgwj5n4iw" path="res://resources/weapon_stats_resource.gd" id="1_v3prr"]
+[ext_resource type="PackedScene" uid="uid://c4npyu2732suj" path="res://projectiles/plr_bullet/bullet.tscn" id="1_wunjo"]
+
+[resource]
+script = ExtResource("1_v3prr")
+shoot_cooldown = 0.1
+bullet_spd = 2000
+bullet_amnt = 1
+random_spread = 0.0
+bullet_scn = ExtResource("1_wunjo")
+metadata/_custom_type_script = "uid://2egkgwj5n4iw"

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c380plmmc2rgk"]
+
+[ext_resource type="Texture2D" uid="uid://c1h2bdnvv4xo3" path="res://Art/planestuff/clouds-Sheet.png" id="1_yc7kn"]
+[ext_resource type="Script" uid="uid://18f87ce0wya" path="res://scenes/cloud/cloud.gd" id="2_0xcjh"]
+
+[node name="cloud" type="Sprite2D"]
+modulate = Color(0.462291, 0.462291, 0.462291, 1)
+position = Vector2(0, -1)
+texture = ExtResource("1_yc7kn")
+hframes = 5
+script = ExtResource("2_0xcjh")

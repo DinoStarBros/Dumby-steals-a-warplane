@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cbe0x2c0yeb4t"
+path="res://.godot/imported/sword_slash_sfx.mp3-0cd73004bcbecee9fbd56ced8feeddcf.mp3str"
+
+[deps]
+
+source_file="res://Audio/jetslash sfx/SFX/sword_slash_sfx.mp3"
+dest_files=["res://.godot/imported/sword_slash_sfx.mp3-0cd73004bcbecee9fbd56ced8feeddcf.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

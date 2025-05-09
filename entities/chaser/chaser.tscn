@@ -1,0 +1,376 @@
+[gd_scene load_steps=20 format=3 uid="uid://bj5wj2g1r73gg"]
+
+[ext_resource type="Script" uid="uid://cn6d8a0upm6v5" path="res://entities/chaser/chaser.gd" id="1_b7csh"]
+[ext_resource type="Texture2D" uid="uid://b3hwhp3ky72y6" path="res://Art/planestuff/plane.png" id="2_fsmyf"]
+[ext_resource type="Texture2D" uid="uid://baj53ina6l1vj" path="res://Art/planestuff/plane-Sheet.png" id="3_l3laj"]
+[ext_resource type="PackedScene" uid="uid://gs3fdbhnlc5o" path="res://CompositionStuff/Hurtbox/hurtbox_component.tscn" id="4_on2tx"]
+[ext_resource type="PackedScene" uid="uid://dydkhhqkwcgfw" path="res://CompositionStuff/Health/health_component.tscn" id="5_74ld6"]
+[ext_resource type="Texture2D" uid="uid://cb00doqsxr2ay" path="res://Art/Stuff2/shockwave-Sheet.png" id="6_0teo6"]
+[ext_resource type="PackedScene" uid="uid://cilaqubvkn2sv" path="res://CompositionStuff/Hitbox/hitbox_component.tscn" id="7_bngux"]
+
+[sub_resource type="Curve" id="Curve_smpng"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, -304.615), 0.0, 0.0, 0, 0, Vector2(0.983146, 296.703), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_dq1xq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kvjl2"]
+resource_name = "flameLoop"
+length = 0.3
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_75cqi"]
+_data = {
+&"RESET": SubResource("Animation_dq1xq"),
+&"flameLoop": SubResource("Animation_kvjl2")
+}
+
+[sub_resource type="Animation" id="Animation_2qnmu"]
+resource_name = "Ouch"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Plane:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(100, 100, 100, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bvk23"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d56he"]
+_data = {
+&"Ouch": SubResource("Animation_2qnmu"),
+&"RESET": SubResource("Animation_bvk23")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iq0po"]
+size = Vector2(34, 18)
+
+[sub_resource type="Animation" id="Animation_lctui"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shockwave-sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Plane:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("outline:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Shockwave-sheet:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HurtboxComponent/hubc:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_akvag"]
+resource_name = "die"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shockwave-sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Plane:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("outline:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Shockwave-sheet:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HurtboxComponent/hubc:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eeo2s"]
+_data = {
+&"RESET": SubResource("Animation_lctui"),
+&"die": SubResource("Animation_akvag")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbfv1"]
+size = Vector2(20, 16)
+
+[node name="chaser" type="CharacterBody2D" groups=["Enemy"]]
+z_index = 2
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_b7csh")
+
+[node name="Plane" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(100, 100, 100, 1)
+self_modulate = Color(0, 0, 0, 1)
+texture = ExtResource("2_fsmyf")
+
+[node name="flameparticles" type="CPUParticles2D" parent="Plane"]
+unique_name_in_owner = true
+position = Vector2(-16, 0)
+scale = Vector2(1.2, 1.2)
+amount = 2
+lifetime = 1.5
+explosiveness = 0.1
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, 10)
+initial_velocity_min = 300.0
+initial_velocity_max = 350.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+angular_velocity_curve = SubResource("Curve_smpng")
+scale_amount_min = 4.0
+scale_amount_max = 5.0
+color = Color(0.581033, 0.581033, 0.581033, 1)
+
+[node name="flamez" type="Sprite2D" parent="Plane"]
+unique_name_in_owner = true
+self_modulate = Color(100, 100, 100, 1)
+position = Vector2(-16, 0)
+texture = ExtResource("3_l3laj")
+hframes = 4
+frame = 1
+
+[node name="flameLoop" type="AnimationPlayer" parent="Plane/flamez"]
+libraries = {
+"": SubResource("AnimationLibrary_75cqi")
+}
+autoplay = "flameLoop"
+speed_scale = 1.5
+
+[node name="outline" type="Node2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(100, 100, 100, 1)
+
+[node name="1" type="Sprite2D" parent="outline"]
+modulate = Color(0.587035, 0.722509, 1, 1)
+z_index = -1
+position = Vector2(0, -1)
+texture = ExtResource("2_fsmyf")
+
+[node name="2" type="Sprite2D" parent="outline"]
+modulate = Color(0.587035, 0.722509, 1, 1)
+z_index = -1
+position = Vector2(1, 0)
+texture = ExtResource("2_fsmyf")
+
+[node name="3" type="Sprite2D" parent="outline"]
+modulate = Color(0.587035, 0.722509, 1, 1)
+z_index = -1
+position = Vector2(0, 1)
+texture = ExtResource("2_fsmyf")
+
+[node name="4" type="Sprite2D" parent="outline"]
+modulate = Color(0.587035, 0.722509, 1, 1)
+z_index = -1
+position = Vector2(-1, 0)
+texture = ExtResource("2_fsmyf")
+
+[node name="targetDeviatTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+autostart = true
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component", "ouchnim") instance=ExtResource("4_on2tx")]
+collision_layer = 2
+collision_mask = 2
+health_component = NodePath("../HealthComponent")
+ouchnim = NodePath("ouchnim")
+
+[node name="ouchnim" type="AnimationPlayer" parent="HurtboxComponent"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_d56he")
+}
+
+[node name="hubc" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_iq0po")
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_74ld6")]
+max_hp = 5.0
+
+[node name="death" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_eeo2s")
+}
+speed_scale = 2.0
+
+[node name="Shockwave-sheet" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(100, 100, 100, 1)
+texture = ExtResource("6_0teo6")
+hframes = 3
+vframes = 3
+frame = 1
+
+[node name="HitboxComponent" parent="." instance=ExtResource("7_bngux")]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_rbfv1")
+
+[connection signal="timeout" from="targetDeviatTimer" to="." method="_on_target_deviat_timer_timeout"]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbqycfelpg0v6"]
+
+[ext_resource type="AudioStream" uid="uid://crwvnwtgketcd" path="res://Audio/cardtowersfx/enemy_hit.wav" id="1_2oqfr"]
+[ext_resource type="Script" uid="uid://bv21qdbjq3b34" path="res://spawned_sounds/randomize_pitch.gd" id="1_gsgp0"]
+[ext_resource type="AudioStream" uid="uid://nj64nd85rtql" path="res://Audio/splashtownSFX/Airdash.wav" id="2_3lx7f"]
+[ext_resource type="AudioStream" uid="uid://cw0s6bkxlwn2b" path="res://Audio/splashtownSFX/Jump.wav" id="3_2tf1m"]
+
+[node name="enemy_hit_sfx" type="Node2D"]
+script = ExtResource("1_gsgp0")
+
+[node name="enemy_hit" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("1_2oqfr")
+volume_db = -10.0
+pitch_scale = 0.5
+bus = &"sfx"
+
+[node name="enemy_hit2" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_3lx7f")
+volume_db = -10.0
+pitch_scale = 0.5
+bus = &"sfx"
+
+[node name="enemy_hit3" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_2tf1m")
+volume_db = -5.0
+pitch_scale = 1.5
+bus = &"sfx"

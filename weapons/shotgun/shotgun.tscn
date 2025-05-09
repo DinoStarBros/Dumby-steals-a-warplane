@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhygjgvm7og03"]
+
+[ext_resource type="Script" uid="uid://cceo8h6s8n121" path="res://weapons/shotgun/shotgun.gd" id="1_0kfn4"]
+[ext_resource type="AudioStream" uid="uid://dtq0aduiy7nn4" path="res://Audio/gunshot.wav" id="2_apfrx"]
+[ext_resource type="Resource" uid="uid://b3tp2kent410x" path="res://resources/weapon_stats/ShotgunStats.tres" id="2_ggjqm"]
+[ext_resource type="AudioStream" uid="uid://rfxisnyv0d1i" path="res://Audio/pistol-shot-233473.mp3" id="3_ggjqm"]
+
+[node name="shotgun" type="Node2D"]
+script = ExtResource("1_0kfn4")
+stats = ExtResource("2_ggjqm")
+
+[node name="shootsfx" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_apfrx")
+volume_db = -10.0
+pitch_scale = 0.6
+bus = &"sfx"
+
+[node name="shootsfx2" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_ggjqm")
+volume_db = -20.0
+pitch_scale = 1.2
+bus = &"sfx"

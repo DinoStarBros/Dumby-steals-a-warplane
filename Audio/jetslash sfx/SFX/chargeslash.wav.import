@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cryj6702ttly6"
+path="res://.godot/imported/chargeslash.wav-1f78981231fd0c656dfc3b4d4ba9f29b.sample"
+
+[deps]
+
+source_file="res://Audio/jetslash sfx/SFX/chargeslash.wav"
+dest_files=["res://.godot/imported/chargeslash.wav-1f78981231fd0c656dfc3b4d4ba9f29b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
