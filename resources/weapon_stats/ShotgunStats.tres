@@ -7,7 +7,7 @@
 script = ExtResource("1_hua0a")
 shoot_cooldown = 0.3
 bullet_spd = 1500
-bullet_amnt = 4
+bullet_amnt = 5
 random_spread = 0.2
 bullet_scn = ExtResource("1_yo2f7")
 metadata/_custom_type_script = "uid://2egkgwj5n4iw"

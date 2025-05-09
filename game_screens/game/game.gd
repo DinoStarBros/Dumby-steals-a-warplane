@@ -8,6 +8,7 @@ const right_bound : = 14000
 const up_bound : = -6674
 const down_bound : = 2583
 func _ready():
+	g.game_state = g.game_states.Combat
 	%Groundhitbox.set_attack_properties(1)
 	cloud_parents = %cloudparallax.get_children()
 	#print(320*15)

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=4 format=3 uid="uid://s8xb5hmfqgnq"]
+
+[ext_resource type="Script" uid="uid://d1crhjsum6w1o" path="res://resources/wave_resource.gd" id="1_a4hey"]
+[ext_resource type="PackedScene" uid="uid://bj5wj2g1r73gg" path="res://entities/chaser/chaser.tscn" id="1_w1tnr"]
+[ext_resource type="PackedScene" uid="uid://bhp7st34wqg3f" path="res://entities/shooter/shooter.tscn" id="2_vtds5"]
+
+[resource]
+script = ExtResource("1_a4hey")
+enemies = Array[PackedScene]([ExtResource("1_w1tnr"), ExtResource("2_vtds5")])
+starting_spawn_time = 2.0
+minimum_spawn_time = 0.05
+spawn_time_increment = 0.01
+enemy_limit = 200.0
+min_enemy_amount = 2
+max_enemy_amount = 4
+metadata/_custom_type_script = "uid://d1crhjsum6w1o"

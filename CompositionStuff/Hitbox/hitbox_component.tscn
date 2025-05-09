@@ -29,7 +29,6 @@ bus = &"sfx"
 unique_name_in_owner = true
 stream = ExtResource("4_xevjv")
 volume_db = -5.0
-pitch_scale = 1.5
 bus = &"sfx"
 
 [node name="player_hit" type="AudioStreamPlayer" parent="."]

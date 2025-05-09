@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bfahxvjjxjylq"]
+[gd_scene load_steps=45 format=3 uid="uid://bfahxvjjxjylq"]
 
 [ext_resource type="Script" uid="uid://cbp023lkcpg5o" path="res://entities/dumby/dumby.gd" id="1_2ba6e"]
 [ext_resource type="PackedScene" uid="uid://gs3fdbhnlc5o" path="res://CompositionStuff/Hurtbox/hurtbox_component.tscn" id="2_5wgoi"]
@@ -20,7 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://bqubavsk5td7m" path="res://Art/newsprites.png" id="19_hu6rb"]
 [ext_resource type="Script" uid="uid://0245wd4r0bun" path="res://entities/dumby/weapons_parent.gd" id="19_ufwy4"]
 [ext_resource type="Texture2D" uid="uid://b2e50hn2busxu" path="res://Art/Stuff2/2d_lights_and_shadows_neutral_point_light.webp" id="20_hu6rb"]
-[ext_resource type="PackedScene" uid="uid://bhygjgvm7og03" path="res://weapons/shotgun/shotgun.tscn" id="20_ubs6q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmt67"]
 size = Vector2(4, 4)
@@ -89,15 +88,13 @@ _data = {
 &"RESET": SubResource("Animation_mt2ih")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4unw"]
-bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6w3i"]
-bg_color = Color(0.548963, 0.548963, 0.548963, 1)
-
 [sub_resource type="Curve" id="Curve_tualj"]
 _limits = [-360.0, 360.0, 0.0, 1.0]
 _data = [Vector2(0, -304.615), 0.0, 0.0, 0, 0, Vector2(0.983146, 296.703), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_hu6rb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Animation" id="Animation_dq1xq"]
@@ -154,7 +151,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.15),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1.2, 1.2)]
+"values": [Vector2(3, 1.5), Vector2(2, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_75cqi"]
@@ -399,6 +396,47 @@ font_size = 25
 font_color = Color(0, 0, 0, 1)
 outline_size = 12
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4unw"]
+bg_color = Color(0.501407, 0.501406, 0.501406, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hu6rb"]
+bg_color = Color(0.0594658, 0.796868, 0.0499423, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hu6rb"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+outline_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6w3i"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_hu6rb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
 [sub_resource type="Animation" id="Animation_ufwy4"]
 resource_name = "flash"
 length = 0.2
@@ -426,33 +464,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [8, 7, 6]
-}
-
-[sub_resource type="Animation" id="Animation_hu6rb"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [7]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hu6rb"]
@@ -486,27 +497,7 @@ libraries = {
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("hp_bar") instance=ExtResource("3_pin7m")]
 unique_name_in_owner = true
 scale = Vector2(1.5, 1.5)
-hp_bar = NodePath("hpbar")
-hp_text = NodePath("")
-
-[node name="hpbar" type="ProgressBar" parent="HealthComponent"]
-offset_left = -27.0
-offset_top = -28.3333
-offset_bottom = -22.3333
-scale = Vector2(2, 2)
-theme_override_styles/background = SubResource("StyleBoxFlat_d4unw")
-theme_override_styles/fill = SubResource("StyleBoxFlat_v6w3i")
-show_percentage = false
-
-[node name="hptxt" type="Label" parent="HealthComponent/hpbar"]
-visible = false
-layout_mode = 0
-offset_left = 10.3333
-offset_top = -0.833336
-offset_right = 50.3333
-offset_bottom = 22.1667
-scale = Vector2(0.3, 0.3)
-text = "5/5"
+hp_bar = NodePath("../GUI/hpbar")
 
 [node name="Plane" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -525,14 +516,14 @@ initial_velocity_max = 350.0
 angular_velocity_min = -180.0
 angular_velocity_max = 180.0
 angular_velocity_curve = SubResource("Curve_tualj")
-scale_amount_min = 4.0
-scale_amount_max = 5.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_hu6rb")
 
 [node name="trailparticle" type="CPUParticles2D" parent="Plane"]
 unique_name_in_owner = true
-position = Vector2(-16, 0)
+position = Vector2(-30, 0)
 scale = Vector2(1.2, 1.2)
-amount = 40
+amount = 100
 direction = Vector2(0, 0)
 spread = 0.0
 gravity = Vector2(0, 0)
@@ -540,7 +531,7 @@ angular_velocity_min = -180.0
 angular_velocity_max = 180.0
 angular_velocity_curve = SubResource("Curve_tualj")
 scale_amount_min = 4.0
-scale_amount_max = 5.0
+scale_amount_max = 10.0
 
 [node name="flamez" type="Sprite2D" parent="Plane"]
 unique_name_in_owner = true
@@ -603,6 +594,7 @@ bus = &"sfx"
 [node name="jet" type="AudioStreamPlayer" parent="sfx"]
 unique_name_in_owner = true
 stream = ExtResource("9_xd5q6")
+volume_db = 4.0
 bus = &"sfx"
 
 [node name="explod" type="AudioStreamPlayer" parent="sfx"]
@@ -778,8 +770,39 @@ hframes = 3
 vframes = 3
 frame = 6
 
-[node name="weapons_parent" type="Node2D" parent="."]
+[node name="hpbar" type="ProgressBar" parent="GUI"]
+offset_left = 12.0
+offset_top = 127.0
+offset_right = 81.0
+offset_bottom = 133.0
+scale = Vector2(2, 2)
+theme_override_styles/background = SubResource("StyleBoxFlat_d4unw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hu6rb")
+show_percentage = false
+
+[node name="hptxt" type="Label" parent="GUI/hpbar"]
+layout_mode = 0
+offset_top = -11.5
+offset_right = 49.0
+offset_bottom = 30.5
+scale = Vector2(0.3, 0.3)
+text = "HP:"
+label_settings = SubResource("LabelSettings_hu6rb")
+
+[node name="regen_bar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -36.0
+offset_top = -28.0
+offset_bottom = -22.0
+scale = Vector2(2, 2)
+theme_override_styles/background = SubResource("StyleBoxFlat_d4unw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_v6w3i")
+show_percentage = false
+
+[node name="weapons_parent" type="Node2D" parent="." node_paths=PackedStringArray("dumby")]
+unique_name_in_owner = true
 script = ExtResource("19_ufwy4")
+dumby = NodePath("..")
 
 [node name="muzzle_flash" type="Sprite2D" parent="weapons_parent"]
 visible = false
@@ -802,8 +825,6 @@ texture = ExtResource("20_hu6rb")
 texture_scale = 0.4
 
 [node name="rapid" parent="weapons_parent" instance=ExtResource("18_23fr6")]
-
-[node name="shotgun" parent="weapons_parent" instance=ExtResource("20_ubs6q")]
 
 [connection signal="timeout" from="shootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="NewGun" from="GUI" to="." method="_on_gui_new_gun"]

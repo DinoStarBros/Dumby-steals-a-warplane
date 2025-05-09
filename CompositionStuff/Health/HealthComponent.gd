@@ -19,13 +19,7 @@ func damage(attack:Attack):
 		hp -= attack.ene_attack_damage
 
 func _process(_delta:float)->void:
-	if get_parent().is_in_group("Enemy"):
-		if hp_bar:
-			hp_bar.visible = g.show_healthbar
-			hp_text.visible = g.show_healthbar
-	else:
-		pass
-	
+
 	if hp_bar:
 		hp_bar.max_value = max_hp
 		hp_bar.value = hp

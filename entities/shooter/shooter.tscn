@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bhp7st34wqg3f"]
+[gd_scene load_steps=22 format=3 uid="uid://bhp7st34wqg3f"]
 
 [ext_resource type="Script" uid="uid://bsinn15v5ma8t" path="res://entities/shooter/shooter.gd" id="1_kg2ur"]
 [ext_resource type="Texture2D" uid="uid://b3hwhp3ky72y6" path="res://Art/planestuff/plane.png" id="2_bvc85"]
@@ -140,7 +140,7 @@ tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
+"update": 0,
 "values": [true]
 }
 tracks/3/type = "value"
@@ -218,7 +218,7 @@ tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
+"update": 0,
 "values": [false]
 }
 tracks/4/type = "value"
@@ -245,12 +245,32 @@ tracks/5/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("explode_particles:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eeo2s"]
 _data = {
 &"RESET": SubResource("Animation_lctui"),
 &"die": SubResource("Animation_akvag")
 }
+
+[sub_resource type="Curve" id="Curve_o2tfc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_o2tfc"]
+offsets = PackedFloat32Array(0, 0.885906, 0.993289)
+colors = PackedColorArray(1, 0.862143, 0.308024, 1, 0.958062, 0.583923, 1.4023e-06, 1, 0.980565, 0.365168, 0, 1)
 
 [node name="shooter" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 2
@@ -354,9 +374,28 @@ libraries = {
 }
 speed_scale = 2.0
 
+[node name="explode_particles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 20
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 500.0
+initial_velocity_max = 1000.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+scale_amount_min = 5.0
+scale_amount_max = 20.0
+scale_amount_curve = SubResource("Curve_o2tfc")
+color_ramp = SubResource("Gradient_o2tfc")
+
 [node name="Shockwave-sheet" type="Sprite2D" parent="."]
 visible = false
-modulate = Color(100, 100, 100, 1)
 texture = ExtResource("6_uy5fh")
 hframes = 3
 vframes = 3

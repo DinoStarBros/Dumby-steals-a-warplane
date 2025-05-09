@@ -10,6 +10,8 @@ var dist_to_targ : float
 func _ready():
 	_on_target_deviat_timer_timeout()
 	%HitboxComponent.set_attack_properties(1)
+	
+	accelerate_spd += randi_range(-5, 5)
 
 var target_deviation : Vector2
 func _physics_process(delta):
@@ -49,7 +51,7 @@ func lim_accel_y()->void:
 	if velocity.y >= accelerate_limit:
 		velocity.y = accelerate_limit
 
-const tdev_range : = 150
+const tdev_range : = 300
 func _on_target_deviat_timer_timeout():
 	target_deviation.x = randf_range(-tdev_range,tdev_range)
 	target_deviation.y = randf_range(-tdev_range,tdev_range)

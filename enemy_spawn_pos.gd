@@ -1,24 +1,23 @@
 extends Path2D
 
-var enemies : = [
-	preload("res://entities/shooter/shooter.tscn"),
-	preload("res://entities/chaser/chaser.tscn")
-]
+@export var wave : Wave
+var spawn_time : float = 1
+
 func _ready():
 	%spawnTimer.start(1)
+	spawn_time = wave.starting_spawn_time
 
-var spawn_time : float = 0.5
 func _on_spawn_timer_timeout():
-	spawn_time -= 0.05
-	if spawn_time <= 0.05:
-		spawn_time = 0.05
+	spawn_time -= wave.spawn_time_increment
+	if spawn_time <= wave.minimum_spawn_time:
+		spawn_time = wave.minimum_spawn_time
 	%spawnTimer.start(spawn_time)
-	if get_tree().get_nodes_in_group("Enemy").size() <= 100:
-		for n in randi_range(4,5):
+	if get_tree().get_nodes_in_group("Enemy").size() <= wave.enemy_limit and g.game_state == g.game_states.Combat:
+		for n in randi_range(wave.min_enemy_amount, wave.max_enemy_amount):
 			spawn_enemy()
 
 func spawn_enemy()->void:
-	var enemy_scn = enemies.pick_random()
+	var enemy_scn = wave.enemies.pick_random()
 	var enemy = enemy_scn.instantiate()
 	
 	%enemy_spawn_pos.progress_ratio = randf()

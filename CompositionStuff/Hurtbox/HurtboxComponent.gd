@@ -4,6 +4,8 @@ class_name HurtboxComponent
 @export var health_component : HealthComponent
 @export var ouchnim : AnimationPlayer
 
+signal Hit(dmg:int)
+
 func damage(attack:Attack):
 	z_index = 1
 	
