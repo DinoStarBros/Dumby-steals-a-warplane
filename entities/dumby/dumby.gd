@@ -34,7 +34,6 @@ func _physics_process(delta):
 		velocity += accelerate_spd * dir_to_mouse
 		if not %jet.playing:
 			%jet.play()
-		
 	else:
 		%jet.stop()
 	
@@ -62,30 +61,11 @@ func lim_accel_x()->void:
 		velocity.x = -accelerate_limit
 	if velocity.x >= accelerate_limit:
 		velocity.x = accelerate_limit
-
 func lim_accel_y()->void:
 	if velocity.y <= -accelerate_limit:
 		velocity.y = -accelerate_limit
 	if velocity.y >= accelerate_limit:
 		velocity.y = accelerate_limit
-
-var shoot_cooldown : = .2
-var bullet_scenes : = [
-	preload("res://projectiles/plr_bullet/bullet.tscn"),
-	preload("res://projectiles/rocket/rocket.tscn"),
-	preload("res://projectiles/plr_bullet/bullet.tscn"),
-	preload("res://projectiles/laser/laser.tscn"),
-	preload("res://projectiles/rocket/rocket.tscn"),
-]
-var bullet_scn 
-var can_shoot : = true
-var bullet_spd : = 1500
-var bullet_idx : = 1
-var bullet_amnt : = 1
-var gun_type : = 0
-
-func _on_shoot_timer_timeout():
-	can_shoot = true
 
 func damage(_attack:Attack)->void:
 	pass
@@ -97,12 +77,11 @@ func Dead(_attack:Attack)->void:
 	%death.play("die")
 	%weapons_parent.process_mode = Node.PROCESS_MODE_DISABLED
 
-@onready var plane: Sprite2D = %Plane
+@onready var plane_sprite: AnimatedSprite2D = %PlaneSprite
 func plane_rotation_handling()->void:
-	plane.look_at(get_global_mouse_position())
-	if plane.rotation_degrees > 360:
-		plane.rotation_degrees = 0
-	if plane.rotation_degrees < 0:
-		plane.rotation_degrees = 360
+	plane_sprite.look_at(get_global_mouse_position())
 	
-	print(%Plane.rotation_degrees)
+	if plane_sprite.rotation_degrees > 180:
+		plane_sprite.rotation_degrees = -180
+	if plane_sprite.rotation_degrees < -180:
+		plane_sprite.rotation_degrees = 180

@@ -43,16 +43,9 @@ func damage(_attack:Attack)->void:
 func Dead(_attack:Attack)->void:
 	g.score += 50
 	g.killscore += 1
-	spawn_txt("50")
+	g.spawn_txt("50", global_position)
 	set_physics_process(false)
 	%death.play("die")
-
-var txt_scn : = preload("res://scenes/DmgNum/dmg_num.tscn")
-func spawn_txt(text:String)->void:
-	var txt = txt_scn.instantiate()
-	txt.text = text
-	txt.global_position = global_position
-	g.game.add_child(txt)
 
 var shooty : = true
 func disable()->void:

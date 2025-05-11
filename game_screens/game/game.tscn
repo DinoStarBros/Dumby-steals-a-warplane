@@ -88,6 +88,7 @@ position = Vector2(52, 0)
 shape = SubResource("RectangleShape2D_6uk7y")
 
 [node name="u" type="StaticBody2D" parent="wall_bounds"]
+position = Vector2(-54, 552.667)
 
 [node name="uc" type="CollisionShape2D" parent="wall_bounds/u"]
 position = Vector2(68, -1654)
@@ -288,7 +289,7 @@ scale = Vector2(5, 2.5)
 texture = ExtResource("4_3mndk")
 
 [node name="u2" type="Node2D" parent="."]
-position = Vector2(726, 8624)
+position = Vector2(164, 10296)
 rotation = 3.14159
 scale = Vector2(1, 4)
 

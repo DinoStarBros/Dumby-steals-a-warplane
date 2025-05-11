@@ -4,7 +4,7 @@ class_name HurtboxComponent
 @export var health_component : HealthComponent
 @export var ouchnim : AnimationPlayer
 
-signal Hit(dmg:int)
+signal PlrHit(dmg:int)
 
 func damage(attack:Attack):
 	z_index = 1
@@ -24,10 +24,10 @@ func damage(attack:Attack):
 	
 	if get_parent().is_in_group("Enemy"):
 		g.cam.apply_shake(10)
-		#g.frameFreeze(0.3,0.05)
 	elif get_parent().is_in_group("Player"):
-		#g.frameFreeze(0.3,0.6)
 		g.cam.apply_shake(30)
+		PlrHit.emit(attack.attack_damage)
+
 	if ouchnim:
 		ouchnim.play("Ouch")
  

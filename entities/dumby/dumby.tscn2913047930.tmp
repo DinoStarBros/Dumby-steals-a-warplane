@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://bfahxvjjxjylq"]
+[gd_scene load_steps=54 format=3 uid="uid://bfahxvjjxjylq"]
 
 [ext_resource type="Script" uid="uid://cbp023lkcpg5o" path="res://entities/dumby/dumby.gd" id="1_2ba6e"]
 [ext_resource type="PackedScene" uid="uid://gs3fdbhnlc5o" path="res://CompositionStuff/Hurtbox/hurtbox_component.tscn" id="2_5wgoi"]
@@ -410,21 +410,6 @@ font_size = 30
 font_color = Color(0, 0, 0, 1)
 outline_size = 7
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12q0g"]
-skew = Vector2(1, 0)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_baqsm"]
-bg_color = Color(0.767262, 0.81099, 1.15514e-06, 1)
-skew = Vector2(1, 0)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6w3i"]
 bg_color = Color(1, 1, 1, 1)
 
@@ -489,39 +474,6 @@ _data = {
 &"RESET": SubResource("Animation_hu6rb"),
 &"flash": SubResource("Animation_ufwy4")
 }
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u8vb7"]
-bg_color = Color(0, 0, 0, 1)
-draw_center = false
-skew = Vector2(1, 0)
-border_width_left = 5
-border_width_top = 2
-border_width_right = 5
-border_width_bottom = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5senk"]
-bg_color = Color(1, 1, 1, 1)
-skew = Vector2(1, 0)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4tpm"]
-bg_color = Color(0.959404, 0.734123, 0.92243, 1)
-skew = Vector2(1, 0)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gq83w"]
-bg_color = Color(0, 0, 0, 1)
-skew = Vector2(1, 0)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
 
 [node name="dumby" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_2ba6e")
@@ -841,25 +793,6 @@ offset_top = 19.0
 offset_right = 640.0
 offset_bottom = 19.0
 
-[node name="ammo" type="ProgressBar" parent="GUI"]
-offset_left = 33.0
-offset_top = 654.0
-offset_right = 237.0
-offset_bottom = 681.0
-mouse_filter = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_12q0g")
-theme_override_styles/fill = SubResource("StyleBoxFlat_baqsm")
-show_percentage = false
-
-[node name="ammo_txt" type="Label" parent="GUI/ammo"]
-layout_mode = 0
-offset_left = 12.0
-offset_top = -25.0
-offset_right = 64.0
-offset_bottom = 24.0
-text = "Ammo
-24 / 24"
-
 [node name="regen_bar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
 offset_left = -36.0
@@ -870,12 +803,10 @@ theme_override_styles/background = SubResource("StyleBoxFlat_d4unw")
 theme_override_styles/fill = SubResource("StyleBoxFlat_v6w3i")
 show_percentage = false
 
-[node name="weapons_parent" type="Node2D" parent="." node_paths=PackedStringArray("dumby", "ammo_bar", "current_weapon")]
+[node name="weapons_parent" type="Node2D" parent="." node_paths=PackedStringArray("dumby")]
 unique_name_in_owner = true
 script = ExtResource("19_ufwy4")
 dumby = NodePath("..")
-ammo_bar = NodePath("../GUI/ammo")
-current_weapon = NodePath("rapid")
 
 [node name="muzzle_flash" type="Sprite2D" parent="weapons_parent"]
 visible = false
@@ -898,44 +829,6 @@ texture = ExtResource("20_hu6rb")
 texture_scale = 0.4
 
 [node name="rapid" parent="weapons_parent" instance=ExtResource("18_23fr6")]
-
-[node name="reload_bar" type="ProgressBar" parent="."]
-unique_name_in_owner = true
-z_index = 5
-offset_left = -91.0
-offset_top = -64.0
-offset_right = 91.0
-offset_bottom = -45.0
-theme_override_styles/background = SubResource("StyleBoxFlat_u8vb7")
-theme_override_styles/fill = SubResource("StyleBoxFlat_5senk")
-max_value = 1.0
-show_percentage = false
-
-[node name="max_ss_vis" type="ProgressBar" parent="."]
-unique_name_in_owner = true
-z_index = 1
-offset_left = -91.0
-offset_top = -64.0
-offset_right = 91.0
-offset_bottom = -45.0
-theme_override_styles/background = SubResource("StyleBoxFlat_u8vb7")
-theme_override_styles/fill = SubResource("StyleBoxFlat_n4tpm")
-max_value = 1.0
-value = 0.6
-show_percentage = false
-
-[node name="min_ss_vis" type="ProgressBar" parent="."]
-unique_name_in_owner = true
-z_index = 1
-offset_left = -91.0
-offset_top = -64.0
-offset_right = 91.0
-offset_bottom = -45.0
-theme_override_styles/background = SubResource("StyleBoxFlat_u8vb7")
-theme_override_styles/fill = SubResource("StyleBoxFlat_gq83w")
-max_value = 1.0
-value = 0.5
-show_percentage = false
 
 [connection signal="PlrHit" from="HurtboxComponent" to="weapons_parent" method="_on_hurtbox_component_plr_hit"]
 [connection signal="NewGun" from="GUI" to="GUI" method="_on_new_gun"]

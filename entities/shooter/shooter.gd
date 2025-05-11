@@ -56,7 +56,7 @@ func damage(_attack:Attack)->void:
 func Dead(_attack:Attack)->void:
 	g.score += 10
 	g.killscore += 1
-	spawn_txt("10")
+	g.spawn_txt("10", global_position)
 	set_physics_process(false)
 	%death.play("die")
 
@@ -80,10 +80,3 @@ func spawn_bullet()->void:
 
 func _on_shoot_timer_timeout():
 	spawn_bullet()
-
-var txt_scn : = preload("res://scenes/DmgNum/dmg_num.tscn")
-func spawn_txt(text:String)->void:
-	var txt = txt_scn.instantiate()
-	txt.text = text
-	txt.global_position = global_position
-	g.game.add_child(txt)

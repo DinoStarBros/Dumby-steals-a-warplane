@@ -49,3 +49,7 @@ func _on_titlescreen_pressed():
 
 func _on_resume_pressed():
 	get_tree().paused = false
+
+
+func _on_new_gun() -> void:
+	pass # Replace with function body.
