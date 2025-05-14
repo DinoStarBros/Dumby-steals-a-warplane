@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bayhme8bl0oxa"]
+[gd_scene load_steps=12 format=3 uid="uid://bayhme8bl0oxa"]
 
 [ext_resource type="Script" uid="uid://4leshduf5xm" path="res://projectiles/homing_rocket/homing_rocket.gd" id="1_cvdho"]
 [ext_resource type="Texture2D" uid="uid://bij3lt28bf2wm" path="res://Art/planestuff/fx/bulletweffect-Sheet.png" id="2_jexvt"]
@@ -10,16 +10,122 @@ atlas = ExtResource("3_xfjqn")
 region = Rect2(2048, 0, 64, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xfjqn"]
-size = Vector2(30, 14)
+size = Vector2(35, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfjqn"]
 radius = 300.0
+
+[sub_resource type="Animation" id="Animation_xfjqn"]
+resource_name = "hit"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bulletweffect-sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bulletweffect-sheet:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5, 5)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_mjjml"]
+resource_name = "start"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bulletweffect-sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("anim:speed_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [5.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bulletweffect-sheet:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_727k3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bulletweffect-sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mjjml"]
+_data = {
+&"RESET": SubResource("Animation_727k3"),
+&"hit": SubResource("Animation_xfjqn"),
+&"start": SubResource("Animation_mjjml")
+}
 
 [node name="homing_rocket" type="CharacterBody2D"]
 script = ExtResource("1_cvdho")
 
 [node name="Bulletweffect-sheet" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
+scale = Vector2(5, 5)
 texture = ExtResource("2_jexvt")
 hframes = 12
 frame = 10
@@ -33,23 +139,44 @@ initial_velocity_min = 1.0
 initial_velocity_max = 2.0
 angular_velocity_min = -180.0
 angular_velocity_max = 180.0
-scale_amount_min = 0.1
-scale_amount_max = 0.2
+scale_amount_min = 0.4
+scale_amount_max = 0.5
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_pyyak")]
 unique_name_in_owner = true
-visible = false
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+[node name="hitboxbox" type="CollisionShape2D" parent="HitboxComponent"]
+unique_name_in_owner = true
+position = Vector2(4.5, 0)
 shape = SubResource("RectangleShape2D_xfjqn")
 
 [node name="detection_radius" type="Area2D" parent="."]
+unique_name_in_owner = true
+visible = false
 collision_layer = 0
-collision_mask = 0
+collision_mask = 2
 
 [node name="dr" type="CollisionShape2D" parent="detection_radius"]
+unique_name_in_owner = true
 shape = SubResource("CircleShape2D_xfjqn")
 
-[connection signal="body_entered" from="detection_radius" to="." method="_on_detection_radius_body_entered"]
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="anim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_mjjml")
+}
+autoplay = "start"
+speed_scale = 5.0
+
+[node name="pointer" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[connection signal="area_entered" from="detection_radius" to="." method="_on_detection_radius_area_entered"]

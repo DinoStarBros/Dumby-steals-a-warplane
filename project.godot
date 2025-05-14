@@ -85,6 +85,7 @@ Ability3={
 2d_physics/layer_1="Plr - Walls"
 2d_physics/layer_2="Plr Dmg - Enemy"
 2d_physics/layer_3="Ene Dmg - Player"
+2d_physics/layer_12="Homing Detection"
 
 [rendering]
 
