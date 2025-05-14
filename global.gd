@@ -1,7 +1,7 @@
 extends Node
 
 var game : Game 
-var cam : Camera2D
+var cam : PlrCamera
 var player : CharacterBody2D
 
 var attack : Attack = Attack.new()
@@ -9,6 +9,10 @@ var attack : Attack = Attack.new()
 var game_state : game_states = game_states.Title
 var score : int = 0
 var killscore : int = 0
+
+var exp : int = 0
+var next_lvl_exp : int = 20
+
 var mobile : bool = false
 
 enum game_states {

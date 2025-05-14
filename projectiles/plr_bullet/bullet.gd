@@ -1,13 +1,19 @@
-extends CharacterBody2D
+extends Projectile
 
-var pos_to_look : Vector2
 
-func _ready():
-	look_at(pos_to_look)
+
+@onready var hitbox_component: HitboxComponent = %HitboxComponent
+
+func _ready() -> void:
+	hitbox_component.Hit.connect(hit)
+	
+	await get_tree().create_timer(lifetime).timeout
+	queue_free()
 
 func _physics_process(_delta:float)->void:
 	move_and_slide()
-	%HitboxComponent.set_attack_properties(6)
+	hitbox_component.set_attack_properties(6)
 
-func _on_duration_timeout():
-	queue_free()
+func hit() -> void:
+	velocity = Vector2.ZERO
+	%anim.play("hit")

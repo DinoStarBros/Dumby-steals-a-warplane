@@ -11,12 +11,6 @@ func _process(_delta):
 	%joystick.visible = g.mobile
 	
 	%yLost.visible = g.game_state == g.game_states.Lost
-	%score.text = str("Score:\n",g.score)
-	%"2next".text = str("Kills 'til next gun: \n", g.killscore, " / 10")
-	if g.killscore >= 20:
-		%newgunim.play("newgun")
-		g.killscore = 0
-		emit_signal("NewGun" )
 	
 	if Input.is_action_just_pressed("pause") and g.game_state == g.game_states.Combat:
 		get_tree().paused = not get_tree().paused
@@ -40,7 +34,6 @@ func scene_change(scene:String)->void:
 			}
 		)
 
-
 func _on_titlescreen_pressed():
 	get_tree().paused = false
 	scene_change("res://game_screens/title/title.tscn")
@@ -50,6 +43,13 @@ func _on_titlescreen_pressed():
 func _on_resume_pressed():
 	get_tree().paused = false
 
+func newgun_handling() -> void: ## This is old feature, game jam version
+	%score.text = str("Score:\n",g.score)
+	%"2next".text = str("Kills : \n", g.killscore)
+	if g.killscore >= 20:
+		%newgunim.play("newgun")
+		g.killscore = 0
+		emit_signal("NewGun" )
 
 func _on_new_gun() -> void:
 	pass # Replace with function body.

@@ -11,7 +11,7 @@ stats = ExtResource("2_7cnad")
 max_reload_duration = 0.7
 min_sweet_spot = 0.3
 max_sweet_spot = 0.5
-max_buff_time = 2.0
+max_buff_time = 3.0
 
 [node name="shootsfx" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

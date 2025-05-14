@@ -1,11 +1,14 @@
 extends AnimatedSprite2D
 
 @export var max_frame : float = 6
+@onready var p : Dumby = get_parent() ## Reference to the Parent Node, Dumby
 
 func _process(_delta: float) -> void:
 	var rot : float = rotation_degrees
 	frame = _pose_matcher(rot)
 	%PlaneSprite.scale = Vector2(2,2)
+	
+	fx()
 
 func _pose_matcher(_rot : float) -> int:
 	var index :float
@@ -18,3 +21,11 @@ func _pose_matcher(_rot : float) -> int:
 	flip_v = abs(_rot) > 90
 	
 	return round(index)
+
+func fx() -> void:
+	%flamez.visible = p.accelerating
+	%flameparticles.emitting = p.accelerating
+	%trailparticle.emitting = p.accelerating
+	%flameparticles.direction = -p.velocity
+	
+	%speedring.visible = p.velocity.length() > 800 and p.accelerating and p.accelerate_time > 1

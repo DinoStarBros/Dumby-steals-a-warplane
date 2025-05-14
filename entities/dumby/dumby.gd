@@ -7,6 +7,7 @@ var dist_to_mouse : float
 var accelerate_spd : int = 60
 var accelerate_limit : int = 700
 var direc_mouse 
+var accelerate_time : float = 0
 
 func _ready():
 	#gun_sequence.shuffle()
@@ -14,6 +15,7 @@ func _ready():
 	%weapons_parent.process_mode = Node.PROCESS_MODE_INHERIT
 
 func _physics_process(delta):
+	
 	move_and_slide()
 	
 	half_viewport = get_viewport_rect().size / 2.0
@@ -23,11 +25,6 @@ func _physics_process(delta):
 	
 	
 	#%Plane.flip_v = dir_to_mouse.x <= 0
-
-	%flamez.visible = accelerating
-	%flameparticles.emitting = accelerating
-	%flameparticles.direction = -velocity
-	%trailparticle.emitting = accelerating
 	
 	velocity.y += (980 * delta) / 2
 	if accelerating and dist_to_mouse >= 50:
@@ -47,7 +44,13 @@ func _physics_process(delta):
 		accelerating = Input.is_action_pressed("accelerate")
 		
 	plane_rotation_handling()
-
+	
+	if accelerating:
+		accelerate_time += delta
+		if accelerate_time > 5:
+			accelerate_time = 5
+	else:
+		accelerate_time = 0
 
 var aim_position : Vector2
 func _unhandled_input(event: InputEvent) -> void:

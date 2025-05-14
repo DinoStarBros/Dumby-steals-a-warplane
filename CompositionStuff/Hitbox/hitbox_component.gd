@@ -14,7 +14,7 @@ func set_attack_properties(damag:int):
 
 func _on_area_entered(area):
 	if area is HurtboxComponent:
-		emit_signal("Hit")
+		Hit.emit()
 		if get_parent().is_in_group("Enemy"):
 			g.cam.apply_shake(10)
 			
@@ -34,8 +34,6 @@ func _on_area_entered(area):
 			%enemy_hit3.pitch_scale = randf_range(1.4,1.6)
 			%enemy_hit3.play()
 			
-			
-		
 		area.damage(attack)
 		if delete_after_hit:
 			if get_parent().is_in_group("Enemy"):

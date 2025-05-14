@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://bfahxvjjxjylq"]
+[gd_scene load_steps=69 format=3 uid="uid://bfahxvjjxjylq"]
 
 [ext_resource type="Script" uid="uid://cbp023lkcpg5o" path="res://entities/dumby/dumby.gd" id="1_2ba6e"]
 [ext_resource type="PackedScene" uid="uid://gs3fdbhnlc5o" path="res://CompositionStuff/Hurtbox/hurtbox_component.tscn" id="2_5wgoi"]
@@ -16,9 +16,9 @@
 [ext_resource type="AudioStream" uid="uid://rfxisnyv0d1i" path="res://Audio/pistol-shot-233473.mp3" id="10_e8exh"]
 [ext_resource type="Texture2D" uid="uid://bykujg31moh5u" path="res://Art/planestuff/dumbplane_sprites/plane7.png" id="10_lhj8b"]
 [ext_resource type="Script" uid="uid://0hg24jjcl11j" path="res://entities/dumby/plane_sprite.gd" id="11_up01i"]
-[ext_resource type="Texture2D" uid="uid://c53xsnm74v5pd" path="res://Art/Stuff2/moon.png" id="12_8ylsd"]
 [ext_resource type="AudioStream" uid="uid://bam7vrfyhev2j" path="res://Art/Placeholder/Roblox Explosion Sound Effect.wav" id="12_xik33"]
 [ext_resource type="Texture2D" uid="uid://cb00doqsxr2ay" path="res://Art/Stuff2/shockwave-Sheet.png" id="13_6f8f5"]
+[ext_resource type="Texture2D" uid="uid://cuqwajg7lthld" path="res://Art/planestuff/fx/effects-Sheet.png" id="13_12q0g"]
 [ext_resource type="AudioStream" uid="uid://oilja35cgsfb" path="res://Audio/hurt or laser.wav" id="13_pxqrg"]
 [ext_resource type="Script" uid="uid://ctjumrbw2yuxo" path="res://GUI.gd" id="15_0uce1"]
 [ext_resource type="AudioStream" uid="uid://dspg81m7f74v2" path="res://Audio/splashtownSFX/pickupCoin.wav" id="15_6bsw8"]
@@ -27,6 +27,12 @@
 [ext_resource type="Script" uid="uid://0245wd4r0bun" path="res://entities/dumby/weapons_parent.gd" id="19_ufwy4"]
 [ext_resource type="Texture2D" uid="uid://b2e50hn2busxu" path="res://Art/Stuff2/2d_lights_and_shadows_neutral_point_light.webp" id="20_hu6rb"]
 [ext_resource type="PackedScene" uid="uid://bj5jbn7aere7t" path="res://timer/timer.tscn" id="23_12q0g"]
+[ext_resource type="PackedScene" uid="uid://2m2qt563w7ii" path="res://juices/spd_line/speed_line.tscn" id="28_baqsm"]
+[ext_resource type="AudioStream" uid="uid://cq1v7cgw8ngyk" path="res://Audio/tresure/slashParry.wav" id="28_n4tpm"]
+[ext_resource type="Script" uid="uid://b5aik354wenca" path="res://entities/dumby/screen_fx.gd" id="28_u8vb7"]
+[ext_resource type="Script" uid="uid://bmgkgsoo8m4jd" path="res://entities/dumby/abilities.gd" id="31_5senk"]
+[ext_resource type="PackedScene" uid="uid://cqr2md0ymsehj" path="res://abilities/homing_rockets/homing_rockets.tscn" id="32_gq83w"]
+[ext_resource type="PackedScene" uid="uid://uqxv3w86ie7g" path="res://abilities/ability_slot/ability_slot.tscn" id="32_lhj8b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmt67"]
 size = Vector2(4, 4)
@@ -138,6 +144,42 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%flamez/../speedring:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../speedring/speedring2:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../speedring/speedring2/speedring3:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
 
 [sub_resource type="Animation" id="Animation_kvjl2"]
 resource_name = "flameLoop"
@@ -167,6 +209,42 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(3, 1.5), Vector2(2, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%flamez/../speedring:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../speedring/speedring2:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../speedring/speedring2/speedring3:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_75cqi"]
@@ -254,7 +332,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Shockwave-sheet:frame")
+tracks/0/path = NodePath("death/Shockwave-sheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -278,7 +356,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Shockwave-sheet:visible")
+tracks/2/path = NodePath("death/Shockwave-sheet:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -330,7 +408,7 @@ length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Shockwave-sheet:visible")
+tracks/0/path = NodePath("death/Shockwave-sheet:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -342,7 +420,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Shockwave-sheet:frame")
+tracks/1/path = NodePath("death/Shockwave-sheet:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -425,9 +503,6 @@ border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6w3i"]
-bg_color = Color(1, 1, 1, 1)
-
 [sub_resource type="Animation" id="Animation_hu6rb"]
 length = 0.001
 tracks/0/type = "value"
@@ -490,6 +565,68 @@ _data = {
 &"flash": SubResource("Animation_ufwy4")
 }
 
+[sub_resource type="Animation" id="Animation_n4tpm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("tactical_reload_fx:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("tactical_reload_fx:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_u8vb7"]
+resource_name = "zing"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("tactical_reload_fx:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("tactical_reload_fx:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n4tpm"]
+_data = {
+&"RESET": SubResource("Animation_n4tpm"),
+&"zing": SubResource("Animation_u8vb7")
+}
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u8vb7"]
 bg_color = Color(0, 0, 0, 1)
 draw_center = false
@@ -522,6 +659,9 @@ border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6w3i"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="dumby" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_2ba6e")
@@ -596,6 +736,14 @@ angular_velocity_curve = SubResource("Curve_tualj")
 scale_amount_min = 4.0
 scale_amount_max = 10.0
 
+[node name="fxLoop" type="AnimationPlayer" parent="PlaneSprite"]
+root_node = NodePath("../flamez")
+libraries = {
+&"": SubResource("AnimationLibrary_75cqi")
+}
+autoplay = "flameLoop"
+speed_scale = 2.0
+
 [node name="flamez" type="Sprite2D" parent="PlaneSprite"]
 unique_name_in_owner = true
 position = Vector2(-16, 0)
@@ -603,12 +751,35 @@ texture = ExtResource("5_rxwle")
 hframes = 4
 frame = 1
 
-[node name="flameLoop" type="AnimationPlayer" parent="PlaneSprite/flamez"]
-libraries = {
-&"": SubResource("AnimationLibrary_75cqi")
-}
-autoplay = "flameLoop"
-speed_scale = 1.5
+[node name="speedring" type="Sprite2D" parent="PlaneSprite"]
+unique_name_in_owner = true
+position = Vector2(-31, 0)
+rotation = 1.5708
+texture = ExtResource("13_12q0g")
+hframes = 6
+frame = 1
+region_enabled = true
+region_rect = Rect2(2176, 0, 384, 64)
+
+[node name="speedring2" type="Sprite2D" parent="PlaneSprite/speedring"]
+unique_name_in_owner = true
+position = Vector2(6.11959e-07, 14)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("13_12q0g")
+hframes = 6
+frame = 1
+region_enabled = true
+region_rect = Rect2(2176, 0, 384, 64)
+
+[node name="speedring3" type="Sprite2D" parent="PlaneSprite/speedring/speedring2"]
+unique_name_in_owner = true
+position = Vector2(0, 14)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("13_12q0g")
+hframes = 6
+frame = 1
+region_enabled = true
+region_rect = Rect2(2176, 0, 384, 64)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 zoom = Vector2(0.7, 0.7)
@@ -660,19 +831,13 @@ libraries = {
 &"": SubResource("AnimationLibrary_wth8f")
 }
 
-[node name="Moon" type="Sprite2D" parent="."]
-modulate = Color(0.525101, 0.525101, 0.525101, 0.667)
-z_index = -1
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("12_8ylsd")
-
 [node name="death" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_p1300")
 }
 
-[node name="Shockwave-sheet" type="Sprite2D" parent="."]
+[node name="Shockwave-sheet" type="Sprite2D" parent="death"]
 visible = false
 modulate = Color(100, 100, 100, 1)
 scale = Vector2(2, 2)
@@ -800,11 +965,12 @@ offset_top = 4.0
 offset_right = -12.0
 offset_bottom = 77.0
 grow_horizontal = 0
-text = "Kills till next gun:"
+text = "EXP:"
 label_settings = SubResource("LabelSettings_8y0g6")
 
 [node name="joystick" type="Node2D" parent="GUI"]
 unique_name_in_owner = true
+visible = false
 position = Vector2(114, 590)
 
 [node name="bigcircle" type="Sprite2D" parent="GUI/joystick"]
@@ -860,16 +1026,6 @@ offset_bottom = 24.0
 text = "Ammo
 24 / 24"
 
-[node name="regen_bar" type="ProgressBar" parent="."]
-unique_name_in_owner = true
-offset_left = -36.0
-offset_top = -28.0
-offset_bottom = -22.0
-scale = Vector2(2, 2)
-theme_override_styles/background = SubResource("StyleBoxFlat_d4unw")
-theme_override_styles/fill = SubResource("StyleBoxFlat_v6w3i")
-show_percentage = false
-
 [node name="weapons_parent" type="Node2D" parent="." node_paths=PackedStringArray("dumby", "ammo_bar", "current_weapon")]
 unique_name_in_owner = true
 script = ExtResource("19_ufwy4")
@@ -879,7 +1035,8 @@ current_weapon = NodePath("rapid")
 
 [node name="muzzle_flash" type="Sprite2D" parent="weapons_parent"]
 visible = false
-position = Vector2(45, 0)
+position = Vector2(65, 0)
+scale = Vector2(2, 2)
 texture = ExtResource("19_hu6rb")
 hframes = 3
 vframes = 3
@@ -899,21 +1056,53 @@ texture_scale = 0.4
 
 [node name="rapid" parent="weapons_parent" instance=ExtResource("18_23fr6")]
 
-[node name="reload_bar" type="ProgressBar" parent="."]
+[node name="tactical_reload_fx" type="Sprite2D" parent="weapons_parent"]
+unique_name_in_owner = true
+visible = false
+scale = Vector2(10, 10)
+texture = ExtResource("13_12q0g")
+hframes = 42
+frame = 2
+
+[node name="shing" type="AudioStreamPlayer" parent="weapons_parent/tactical_reload_fx"]
+unique_name_in_owner = true
+stream = ExtResource("28_n4tpm")
+volume_db = -5.0
+bus = &"sfx"
+
+[node name="tactical_reloadnim" type="AnimationPlayer" parent="weapons_parent/tactical_reload_fx"]
+unique_name_in_owner = true
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_n4tpm")
+}
+speed_scale = 2.0
+
+[node name="bars" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="reload_bar" type="ProgressBar" parent="bars"]
 unique_name_in_owner = true
 z_index = 5
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 0
 offset_left = -91.0
 offset_top = -64.0
-offset_right = 91.0
-offset_bottom = -45.0
+offset_right = 109.0
+offset_bottom = -44.0
 theme_override_styles/background = SubResource("StyleBoxFlat_u8vb7")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5senk")
 max_value = 1.0
 show_percentage = false
 
-[node name="max_ss_vis" type="ProgressBar" parent="."]
+[node name="max_ss_vis" type="ProgressBar" parent="bars"]
 unique_name_in_owner = true
 z_index = 1
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 0
 offset_left = -91.0
 offset_top = -64.0
 offset_right = 91.0
@@ -924,9 +1113,11 @@ max_value = 1.0
 value = 0.6
 show_percentage = false
 
-[node name="min_ss_vis" type="ProgressBar" parent="."]
+[node name="min_ss_vis" type="ProgressBar" parent="bars"]
 unique_name_in_owner = true
 z_index = 1
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 0
 offset_left = -91.0
 offset_top = -64.0
 offset_right = 91.0
@@ -936,6 +1127,105 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_gq83w")
 max_value = 1.0
 value = 0.5
 show_percentage = false
+
+[node name="regen_bar" type="ProgressBar" parent="bars"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -48.0
+offset_top = -32.0
+offset_bottom = -27.0
+scale = Vector2(2, 2)
+theme_override_styles/background = SubResource("StyleBoxFlat_d4unw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_v6w3i")
+show_percentage = false
+
+[node name="ScreenFX" type="CanvasLayer" parent="."]
+layer = 2
+script = ExtResource("28_u8vb7")
+max_frame = 20
+
+[node name="speed_lines_parent" type="Node2D" parent="ScreenFX"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(640, 360)
+
+[node name="sp1" parent="ScreenFX/speed_lines_parent" instance=ExtResource("28_baqsm")]
+position = Vector2(-502, -251)
+
+[node name="sp2" parent="ScreenFX/speed_lines_parent" instance=ExtResource("28_baqsm")]
+position = Vector2(-539, -80)
+
+[node name="sp3" parent="ScreenFX/speed_lines_parent" instance=ExtResource("28_baqsm")]
+position = Vector2(-522, 88)
+
+[node name="sp4" parent="ScreenFX/speed_lines_parent" instance=ExtResource("28_baqsm")]
+position = Vector2(-456, 245)
+
+[node name="sp5" parent="ScreenFX/speed_lines_parent" instance=ExtResource("28_baqsm")]
+position = Vector2(-282, 262)
+
+[node name="sp6" parent="ScreenFX/speed_lines_parent" instance=ExtResource("28_baqsm")]
+position = Vector2(-71, 285)
+
+[node name="sp7" parent="ScreenFX/speed_lines_parent" instance=ExtResource("28_baqsm")]
+position = Vector2(169, 248)
+
+[node name="sp8" parent="ScreenFX/speed_lines_parent" instance=ExtResource("28_baqsm")]
+position = Vector2(409, 259)
+
+[node name="sp9" parent="ScreenFX/speed_lines_parent" instance=ExtResource("28_baqsm")]
+position = Vector2(512, 122)
+
+[node name="sp10" parent="ScreenFX/speed_lines_parent" instance=ExtResource("28_baqsm")]
+position = Vector2(501, -109)
+
+[node name="sp11" parent="ScreenFX/speed_lines_parent" instance=ExtResource("28_baqsm")]
+position = Vector2(501, -266)
+
+[node name="sp12" parent="ScreenFX/speed_lines_parent" instance=ExtResource("28_baqsm")]
+position = Vector2(276, -289)
+
+[node name="sp13" parent="ScreenFX/speed_lines_parent" instance=ExtResource("28_baqsm")]
+position = Vector2(33, -303)
+
+[node name="sp14" parent="ScreenFX/speed_lines_parent" instance=ExtResource("28_baqsm")]
+position = Vector2(-164, -320)
+
+[node name="sp15" parent="ScreenFX/speed_lines_parent" instance=ExtResource("28_baqsm")]
+position = Vector2(-338, -277)
+
+[node name="Abilities" type="CanvasLayer" parent="."]
+script = ExtResource("31_5senk")
+
+[node name="abilities_row" type="HBoxContainer" parent="Abilities"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -235.0
+offset_top = -82.0
+offset_right = -131.0
+offset_bottom = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(2, 2)
+
+[node name="as1" parent="Abilities/abilities_row" instance=ExtResource("32_lhj8b")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="homing_rockets" parent="Abilities/abilities_row/as1" instance=ExtResource("32_gq83w")]
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="as2" parent="Abilities/abilities_row" instance=ExtResource("32_lhj8b")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="as3" parent="Abilities/abilities_row" instance=ExtResource("32_lhj8b")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [connection signal="PlrHit" from="HurtboxComponent" to="weapons_parent" method="_on_hurtbox_component_plr_hit"]
 [connection signal="NewGun" from="GUI" to="GUI" method="_on_new_gun"]

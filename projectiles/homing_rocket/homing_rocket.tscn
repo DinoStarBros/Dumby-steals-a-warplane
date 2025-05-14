@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://bayhme8bl0oxa"]
+
+[ext_resource type="Script" uid="uid://4leshduf5xm" path="res://projectiles/homing_rocket/homing_rocket.gd" id="1_cvdho"]
+[ext_resource type="Texture2D" uid="uid://bij3lt28bf2wm" path="res://Art/planestuff/fx/bulletweffect-Sheet.png" id="2_jexvt"]
+[ext_resource type="PackedScene" uid="uid://cilaqubvkn2sv" path="res://CompositionStuff/Hitbox/hitbox_component.tscn" id="3_pyyak"]
+[ext_resource type="Texture2D" uid="uid://cuqwajg7lthld" path="res://Art/planestuff/fx/effects-Sheet.png" id="3_xfjqn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjjml"]
+atlas = ExtResource("3_xfjqn")
+region = Rect2(2048, 0, 64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfjqn"]
+size = Vector2(30, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xfjqn"]
+radius = 300.0
+
+[node name="homing_rocket" type="CharacterBody2D"]
+script = ExtResource("1_cvdho")
+
+[node name="Bulletweffect-sheet" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jexvt")
+hframes = 12
+frame = 10
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 10
+texture = SubResource("AtlasTexture_mjjml")
+speed_scale = 2.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_pyyak")]
+unique_name_in_owner = true
+visible = false
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_xfjqn")
+
+[node name="detection_radius" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="dr" type="CollisionShape2D" parent="detection_radius"]
+shape = SubResource("CircleShape2D_xfjqn")
+
+[connection signal="body_entered" from="detection_radius" to="." method="_on_detection_radius_body_entered"]

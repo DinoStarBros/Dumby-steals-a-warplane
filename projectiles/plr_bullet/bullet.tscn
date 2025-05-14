@@ -1,88 +1,273 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4npyu2732suj"]
+[gd_scene load_steps=11 format=3 uid="uid://c4npyu2732suj"]
 
 [ext_resource type="Script" uid="uid://w4fbnqem3jpc" path="res://projectiles/plr_bullet/bullet.gd" id="1_xqd8s"]
-[ext_resource type="Texture2D" uid="uid://bqubavsk5td7m" path="res://Art/newsprites.png" id="2_8vdfw"]
 [ext_resource type="PackedScene" uid="uid://cilaqubvkn2sv" path="res://CompositionStuff/Hitbox/hitbox_component.tscn" id="3_ekud1"]
+[ext_resource type="Texture2D" uid="uid://bqubavsk5td7m" path="res://Art/newsprites.png" id="3_njipi"]
 [ext_resource type="PackedScene" uid="uid://cg4l4fx01iia" path="res://classes/vis_on_screen/vis_on_screen.tscn" id="4_5dbsh"]
+[ext_resource type="Texture2D" uid="uid://bij3lt28bf2wm" path="res://Art/planestuff/fx/bulletweffect-Sheet.png" id="5_njipi"]
 
 [sub_resource type="Animation" id="Animation_8vyrs"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("outline:scale")
+tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [Vector2(1.5, 1.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_yfywj"]
-resource_name = "loop"
+[sub_resource type="Animation" id="Animation_5dbsh"]
+resource_name = "hit"
 length = 0.2
-loop_mode = 1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("outline:scale")
+tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("anim:speed_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1.2, 1.2), Vector2(1.1, 1.1)]
+"values": [1.0]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, 4)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HitboxComponent/hibc:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("sprite2:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_yfywj"]
+resource_name = "start"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(17.1484, 1),
+"update": 0,
+"values": [Vector2(1.3, 1.3), Vector2(1.2, 1.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("anim:speed_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [5.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitboxComponent/hibc:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("sprite2:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8uk70"]
 _data = {
 &"RESET": SubResource("Animation_8vyrs"),
-&"loop": SubResource("Animation_yfywj")
+&"hit": SubResource("Animation_5dbsh"),
+&"start": SubResource("Animation_yfywj")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_phsm6"]
-size = Vector2(34, 14)
+size = Vector2(46, 24)
 
 [node name="bullet" type="CharacterBody2D"]
 z_index = 2
 script = ExtResource("1_xqd8s")
 
-[node name="bulletsprite" type="Sprite2D" parent="."]
-modulate = Color(100, 100, 100, 1)
-texture = ExtResource("2_8vdfw")
+[node name="sprite" type="Sprite2D" parent="."]
+modulate = Color(0.949219, 1, 0.5, 1)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_njipi")
+hframes = 12
+frame = 2
+
+[node name="sprite2" type="Sprite2D" parent="."]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_njipi")
 hframes = 3
 vframes = 3
 
-[node name="outline" type="Sprite2D" parent="."]
-modulate = Color(100, 100, 100, 0.757)
-z_index = -1
-texture = ExtResource("2_8vdfw")
-hframes = 3
-vframes = 3
-
-[node name="loop" type="AnimationPlayer" parent="."]
+[node name="anim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_8uk70")
 }
-autoplay = "loop"
+autoplay = "start"
+speed_scale = 5.0
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_ekud1")]
 unique_name_in_owner = true
+visible = false
 collision_layer = 2
 collision_mask = 2
-delete_after_hit = true
 
 [node name="hibc" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("RectangleShape2D_phsm6")
 
-[node name="duration" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-autostart = true
-
 [node name="vis_on_screen" parent="." instance=ExtResource("4_5dbsh")]
-
-[connection signal="timeout" from="duration" to="." method="_on_duration_timeout"]
+visible = false

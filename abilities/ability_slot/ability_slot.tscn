@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://uqxv3w86ie7g"]
+
+[ext_resource type="Script" uid="uid://cgec78c8hpavw" path="res://abilities/ability_slot/ability_slot.gd" id="1_2kmhg"]
+
+[node name="ability_slot" type="Control"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2kmhg")

@@ -12,6 +12,8 @@ var ammo_text : Label
 @onready var max_ss_vis: ProgressBar = %max_ss_vis
 @onready var min_ss_vis: ProgressBar = %min_ss_vis
 
+signal Tactical_Reload
+
 func _ready() -> void:
 	ammo_text = ammo_bar.get_child(0)
 
@@ -40,7 +42,8 @@ func ammo_handling(delta: float) -> void:
 	
 	ammo_text.text = str("Ammo : \n", current_weapon.ammo, " / ", current_weapon.stats.max_ammo)
 	
-	if Input.is_action_just_pressed("reload") and current_weapon.ammo != current_weapon.stats.max_ammo:
+	#if (Input.is_action_just_pressed("reload") and current_weapon.ammo != current_weapon.stats.max_ammo and current_weapon.ammo <= current_weapon.stats.max_ammo / 2) or current_weapon.ammo <= 0:
+	if current_weapon.ammo <= 0:
 		if not current_weapon.reloading:
 			current_weapon.r_tact_pressed = false
 			reload_time = 0
@@ -65,6 +68,11 @@ func ammo_handling(delta: float) -> void:
 			current_weapon.r_tact_pressed = true
 			if reload_time > current_weapon.min_sweet_spot and reload_time < current_weapon.max_sweet_spot:
 				g.spawn_txt("Quick Reload", global_position)
+				Tactical_Reload.emit()
+				%tactical_reload_fx.rotation_degrees = randf_range(-180, 180)
+				%shing.pitch_scale = randf_range(0.8, 1.2)
+				%shing.play()
+				%tactical_reloadnim.play("zing")
 				current_weapon.buff_time = current_weapon.max_buff_time
 				finished_reload()
 			else:

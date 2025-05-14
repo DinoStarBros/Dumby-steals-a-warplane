@@ -1,0 +1,175 @@
+[gd_scene load_steps=6 format=3 uid="uid://2m2qt563w7ii"]
+
+[ext_resource type="Script" uid="uid://drmjn7fohcds7" path="res://juices/spd_line/speed_line.gd" id="1_gdkbw"]
+[ext_resource type="Texture2D" uid="uid://dg6gm0t0y2xbg" path="res://Art/planestuff/fx/speed_lines-Sheet.png" id="1_jkn5y"]
+
+[sub_resource type="Animation" id="Animation_6lynj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spd_line:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("spd_line4:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("spd_line2:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("spd_line3:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("spd_line:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 12)]
+}
+
+[sub_resource type="Animation" id="Animation_jkn5y"]
+resource_name = "loop"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spd_line:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("spd_line4:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [15, 16, 17, 18]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("spd_line2:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("spd_line3:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("spd_line:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(30, 12), Vector2(10, 12), Vector2(-10, 12), Vector2(-30, 12)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6lynj"]
+_data = {
+&"RESET": SubResource("Animation_6lynj"),
+&"loop": SubResource("Animation_jkn5y")
+}
+
+[node name="speed_line" type="Node2D"]
+script = ExtResource("1_gdkbw")
+
+[node name="anim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_6lynj")
+}
+autoplay = "loop"
+
+[node name="spd_line" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(10, 12)
+rotation = 0.610865
+texture = ExtResource("1_jkn5y")
+hframes = 19
+frame = 1
+
+[node name="spd_line2" type="Sprite2D" parent="."]
+texture = ExtResource("1_jkn5y")
+hframes = 19
+frame = 6
+
+[node name="spd_line3" type="Sprite2D" parent="."]
+position = Vector2(-2.38419e-07, 8)
+rotation = 0.698132
+texture = ExtResource("1_jkn5y")
+hframes = 19
+frame = 11
+
+[node name="spd_line4" type="Sprite2D" parent="."]
+rotation = -0.872665
+texture = ExtResource("1_jkn5y")
+hframes = 19
+frame = 6
