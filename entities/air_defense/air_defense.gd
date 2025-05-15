@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction : = 1
 func _ready():
@@ -12,9 +11,8 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-
 var bullet_spd : = 1500
-var bullet_scn : = preload("res://projectiles/ene_bullet/ene_bullet.tscn")
+const bullet_scn : = preload("res://projectiles/ene_bullet/ene_bullet.tscn")
 
 func spawn_bullet()->void:
 	%shoot.pitch_scale = randf_range(.9,1.1)

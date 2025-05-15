@@ -1,0 +1,97 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4c1v5hlv56nk"]
+
+[ext_resource type="Script" uid="uid://cttbndlpj14x6" path="res://input_mapper/remapper.gd" id="1_7lnyo"]
+[ext_resource type="Script" uid="uid://del61rnlg48jd" path="res://input_mapper/input_mapper.gd" id="1_k2syh"]
+
+[node name="InputMapper" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -11.0
+offset_right = -801.0
+offset_bottom = -466.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k2syh")
+
+[node name="Up" type="Button" parent="."]
+layout_mode = 2
+offset_left = 22.0
+offset_top = 51.0
+offset_right = 356.0
+offset_bottom = 114.0
+script = ExtResource("1_7lnyo")
+action = "Up"
+
+[node name="Left" type="Button" parent="."]
+layout_mode = 2
+offset_left = 22.0
+offset_top = 123.0
+offset_right = 356.0
+offset_bottom = 186.0
+script = ExtResource("1_7lnyo")
+action = "Left"
+
+[node name="Down" type="Button" parent="."]
+layout_mode = 2
+offset_left = 24.0
+offset_top = 195.0
+offset_right = 358.0
+offset_bottom = 258.0
+script = ExtResource("1_7lnyo")
+action = "Down"
+
+[node name="Right" type="Button" parent="."]
+layout_mode = 2
+offset_left = 22.0
+offset_top = 267.0
+offset_right = 356.0
+offset_bottom = 330.0
+script = ExtResource("1_7lnyo")
+action = "Right"
+
+[node name="Jump" type="Button" parent="."]
+layout_mode = 2
+offset_left = 22.0
+offset_top = 339.0
+offset_right = 356.0
+offset_bottom = 402.0
+script = ExtResource("1_7lnyo")
+action = "Jump"
+
+[node name="Slash" type="Button" parent="."]
+layout_mode = 2
+offset_left = 24.0
+offset_top = 411.0
+offset_right = 358.0
+offset_bottom = 474.0
+script = ExtResource("1_7lnyo")
+action = "Slash"
+
+[node name="Grapple" type="Button" parent="."]
+layout_mode = 2
+offset_left = 24.0
+offset_top = 483.0
+offset_right = 358.0
+offset_bottom = 546.0
+script = ExtResource("1_7lnyo")
+action = "Grapple"
+
+[node name="GrappleDash" type="Button" parent="."]
+layout_mode = 2
+offset_left = 24.0
+offset_top = 555.0
+offset_right = 358.0
+offset_bottom = 618.0
+script = ExtResource("1_7lnyo")
+action = "Grapple Dash"
+
+[node name="keybind" type="Label" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 16.0
+offset_right = 95.0
+offset_bottom = 39.0
+scale = Vector2(1.5, 1.5)
+text = "Keybinds:"

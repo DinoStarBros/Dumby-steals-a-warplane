@@ -39,7 +39,6 @@ func _on_titlescreen_pressed():
 	scene_change("res://game_screens/title/title.tscn")
 	g.game_state = g.game_states.Title
 
-
 func _on_resume_pressed():
 	get_tree().paused = false
 
@@ -51,5 +50,6 @@ func newgun_handling() -> void: ## This is old feature, game jam version
 		g.killscore = 0
 		emit_signal("NewGun" )
 
-func _on_new_gun() -> void:
+
+func _on_quit_pressed() -> void:
 	pass # Replace with function body.

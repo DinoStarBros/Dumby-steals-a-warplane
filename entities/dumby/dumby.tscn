@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://bfahxvjjxjylq"]
+[gd_scene load_steps=70 format=3 uid="uid://bfahxvjjxjylq"]
 
 [ext_resource type="Script" uid="uid://cbp023lkcpg5o" path="res://entities/dumby/dumby.gd" id="1_2ba6e"]
 [ext_resource type="PackedScene" uid="uid://gs3fdbhnlc5o" path="res://CompositionStuff/Hurtbox/hurtbox_component.tscn" id="2_5wgoi"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://0245wd4r0bun" path="res://entities/dumby/weapons_parent.gd" id="19_ufwy4"]
 [ext_resource type="Texture2D" uid="uid://b2e50hn2busxu" path="res://Art/Stuff2/2d_lights_and_shadows_neutral_point_light.webp" id="20_hu6rb"]
 [ext_resource type="PackedScene" uid="uid://bj5jbn7aere7t" path="res://timer/timer.tscn" id="23_12q0g"]
+[ext_resource type="PackedScene" uid="uid://do3oy3lqr320g" path="res://settingsMenu/settings_menu.tscn" id="23_fj41j"]
 [ext_resource type="PackedScene" uid="uid://2m2qt563w7ii" path="res://juices/spd_line/speed_line.tscn" id="28_baqsm"]
 [ext_resource type="AudioStream" uid="uid://cq1v7cgw8ngyk" path="res://Audio/tresure/slashParry.wav" id="28_n4tpm"]
 [ext_resource type="Script" uid="uid://b5aik354wenca" path="res://entities/dumby/screen_fx.gd" id="28_u8vb7"]
@@ -900,7 +901,6 @@ text = "Menu"
 
 [node name="paused" type="Control" parent="GUI"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -913,16 +913,50 @@ offset_right = 15.0
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.5, 1.5)
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 
 [node name="grey" type="Polygon2D" parent="GUI/paused"]
 position = Vector2(-695, -348)
 color = Color(0.466667, 0.466667, 0.466667, 0.658824)
 polygon = PackedVector2Array(-91, -95, -71, 813, 1402, 839, 1370, -139)
 
+[node name="settingsMenu" parent="GUI/paused" instance=ExtResource("23_fj41j")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -551.0
+offset_top = -312.0
+offset_right = 551.0
+offset_bottom = 312.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="butons" type="HBoxContainer" parent="GUI/paused/settingsMenu"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 555.0
+offset_right = 148.0
+offset_bottom = 595.0
+
+[node name="resume" type="Button" parent="GUI/paused/settingsMenu/butons"]
+layout_mode = 2
+focus_mode = 0
+text = "Resume"
+
+[node name="quit" type="Button" parent="GUI/paused/settingsMenu/butons"]
+layout_mode = 2
+focus_mode = 0
+text = "Quit
+"
+
 [node name="buttons" type="VBoxContainer" parent="GUI/paused"]
+visible = false
 layout_mode = 0
 offset_left = -254.0
 offset_top = -110.0
@@ -1228,8 +1262,9 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [connection signal="PlrHit" from="HurtboxComponent" to="weapons_parent" method="_on_hurtbox_component_plr_hit"]
-[connection signal="NewGun" from="GUI" to="GUI" method="_on_new_gun"]
 [connection signal="pressed" from="GUI/yLost/buttons/play" to="GUI" method="_on_play_pressed"]
 [connection signal="pressed" from="GUI/yLost/buttons/menu" to="GUI" method="_on_menu_pressed"]
+[connection signal="pressed" from="GUI/paused/settingsMenu/butons/resume" to="GUI" method="_on_resume_pressed"]
+[connection signal="pressed" from="GUI/paused/settingsMenu/butons/quit" to="GUI" method="_on_quit_pressed"]
 [connection signal="pressed" from="GUI/paused/buttons/resume" to="GUI" method="_on_resume_pressed"]
 [connection signal="pressed" from="GUI/paused/buttons/titlescreen" to="GUI" method="_on_titlescreen_pressed"]

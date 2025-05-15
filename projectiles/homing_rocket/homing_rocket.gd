@@ -6,15 +6,10 @@ class_name Homing_Rocket
 var rand_initial_dir : Vector2
 var dir_to_target : Vector2
 
-const base_speed : int = 500
-const homing_speed : int = 100
+const base_speed : int = 600
+const homing_speed : int = 600
 func _ready() -> void:
 	hitbox_component.Hit.connect(hit)
-	
-	rand_initial_dir.x = randf_range(-1, 1)
-	rand_initial_dir.y = randf_range(-1, 0)
-	
-	
 
 var time : float = 0
 var gain_speed : float = 0
@@ -22,14 +17,16 @@ func _physics_process(delta:float)->void:
 	move_and_slide()
 	hitbox_component.set_attack_properties(2)
 	
-	if target:
+	if target and time > 0.2:
 		%hitboxbox.disabled = false
 		dir_to_target = global_position.direction_to(target.global_position)
-		gain_speed += delta * 50
+		rand_initial_dir = dir_to_target
+		gain_speed += delta * 500.0
 		velocity = dir_to_target * (homing_speed + gain_speed)
 		
 		look_at(global_position + dir_to_target)
 	else:
+		
 		%hitboxbox.disabled = true
 		look_at(global_position + rand_initial_dir)
 		velocity = rand_initial_dir * base_speed
@@ -37,7 +34,7 @@ func _physics_process(delta:float)->void:
 	time += delta
 	if time >= lifetime:
 		queue_free()
-	
+
 func hit() -> void:
 	velocity = Vector2.ZERO
 	%anim.play("hit")

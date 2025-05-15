@@ -10,7 +10,7 @@ var speed_lines : Array[Node2D]
 func _ready() -> void:
 	for n in speed_lines_parent.get_children():
 		speed_lines.append(n)
-		## Adds all the speed lines into an array
+		# Adds all the speed lines into an array
 
 func _physics_process(delta: float) -> void:
 	var idx : int = _dir_matcher(%PlaneSprite.rotation_degrees)
@@ -28,7 +28,7 @@ func _dir_matcher(_rot : float) -> int:
 	else: # Negative Angle
 		index = abs(remap(_rot, -180, 0, max_frame/2, -max_frame/2))
 	
-	if abs(_rot) > 90:
+	if abs(_rot) > 90: # Checks if facing the left
 		speed_lines_parent.scale.x = -1
 	else:
 		speed_lines_parent.scale.x = 1

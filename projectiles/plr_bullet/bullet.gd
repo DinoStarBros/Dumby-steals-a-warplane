@@ -1,7 +1,5 @@
 extends Projectile
 
-
-
 @onready var hitbox_component: HitboxComponent = %HitboxComponent
 
 func _ready() -> void:

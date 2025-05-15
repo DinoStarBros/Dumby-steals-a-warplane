@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Projectile
 
 var pos_to_look : Vector2
 

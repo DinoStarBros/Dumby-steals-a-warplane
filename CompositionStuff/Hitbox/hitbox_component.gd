@@ -45,5 +45,5 @@ func _on_area_entered(area):
 				g.game.add_child(enemy_hit_sfx)
 				get_parent().queue_free()
 
-var enemy_hit_sfx_scn : = preload("res://spawned_sounds/enemy_hit_sfx.tscn")
-var plr_hit_sfx_scn : = preload("res://spawned_sounds/plr_hit_sfx.tscn")
+const enemy_hit_sfx_scn : = preload("res://spawned_sounds/enemy_hit_sfx.tscn")
+const plr_hit_sfx_scn : = preload("res://spawned_sounds/plr_hit_sfx.tscn")
