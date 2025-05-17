@@ -1,4 +1,4 @@
 extends Projectile
 
-func _ready():
-	%HitboxComponent.set_attack_properties(1)
+func _ready() -> void:
+	%HitboxComponent.set_attack_properties(dmg)

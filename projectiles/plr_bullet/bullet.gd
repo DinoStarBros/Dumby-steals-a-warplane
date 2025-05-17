@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func _physics_process(_delta:float)->void:
 	move_and_slide()
-	hitbox_component.set_attack_properties(6)
+	hitbox_component.set_attack_properties(dmg)
 
 func hit() -> void:
 	velocity = Vector2.ZERO

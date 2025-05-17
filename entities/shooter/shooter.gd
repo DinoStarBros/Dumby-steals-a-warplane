@@ -6,14 +6,14 @@ var accelerating : = true
 var dir_to_targ : Vector2
 var target : CharacterBody2D
 
-func _ready():
+func _ready() ->  void:
 	_on_target_deviat_timer_timeout()
 	
 	accelerate_spd += randi_range(-5, 5)
 	
 
 var target_deviation : Vector2
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	move_and_slide()
 	target = g.player
 	dir_to_targ = (target.global_position - global_position).normalized()
@@ -46,7 +46,7 @@ func lim_accel_y()->void:
 		velocity.y = accelerate_limit
 
 const tdev_range : = 500
-func _on_target_deviat_timer_timeout():
+func _on_target_deviat_timer_timeout() -> void:
 	target_deviation.x = randf_range(-tdev_range,tdev_range)
 	target_deviation.y = randf_range(-tdev_range,tdev_range)
 
@@ -57,12 +57,13 @@ func Dead(_attack:Attack)->void:
 	g.score += 10
 	g.killscore += 1
 	g.spawn_txt("10", global_position)
+	g.spawn_xp(global_position, 1)
 	set_physics_process(false)
 	%death.play("die")
 
 var bullet_spd : = 1500
 
-var bullet_scn : = preload("res://projectiles/ene_bullet/ene_bullet.tscn")
+const bullet_scn : = preload("res://projectiles/ene_bullet/ene_bullet.tscn")
 func spawn_bullet()->void:
 	
 	%shoot.pitch_scale = randf_range(.9,1.1)
@@ -70,7 +71,7 @@ func spawn_bullet()->void:
 	%shoot2.pitch_scale = randf_range(.9,1.1)
 	%shoot2.play(.2)
 	
-	var bullet = bullet_scn.instantiate()
+	var bullet : Projectile = bullet_scn.instantiate()
 	bullet.global_position = global_position
 	bullet.velocity = dir_to_targ * bullet_spd
 	bullet.pos_to_look = target.global_position
@@ -78,5 +79,5 @@ func spawn_bullet()->void:
 	bullet.velocity = dir_to_targ * bullet_spd
 	bullet.pos_to_look = target.global_position
 
-func _on_shoot_timer_timeout():
+func _on_shoot_timer_timeout() -> void:
 	spawn_bullet()

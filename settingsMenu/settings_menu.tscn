@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://do3oy3lqr320g"]
+[gd_scene load_steps=2 format=3 uid="uid://do3oy3lqr320g"]
 
 [ext_resource type="Script" uid="uid://cuqedscshbnth" path="res://settingsMenu/settings_menu.gd" id="1_ewieb"]
-[ext_resource type="PackedScene" uid="uid://d4c1v5hlv56nk" path="res://input_mapper/input_mapper.tscn" id="2_gcp1t"]
 
 [node name="settingsMenu" type="Control"]
 process_mode = 3
@@ -11,7 +10,7 @@ script = ExtResource("1_ewieb")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_right = 1100.0
+offset_right = 644.0
 offset_bottom = 624.0
 
 [node name="volumes" type="VBoxContainer" parent="."]
@@ -127,13 +126,6 @@ popup/item_1/text = "1600x900"
 popup/item_1/id = 1
 popup/item_2/text = "1280x720"
 popup/item_2/id = 2
-
-[node name="InputMapper" parent="." instance=ExtResource("2_gcp1t")]
-layout_mode = 1
-offset_left = 590.0
-offset_top = -8.0
-offset_right = 590.0
-offset_bottom = -8.0
 
 [connection signal="value_changed" from="volumes/master_volume" to="." method="_on_master_volume_value_changed"]
 [connection signal="value_changed" from="volumes/music_volume" to="." method="_on_music_volume_value_changed"]

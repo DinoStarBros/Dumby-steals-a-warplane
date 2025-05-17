@@ -2,44 +2,38 @@ extends CanvasLayer
 
 signal NewGun
 
-func _ready():
+var are_you_sure : bool = false
+
+func _ready() -> void:
 	g.score = 0
 	g.killscore = 0
-	g.game_state = g.game_states.Combat
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	%joystick.visible = g.mobile
-	
 	%yLost.visible = g.game_state == g.game_states.Lost
-	
 	if Input.is_action_just_pressed("pause") and g.game_state == g.game_states.Combat:
 		get_tree().paused = not get_tree().paused
-	%paused.visible = get_tree().paused
+		are_you_sure = false
+	%paused.visible = get_tree().paused and g.game_state == g.game_states.Combat
+	%sure.visible = are_you_sure
 
-func _on_menu_pressed():
+func _on_menu_pressed() -> void:
 	scene_change("res://game_screens/title/title.tscn")
 	g.game_state = g.game_states.Combat
 
-func _on_play_pressed():
+func _on_play_pressed() -> void:
 	SceneManager.reload_scene()
 	g.game_state = g.game_states.Combat
 
 func scene_change(scene:String)->void:
 	SceneManager.change_scene(
 		scene, {
-			
 			"pattern_enter" : "curtains",
 			"pattern_leave" : "fade",
-			
 			}
 		)
 
-func _on_titlescreen_pressed():
-	get_tree().paused = false
-	scene_change("res://game_screens/title/title.tscn")
-	g.game_state = g.game_states.Title
-
-func _on_resume_pressed():
+func _on_resume_pressed() -> void:
 	get_tree().paused = false
 
 func newgun_handling() -> void: ## This is old feature, game jam version
@@ -48,8 +42,12 @@ func newgun_handling() -> void: ## This is old feature, game jam version
 	if g.killscore >= 20:
 		%newgunim.play("newgun")
 		g.killscore = 0
-		emit_signal("NewGun" )
-
+		emit_signal("NewGun")
 
 func _on_quit_pressed() -> void:
-	pass # Replace with function body.
+	are_you_sure = not are_you_sure
+
+func _on_sure_pressed() -> void:
+	get_tree().paused = false
+	scene_change("res://game_screens/title/title.tscn")
+	g.game_state = g.game_states.Title

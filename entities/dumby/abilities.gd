@@ -7,9 +7,10 @@ func _ready() -> void:
 	pass
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("Ability1"):
-		%as1.activate_ability()
-	elif Input.is_action_just_pressed("Ability2"):
-		%as2.activate_ability()
-	elif Input.is_action_just_pressed("Ability3"):
-		%as3.activate_ability()
+	if g.game_state == g.game_states.Combat:
+		if Input.is_action_just_pressed("Ability1"):
+			%as1.activate_ability()
+		elif Input.is_action_just_pressed("Ability2"):
+			%as2.activate_ability()
+		elif Input.is_action_just_pressed("Ability3"):
+			%as3.activate_ability()

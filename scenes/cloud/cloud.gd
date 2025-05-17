@@ -2,7 +2,7 @@ extends Sprite2D
 
 var start_velocity : float
 
-func _ready():
+func _ready() -> void:
 	frame = randi_range(0,4)
 	flip_h = randf_range(0,1) > 0.5
 	
@@ -12,7 +12,7 @@ func _ready():
 	
 	velocity = Vector2.ZERO
 
-func _process(delta):
+func _process(delta : float) -> void:
 	move(delta)
 
 	if global_position.x <= 5800 and global_position.x >= 5500:

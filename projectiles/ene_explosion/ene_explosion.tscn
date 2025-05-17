@@ -82,7 +82,7 @@ bus = &"sfx"
 
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_3hk44")
+&"": SubResource("AnimationLibrary_3hk44")
 }
 autoplay = "boom"
 speed_scale = 2.0

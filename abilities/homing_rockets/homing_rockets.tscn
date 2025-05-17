@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqr2md0ymsehj"]
+[gd_scene load_steps=6 format=3 uid="uid://cqr2md0ymsehj"]
 
 [ext_resource type="Script" uid="uid://dqb1fvdq6tdmr" path="res://abilities/homing_rockets/homing_rockets.gd" id="1_wkddn"]
 [ext_resource type="Texture2D" uid="uid://bs5ejx67ogvb6" path="res://Art/planestuff/fx/abilities-Sheet.png" id="2_u0t8u"]
+[ext_resource type="AudioStream" uid="uid://g5og5y8se7aw" path="res://Audio/jetslash sfx/SFX/Shoot.wav" id="3_u0t8u"]
+[ext_resource type="AudioStream" uid="uid://rfxisnyv0d1i" path="res://Audio/pistol-shot-233473.mp3" id="4_0a1fb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_spn4t"]
 font_color = Color(0, 0, 0, 1)
 outline_size = 7
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_u0t8u"]
 
 [node name="homing_rockets" type="Control" node_paths=PackedStringArray("cooldown_txt", "sprite")]
 custom_minimum_size = Vector2(32, 32)
@@ -16,7 +16,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_wkddn")
-rocket_amount = 11
+rocket_amount = 15
 cooldown_txt = NodePath("Label")
 cooldown = 20.0
 sprite = NodePath("sprite")
@@ -37,8 +37,14 @@ label_settings = SubResource("LabelSettings_spn4t")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="anim" type="AnimationPlayer" parent="."]
+[node name="shoot1" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_u0t8u")
-}
+stream = ExtResource("3_u0t8u")
+volume_db = -10.0
+bus = &"sfx"
+
+[node name="shoot2" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_0a1fb")
+volume_db = -15.0
+bus = &"sfx"

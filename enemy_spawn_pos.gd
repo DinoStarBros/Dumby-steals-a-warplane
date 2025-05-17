@@ -3,11 +3,11 @@ extends Path2D
 @export var wave : Wave
 var spawn_time : float = 1
 
-func _ready():
+func _ready() -> void:
 	%spawnTimer.start(1)
 	spawn_time = wave.starting_spawn_time
 
-func _on_spawn_timer_timeout():
+func _on_spawn_timer_timeout() -> void:
 	spawn_time -= wave.spawn_time_increment
 	if spawn_time <= wave.minimum_spawn_time:
 		spawn_time = wave.minimum_spawn_time
@@ -17,8 +17,8 @@ func _on_spawn_timer_timeout():
 			spawn_enemy()
 
 func spawn_enemy()->void:
-	var enemy_scn = wave.enemies.pick_random()
-	var enemy = enemy_scn.instantiate()
+	var enemy_scn : PackedScene = wave.enemies.pick_random()
+	var enemy : CharacterBody2D = enemy_scn.instantiate()
 	
 	%enemy_spawn_pos.progress_ratio = randf()
 	enemy.global_position = %enemy_spawn_pos.global_position

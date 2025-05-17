@@ -9,10 +9,10 @@ var dmg : int
 
 signal Hit
 
-func set_attack_properties(damag:int):
+func set_attack_properties(damag:int) -> void:
 	dmg = damag
 
-func _on_area_entered(area):
+func _on_area_entered(area : HurtboxComponent) -> void:
 	if area is HurtboxComponent:
 		Hit.emit()
 		if get_parent().is_in_group("Enemy"):
@@ -37,13 +37,13 @@ func _on_area_entered(area):
 		area.damage(attack)
 		if delete_after_hit:
 			if get_parent().is_in_group("Enemy"):
-				var plr_hit_sfx = plr_hit_sfx_scn.instantiate()
+				var plr_hit_sfx : Node2D = plr_hit_sfx_scn.instantiate()
 				g.game.add_child(plr_hit_sfx)
 				get_parent().queue_free()
 			else:
-				var enemy_hit_sfx = enemy_hit_sfx_scn.instantiate()
+				var enemy_hit_sfx : Node2D = enemy_hit_sfx_scn.instantiate()
 				g.game.add_child(enemy_hit_sfx)
 				get_parent().queue_free()
 
-const enemy_hit_sfx_scn : = preload("res://spawned_sounds/enemy_hit_sfx.tscn")
-const plr_hit_sfx_scn : = preload("res://spawned_sounds/plr_hit_sfx.tscn")
+const enemy_hit_sfx_scn : PackedScene = preload("res://spawned_sounds/enemy_hit_sfx.tscn")
+const plr_hit_sfx_scn : PackedScene = preload("res://spawned_sounds/plr_hit_sfx.tscn")

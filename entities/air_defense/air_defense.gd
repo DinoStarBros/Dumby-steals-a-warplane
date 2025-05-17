@@ -1,12 +1,12 @@
 extends CharacterBody2D
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity :float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction : = 1
-func _ready():
+func _ready() -> void:
 	direction = randi_range(-1,1)
 	%AntiAir.flip_h = direction <= 0
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -21,7 +21,7 @@ func spawn_bullet()->void:
 	%shoot2.play(.2)
 	
 	var target : Vector2 = Vector2(.7*direction,-.7)
-	var bullet = bullet_scn.instantiate()
+	var bullet : Projectile = bullet_scn.instantiate()
 	bullet.global_position = global_position
 	bullet.velocity = target * bullet_spd
 	bullet.pos_to_look = target
@@ -30,7 +30,7 @@ func spawn_bullet()->void:
 	bullet.pos_to_look = target
 
 
-func _on_timer_timeout():
+func _on_timer_timeout() -> void:
 	if shooty:
 		spawn_bullet()
 

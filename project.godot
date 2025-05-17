@@ -28,6 +28,10 @@ SceneManager="*res://addons/scene_manager/SceneManager.tscn"
 GlobalSignals="*res://GlobalSignals.gd"
 SaveLoad="*res://saveSystem/SaveLoad.gd"
 
+[debug]
+
+gdscript/warnings/untyped_declaration=2
+
 [display]
 
 window/size/viewport_width=1280
@@ -87,6 +91,7 @@ Ability3={
 2d_physics/layer_2="Plr Dmg - Enemy"
 2d_physics/layer_3="Ene Dmg - Player"
 2d_physics/layer_12="Homing Detection"
+2d_physics/layer_13="EXP"
 
 [rendering]
 

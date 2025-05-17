@@ -2,7 +2,6 @@ extends Control
 class_name Settings
 
 func _ready()->void:
-	hide()
 	
 	_update_res()
 	_update_vol_val()
@@ -56,11 +55,11 @@ func _update_res()->void:
 	%resOptions.select(SaveLoad.SaveFileData.resolutuion_index)
 	_on_res_options_item_selected(SaveLoad.SaveFileData.resolutuion_index)
 
-func _on_master_volume_value_changed(value)->void:
+func _on_master_volume_value_changed(value: float)->void:
 	g.master_volume = value
-func _on_music_volume_value_changed(value)->void:
+func _on_music_volume_value_changed(value: float)->void:
 	g.music_volume = value
-func _on_sfx_vol_value_changed(value)->void:
+func _on_sfx_vol_value_changed(value: float)->void:
 	g.sfx_volume = value
 
 func _on_res_options_item_selected(_index: int) -> void:

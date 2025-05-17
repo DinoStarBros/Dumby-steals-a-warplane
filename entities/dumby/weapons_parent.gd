@@ -53,7 +53,7 @@ func ammo_handling(delta: float) -> void:
 			max_ss_vis.max_value = current_weapon.max_reload_duration
 			min_ss_vis.max_value = current_weapon.max_reload_duration
 			
-			max_ss_vis.value = current_weapon.max_sweet_spot - 0.01
+			max_ss_vis.value = current_weapon.max_sweet_spot - 0.05
 			min_ss_vis.value = current_weapon.min_sweet_spot
 	
 	if current_weapon.reloading:
@@ -88,7 +88,7 @@ var max_regen_time : float = 2
 var regen_speed : float = 0.5
 var regen_speed_limit : float = 1
 # Goofy lmbda function stuff
-var regen_handling : Callable = func(delta:float):
+var regen_handling : Callable = func(delta:float) -> void:
 	if health_component.hp < health_component.max_hp:
 		regen_speed += delta * 0.1
 		regen_time += delta * regen_speed

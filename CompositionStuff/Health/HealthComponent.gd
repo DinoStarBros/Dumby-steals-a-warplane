@@ -8,10 +8,10 @@ class_name HealthComponent
 @export var max_hp : = 10.0
 var hp : float
 
-func _ready():
+func _ready() -> void:
 	hp = max_hp
 
-func damage(attack:Attack):
+func damage(attack:Attack) -> void:
 	if get_parent().is_in_group("Enemy"):
 		hp -= attack.attack_damage
 		get_parent().damage(attack)

@@ -6,7 +6,7 @@ class_name HurtboxComponent
 
 signal PlrHit(dmg:int)
 
-func damage(attack:Attack):
+func damage(attack:Attack) -> void:
 	z_index = 1
 	
 	

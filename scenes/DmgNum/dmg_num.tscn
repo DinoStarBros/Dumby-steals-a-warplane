@@ -85,7 +85,7 @@ script = ExtResource("1_gmy0d")
 
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_6g2at")
+&"": SubResource("AnimationLibrary_6g2at")
 }
 autoplay = "splash"
 

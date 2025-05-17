@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://bayhme8bl0oxa"]
+[gd_scene load_steps=15 format=3 uid="uid://bayhme8bl0oxa"]
 
 [ext_resource type="Script" uid="uid://4leshduf5xm" path="res://projectiles/homing_rocket/homing_rocket.gd" id="1_cvdho"]
 [ext_resource type="Texture2D" uid="uid://bij3lt28bf2wm" path="res://Art/planestuff/fx/bulletweffect-Sheet.png" id="2_jexvt"]
 [ext_resource type="PackedScene" uid="uid://cilaqubvkn2sv" path="res://CompositionStuff/Hitbox/hitbox_component.tscn" id="3_pyyak"]
 [ext_resource type="Texture2D" uid="uid://cuqwajg7lthld" path="res://Art/planestuff/fx/effects-Sheet.png" id="3_xfjqn"]
 [ext_resource type="Texture2D" uid="uid://cb00doqsxr2ay" path="res://Art/Stuff2/shockwave-Sheet.png" id="5_mjjml"]
+[ext_resource type="PackedScene" uid="uid://cg1j2ioabubjc" path="res://juices/trail/trail_fx.tscn" id="6_727k3"]
+[ext_resource type="AudioStream" uid="uid://hbjph6hq0fu3" path="res://Audio/jetslash sfx/SFX/Roblox Explosion Sound Effect.wav" id="7_8vt5m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mjjml"]
 atlas = ExtResource("3_xfjqn")
@@ -14,7 +16,7 @@ region = Rect2(2048, 0, 64, 64)
 size = Vector2(35, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfjqn"]
-radius = 1000.0
+radius = 600.0
 
 [sub_resource type="Animation" id="Animation_727k3"]
 length = 0.001
@@ -121,6 +123,30 @@ tracks/5/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HitboxComponent/hitboxbox:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("explode:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_mjjml"]
 resource_name = "start"
@@ -174,6 +200,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitboxComponent/hitboxbox:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mjjml"]
 _data = {
@@ -205,6 +243,7 @@ scale_amount_max = 0.5
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_pyyak")]
 unique_name_in_owner = true
+visible = false
 collision_layer = 2
 collision_mask = 2
 
@@ -212,16 +251,17 @@ collision_mask = 2
 unique_name_in_owner = true
 position = Vector2(4.5, 0)
 shape = SubResource("RectangleShape2D_xfjqn")
+disabled = true
 
 [node name="detection_radius" type="Area2D" parent="."]
 unique_name_in_owner = true
-visible = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="dr" type="CollisionShape2D" parent="detection_radius"]
 unique_name_in_owner = true
 shape = SubResource("CircleShape2D_xfjqn")
+debug_color = Color(0, 0.6, 0.7, 0.26)
 
 [node name="Label" type="Label" parent="."]
 unique_name_in_owner = true
@@ -243,5 +283,13 @@ texture = ExtResource("5_mjjml")
 hframes = 3
 vframes = 3
 frame = 1
+
+[node name="trail_fx" parent="." instance=ExtResource("6_727k3")]
+
+[node name="explode" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_8vt5m")
+volume_db = -15.0
+max_distance = 10000.0
 
 [connection signal="area_entered" from="detection_radius" to="." method="_on_detection_radius_area_entered"]

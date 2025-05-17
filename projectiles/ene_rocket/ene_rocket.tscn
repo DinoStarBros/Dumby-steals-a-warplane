@@ -71,7 +71,7 @@ vframes = 3
 
 [node name="loop" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_8uk70")
+&"": SubResource("AnimationLibrary_8uk70")
 }
 autoplay = "loop"
 

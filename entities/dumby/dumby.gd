@@ -6,15 +6,14 @@ var dir_to_mouse : Vector2
 var dist_to_mouse : float
 var accelerate_spd : int = 60
 var accelerate_limit : int = 700
-var direc_mouse 
 var accelerate_time : float = 0
 
-func _ready():
+func _ready() -> void:
 	#gun_sequence.shuffle()
 	g.player = self
 	%weapons_parent.process_mode = Node.PROCESS_MODE_INHERIT
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
@@ -22,9 +21,6 @@ func _physics_process(delta):
 	
 	dir_to_mouse = (get_global_mouse_position() - global_position).normalized()
 	dist_to_mouse = global_position.distance_to(get_global_mouse_position())
-	
-	
-	#%Plane.flip_v = dir_to_mouse.x <= 0
 	
 	velocity.y += (980 * delta) / 2
 	if accelerating and dist_to_mouse >= 50:
@@ -57,7 +53,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		aim_position = (event.position - half_viewport)
 
-var accelerating : = false
+var accelerating : bool = false
 
 func lim_accel_x()->void:
 	if velocity.x <= -accelerate_limit:
@@ -88,3 +84,13 @@ func plane_rotation_handling()->void:
 		plane_sprite.rotation_degrees = -180
 	if plane_sprite.rotation_degrees < -180:
 		plane_sprite.rotation_degrees = 180
+
+func _on_exp_pickup_area_entered(area: Area2D) -> void:
+	if area is XpOrb:
+		area.collected = true
+		%collect.pitch_scale = randf_range(0.9, 1.2)
+		%collect.play()
+
+func finish_collect() -> void:
+	%collect2.pitch_scale = randf_range(1.1, 1.3)
+	%collect2.play()
