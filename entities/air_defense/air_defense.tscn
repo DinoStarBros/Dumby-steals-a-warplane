@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dcdxb6boataee"]
+[gd_scene load_steps=13 format=3 uid="uid://dcdxb6boataee"]
 
 [ext_resource type="Script" uid="uid://dgnq6cs28tcsy" path="res://entities/air_defense/air_defense.gd" id="1_tanqj"]
 [ext_resource type="Texture2D" uid="uid://ctlbui32673t1" path="res://Art/planestuff/Anti Air.png" id="2_3jeyg"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://gs3fdbhnlc5o" path="res://CompositionStuff/Hurtbox/hurtbox_component.tscn" id="5_0c283"]
 [ext_resource type="PackedScene" uid="uid://dydkhhqkwcgfw" path="res://CompositionStuff/Health/health_component.tscn" id="6_ilt0u"]
 [ext_resource type="Texture2D" uid="uid://cb00doqsxr2ay" path="res://Art/Stuff2/shockwave-Sheet.png" id="7_ae45x"]
-[ext_resource type="PackedScene" uid="uid://cg4l4fx01iia" path="res://classes/vis_on_screen/vis_on_screen.tscn" id="8_xr34s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gcw7a"]
 size = Vector2(138, 133)
@@ -195,8 +194,5 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_t3oan")
 }
-
-[node name="vis_on_screen" parent="." instance=ExtResource("8_xr34s")]
-scale = Vector2(6.6, 6.2)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

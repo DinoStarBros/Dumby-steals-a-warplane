@@ -1,14 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://bbjqkmrcsybao"]
+[gd_scene load_steps=6 format=3 uid="uid://bbjqkmrcsybao"]
 
 [ext_resource type="Script" uid="uid://m1gmkli3gfru" path="res://scenes/exp/exp.gd" id="1_rmx8j"]
 [ext_resource type="Texture2D" uid="uid://bqubavsk5td7m" path="res://Art/newsprites.png" id="2_vir77"]
 [ext_resource type="PackedScene" uid="uid://cg1j2ioabubjc" path="res://juices/trail/trail_fx.tscn" id="3_n3l1d"]
-[ext_resource type="PackedScene" uid="uid://cg4l4fx01iia" path="res://classes/vis_on_screen/vis_on_screen.tscn" id="4_m0t67"]
 
 [sub_resource type="Gradient" id="Gradient_n3l1d"]
 colors = PackedColorArray(0.56131, 0.511719, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n3l1d"]
+radius = 33.0151
 
 [node name="exp" type="Area2D"]
 z_index = 10
@@ -31,7 +31,5 @@ gradient = SubResource("Gradient_n3l1d")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
 shape = SubResource("CircleShape2D_n3l1d")
-
-[node name="vis_on_screen" parent="." instance=ExtResource("4_m0t67")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

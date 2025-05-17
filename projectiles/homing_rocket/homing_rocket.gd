@@ -88,6 +88,9 @@ func new_homing_handle(delta: float) -> void: ## The new homing, gradually rotat
 	
 	if target:
 		direction = global_position.direction_to(target.global_position)
+		max_speed += 50 * delta
+	else:
+		max_speed = 1500
 	
 	desired_velocity = direction * max_speed
 	previous_velocity = current_velocity
@@ -95,6 +98,5 @@ func new_homing_handle(delta: float) -> void: ## The new homing, gradually rotat
 	
 	current_velocity += change * delta
 	
-	max_speed += 50 * delta
 	look_at(global_position + (current_velocity.normalized()))
 	velocity = current_velocity

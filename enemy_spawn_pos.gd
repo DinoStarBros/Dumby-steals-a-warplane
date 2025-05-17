@@ -15,6 +15,7 @@ func _on_spawn_timer_timeout() -> void:
 	if get_tree().get_nodes_in_group("Enemy").size() <= wave.enemy_limit and g.game_state == g.game_states.Combat:
 		for n in randi_range(wave.min_enemy_amount, wave.max_enemy_amount):
 			spawn_enemy()
+			#pass
 
 func spawn_enemy()->void:
 	var enemy_scn : PackedScene = wave.enemies.pick_random()

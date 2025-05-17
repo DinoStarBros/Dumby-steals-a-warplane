@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ctfkn7tj5byx2" path="res://Art/STARS (2).png" id="5_ymunx"]
 [ext_resource type="PackedScene" uid="uid://cilaqubvkn2sv" path="res://CompositionStuff/Hitbox/hitbox_component.tscn" id="6_dt8y4"]
 [ext_resource type="AudioStream" uid="uid://djpnk4x0gd6y" path="res://Audio/planemusic/DnB stuffs.wav" id="8_yjec7"]
-[ext_resource type="PackedScene" uid="uid://bj5wj2g1r73gg" path="res://entities/chaser/chaser.tscn" id="9_yjec7"]
+[ext_resource type="PackedScene" uid="uid://bbjqkmrcsybao" path="res://scenes/exp/exp.tscn" id="9_yjec7"]
 
 [sub_resource type="Curve2D" id="Curve2D_gy565"]
 _data = {
@@ -1048,8 +1048,8 @@ autostart = true
 
 [node name="enemy_container" type="Node2D" parent="."]
 
-[node name="chaser" parent="enemy_container" instance=ExtResource("9_yjec7")]
-position = Vector2(429, 78)
+[node name="exp" parent="enemy_container" instance=ExtResource("9_yjec7")]
+position = Vector2(-862, 312)
 
 [connection signal="timeout" from="dumby/enemy_spawner/spawnTimer" to="dumby/enemy_spawner" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="airdef_spawner/adftimer" to="." method="_on_adftimer_timeout"]

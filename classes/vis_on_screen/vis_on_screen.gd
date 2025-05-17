@@ -1,5 +1,5 @@
 extends VisibleOnScreenNotifier2D
-class_name VisOnScreen
+class_name VisOnScreen ## Whas
 
 @export var show_on_start : bool = false ## Decides if the parent node is shown on start or nah, keep it false if it's something that starts offscreen e.g. Projectiles, Enemies)
 
@@ -14,4 +14,3 @@ func _p_show() -> void:
 
 func _p_hide() -> void:
 	get_parent().hide()
- 
