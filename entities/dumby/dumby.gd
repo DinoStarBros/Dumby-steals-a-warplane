@@ -78,9 +78,10 @@ func lim_accel_y()->void:
 		velocity.y = accelerate_limit
 
 func damage(_attack:Attack)->void:
-	pass
+	g.cam.screen_shake(20, 0.3)
 
 func Dead(_attack:Attack)->void:
+	g.cam.screen_shake(40, 0.6)
 	g.game_state = g.game_states.Lost
 	set_physics_process(false)
 	%explod.play(.4)

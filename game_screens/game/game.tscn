@@ -1013,7 +1013,6 @@ texture = ExtResource("5_ymunx")
 [node name="music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("8_yjec7")
-volume_db = -10.0
 autoplay = true
 bus = &"music"
 

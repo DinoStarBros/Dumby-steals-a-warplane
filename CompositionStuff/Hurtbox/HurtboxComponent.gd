@@ -27,8 +27,6 @@ func damage(attack:Attack) -> void:
 		if explosion_particles:
 			for n in explosion_particle_amount + randi_range(0,2):
 				spawn_explosion_particles(attack)
-	
-	
 	elif get_parent().is_in_group("Player"):
 		PlrHit.emit(attack.attack_damage)
 		%hitsparkanim.play("spark")
