@@ -59,3 +59,9 @@ func _process(_delta:float)->void:
 		2,
 		linear_to_db(sfx_volume)
 	)
+
+func frame_freeze(timescale: float, duration: float) -> void: ## Slows down the engine's time scale, slowing down the time, for a certain duration. Use for da juice
+	if frame_freeze_value:
+		Engine.time_scale = timescale
+		await get_tree().create_timer(duration, true, false, true).timeout
+		Engine.time_scale = 1.0

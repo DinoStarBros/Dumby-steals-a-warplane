@@ -1,13 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://bhp7st34wqg3f"]
+[gd_scene load_steps=22 format=3 uid="uid://bu4snhapwua1q"]
 
-[ext_resource type="Script" uid="uid://bsinn15v5ma8t" path="res://entities/shooter/shooter.gd" id="1_kg2ur"]
-[ext_resource type="Texture2D" uid="uid://b3hwhp3ky72y6" path="res://Art/planestuff/plane.png" id="2_bvc85"]
-[ext_resource type="Texture2D" uid="uid://baj53ina6l1vj" path="res://Art/planestuff/plane-Sheet.png" id="3_a16y1"]
-[ext_resource type="PackedScene" uid="uid://gs3fdbhnlc5o" path="res://CompositionStuff/Hurtbox/hurtbox_component.tscn" id="4_ttcvk"]
-[ext_resource type="PackedScene" uid="uid://dydkhhqkwcgfw" path="res://CompositionStuff/Health/health_component.tscn" id="5_tq5xu"]
-[ext_resource type="Texture2D" uid="uid://cb00doqsxr2ay" path="res://Art/Stuff2/shockwave-Sheet.png" id="6_uy5fh"]
-[ext_resource type="AudioStream" uid="uid://dtq0aduiy7nn4" path="res://Audio/gunshot.wav" id="7_npqfx"]
-[ext_resource type="AudioStream" uid="uid://rfxisnyv0d1i" path="res://Audio/pistol-shot-233473.mp3" id="8_o6t5e"]
+[ext_resource type="Script" uid="uid://cmyxd3ohjkmp" path="res://entities/shotgunner/shotgunner.gd" id="1_k6gep"]
+[ext_resource type="Texture2D" uid="uid://b3hwhp3ky72y6" path="res://Art/planestuff/plane.png" id="2_5avn4"]
+[ext_resource type="Texture2D" uid="uid://baj53ina6l1vj" path="res://Art/planestuff/plane-Sheet.png" id="3_gwotw"]
+[ext_resource type="PackedScene" uid="uid://gs3fdbhnlc5o" path="res://CompositionStuff/Hurtbox/hurtbox_component.tscn" id="4_uw1lj"]
+[ext_resource type="PackedScene" uid="uid://dydkhhqkwcgfw" path="res://CompositionStuff/Health/health_component.tscn" id="5_um6te"]
+[ext_resource type="Texture2D" uid="uid://cb00doqsxr2ay" path="res://Art/Stuff2/shockwave-Sheet.png" id="6_8jxk8"]
+[ext_resource type="AudioStream" uid="uid://dtq0aduiy7nn4" path="res://Audio/gunshot.wav" id="7_v3f3a"]
+[ext_resource type="AudioStream" uid="uid://rfxisnyv0d1i" path="res://Audio/pistol-shot-233473.mp3" id="8_g05o7"]
 
 [sub_resource type="Curve" id="Curve_smpng"]
 _limits = [-360.0, 360.0, 0.0, 1.0]
@@ -272,14 +272,14 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.885906, 0.993289)
 colors = PackedColorArray(1, 0.862143, 0.308024, 1, 0.958062, 0.583923, 1.4023e-06, 1, 0.980565, 0.365168, 0, 1)
 
-[node name="shooter" type="CharacterBody2D" groups=["Enemy"]]
+[node name="shotgunner" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 2
 scale = Vector2(1.5, 1.5)
-script = ExtResource("1_kg2ur")
+script = ExtResource("1_k6gep")
 
 [node name="Plane" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-texture = ExtResource("2_bvc85")
+texture = ExtResource("2_5avn4")
 
 [node name="flameparticles" type="CPUParticles2D" parent="Plane"]
 unique_name_in_owner = true
@@ -304,7 +304,7 @@ color = Color(0.65834, 0.65834, 0.65834, 1)
 unique_name_in_owner = true
 self_modulate = Color(100, 100, 100, 1)
 position = Vector2(-16, 0)
-texture = ExtResource("3_a16y1")
+texture = ExtResource("3_gwotw")
 hframes = 4
 frame = 1
 
@@ -323,32 +323,32 @@ modulate = Color(100, 100, 100, 1)
 modulate = Color(0.587035, 0.722509, 1, 1)
 z_index = -1
 position = Vector2(0, -1)
-texture = ExtResource("2_bvc85")
+texture = ExtResource("2_5avn4")
 
 [node name="2" type="Sprite2D" parent="outline"]
 modulate = Color(0.587035, 0.722509, 1, 1)
 z_index = -1
 position = Vector2(1, 0)
-texture = ExtResource("2_bvc85")
+texture = ExtResource("2_5avn4")
 
 [node name="3" type="Sprite2D" parent="outline"]
 modulate = Color(0.587035, 0.722509, 1, 1)
 z_index = -1
 position = Vector2(0, 1)
-texture = ExtResource("2_bvc85")
+texture = ExtResource("2_5avn4")
 
 [node name="4" type="Sprite2D" parent="outline"]
 modulate = Color(0.587035, 0.722509, 1, 1)
 z_index = -1
 position = Vector2(-1, 0)
-texture = ExtResource("2_bvc85")
+texture = ExtResource("2_5avn4")
 
 [node name="targetDeviatTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 2.0
 autostart = true
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component", "ouchnim") instance=ExtResource("4_ttcvk")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component", "ouchnim") instance=ExtResource("4_uw1lj")]
 collision_layer = 2
 collision_mask = 2
 health_component = NodePath("../HealthComponent")
@@ -364,8 +364,8 @@ libraries = {
 [node name="hubc" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("CircleShape2D_o2tfc")
 
-[node name="HealthComponent" parent="." instance=ExtResource("5_tq5xu")]
-max_hp = 25.0
+[node name="HealthComponent" parent="." instance=ExtResource("5_um6te")]
+max_hp = 20.0
 
 [node name="death" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -396,7 +396,7 @@ color_ramp = SubResource("Gradient_o2tfc")
 
 [node name="Shockwave-sheet" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("6_uy5fh")
+texture = ExtResource("6_8jxk8")
 hframes = 3
 vframes = 3
 frame = 1
@@ -405,13 +405,13 @@ frame = 1
 
 [node name="shoot" type="AudioStreamPlayer2D" parent="sfx"]
 unique_name_in_owner = true
-stream = ExtResource("7_npqfx")
+stream = ExtResource("7_v3f3a")
 volume_db = -15.0
 bus = &"sfx"
 
 [node name="shoot2" type="AudioStreamPlayer2D" parent="sfx"]
 unique_name_in_owner = true
-stream = ExtResource("8_o6t5e")
+stream = ExtResource("8_g05o7")
 volume_db = -20.0
 pitch_scale = 0.5
 bus = &"sfx"
@@ -419,7 +419,7 @@ bus = &"sfx"
 [node name="ShootTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 3.0
-autostart = true
+one_shot = true
 
 [connection signal="timeout" from="targetDeviatTimer" to="." method="_on_target_deviat_timer_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://bfahxvjjxjylq"]
+[gd_scene load_steps=78 format=3 uid="uid://bfahxvjjxjylq"]
 
 [ext_resource type="Script" uid="uid://cbp023lkcpg5o" path="res://entities/dumby/dumby.gd" id="1_2ba6e"]
 [ext_resource type="PackedScene" uid="uid://gs3fdbhnlc5o" path="res://CompositionStuff/Hurtbox/hurtbox_component.tscn" id="2_5wgoi"]
@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://b2e50hn2busxu" path="res://Art/Stuff2/2d_lights_and_shadows_neutral_point_light.webp" id="20_hu6rb"]
 [ext_resource type="PackedScene" uid="uid://cg1j2ioabubjc" path="res://juices/trail/trail_fx.tscn" id="21_rkk0x"]
 [ext_resource type="AudioStream" uid="uid://dbdn3lqryrjb1" path="res://Audio/amalgun/pickScrap.wav" id="22_sby2x"]
+[ext_resource type="AudioStream" uid="uid://nj64nd85rtql" path="res://Audio/splashtownSFX/Airdash.wav" id="23_4s3yb"]
 [ext_resource type="PackedScene" uid="uid://bj5jbn7aere7t" path="res://timer/timer.tscn" id="23_12q0g"]
 [ext_resource type="PackedScene" uid="uid://do3oy3lqr320g" path="res://settingsMenu/settings_menu.tscn" id="23_fj41j"]
 [ext_resource type="PackedScene" uid="uid://2m2qt563w7ii" path="res://juices/spd_line/speed_line.tscn" id="28_baqsm"]
@@ -41,8 +42,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmt67"]
 size = Vector2(4, 4)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_qxiag"]
-radius = 3.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_3gqex"]
+radius = 40.0
 
 [sub_resource type="Animation" id="Animation_2hs80"]
 resource_name = "Ouch"
@@ -259,21 +260,6 @@ _data = {
 &"RESET": SubResource("Animation_dq1xq"),
 &"flameLoop": SubResource("Animation_kvjl2")
 }
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12q0g"]
-skew = Vector2(1, 0)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_baqsm"]
-bg_color = Color(0.767262, 0.81099, 1.15514e-06, 1)
-skew = Vector2(1, 0)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
 
 [sub_resource type="Animation" id="Animation_5fg7b"]
 length = 0.001
@@ -499,17 +485,6 @@ font_size = 25
 font_color = Color(0, 0, 0, 1)
 outline_size = 12
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4unw"]
-bg_color = Color(0.501407, 0.501406, 0.501406, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hu6rb"]
-bg_color = Color(0.0594658, 0.796868, 0.0499423, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_hu6rb"]
-font_size = 30
-font_color = Color(0, 0, 0, 1)
-outline_size = 7
-
 [sub_resource type="Animation" id="Animation_hu6rb"]
 length = 0.001
 tracks/0/type = "value"
@@ -634,6 +609,21 @@ _data = {
 &"zing": SubResource("Animation_u8vb7")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12q0g"]
+skew = Vector2(1, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_baqsm"]
+bg_color = Color(0.767262, 0.81099, 1.15514e-06, 1)
+skew = Vector2(1, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u8vb7"]
 bg_color = Color(0, 0, 0, 1)
 draw_center = false
@@ -667,8 +657,99 @@ border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6w3i"]
-bg_color = Color(1, 1, 1, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4unw"]
+bg_color = Color(0.501407, 0.501406, 0.501406, 1)
+skew = Vector2(1, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pctjt"]
+bg_color = Color(0.981995, 1, 0.769531, 1)
+skew = Vector2(1, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3gqex"]
+bg_color = Color(0.501407, 0.501406, 0.501406, 1)
+skew = Vector2(1, 0)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4s3yb"]
+bg_color = Color(0.0594658, 0.796868, 0.0499423, 1)
+skew = Vector2(1, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+
+[sub_resource type="Animation" id="Animation_4s3yb"]
+resource_name = "roll"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlaneSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtboxComponent/hurbc:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_pctjt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlaneSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtboxComponent/hurbc:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pctjt"]
+_data = {
+&"RESET": SubResource("Animation_pctjt"),
+&"roll": SubResource("Animation_4s3yb")
+}
 
 [node name="dumby" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 4097
@@ -679,14 +760,17 @@ script = ExtResource("1_2ba6e")
 shape = SubResource("RectangleShape2D_qmt67")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component", "ouchnim") instance=ExtResource("2_5wgoi")]
+unique_name_in_owner = true
 collision_layer = 4
 collision_mask = 4
 health_component = NodePath("../HealthComponent")
 ouchnim = NodePath("Ouch")
+explosion_particles = true
+explosion_particle_amount = 3
 
 [node name="hurbc" type="CollisionShape2D" parent="HurtboxComponent"]
 rotation = 1.5708
-shape = SubResource("CircleShape2D_qxiag")
+shape = SubResource("CircleShape2D_3gqex")
 
 [node name="Ouch" type="AnimationPlayer" parent="HurtboxComponent"]
 root_node = NodePath("../..")
@@ -697,7 +781,7 @@ libraries = {
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("hp_bar") instance=ExtResource("3_pin7m")]
 unique_name_in_owner = true
 scale = Vector2(1.5, 1.5)
-hp_bar = NodePath("../GUI/hpbar")
+hp_bar = NodePath("../bars/hpbar")
 
 [node name="ExpPickup" type="Area2D" parent="."]
 visible = false
@@ -711,8 +795,6 @@ shape = SubResource("CircleShape2D_rkk0x")
 unique_name_in_owner = true
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_fj41j")
-frame = 2
-frame_progress = 0.457169
 script = ExtResource("11_up01i")
 
 [node name="flameparticles" type="CPUParticles2D" parent="PlaneSprite"]
@@ -813,25 +895,6 @@ position_smoothing_speed = 20.0
 script = ExtResource("6_tddd6")
 target = NodePath("..")
 
-[node name="ammo" type="ProgressBar" parent="."]
-offset_left = -108.0
-offset_top = 184.0
-offset_right = 96.0
-offset_bottom = 211.0
-mouse_filter = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_12q0g")
-theme_override_styles/fill = SubResource("StyleBoxFlat_baqsm")
-show_percentage = false
-
-[node name="ammo_txt" type="Label" parent="ammo"]
-layout_mode = 0
-offset_left = 12.0
-offset_top = -25.0
-offset_right = 64.0
-offset_bottom = 24.0
-text = "Ammo
-24 / 24"
-
 [node name="sfx" type="Node2D" parent="."]
 
 [node name="shoot" type="AudioStreamPlayer" parent="sfx"]
@@ -879,6 +942,12 @@ bus = &"sfx"
 [node name="collect2" type="AudioStreamPlayer" parent="sfx"]
 unique_name_in_owner = true
 stream = ExtResource("22_sby2x")
+volume_db = -5.0
+bus = &"sfx"
+
+[node name="roll" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("23_4s3yb")
 volume_db = -5.0
 bus = &"sfx"
 
@@ -943,7 +1012,7 @@ scale = Vector2(2, 2)
 [node name="text" type="Label" parent="GUI/yLost/buttons"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Your Ship has Been Destroyed!"
+text = "Your Warplane has Been Destroyed!"
 
 [node name="play" type="Button" parent="GUI/yLost/buttons"]
 visible = false
@@ -982,6 +1051,7 @@ color = Color(0.466667, 0.466667, 0.466667, 0.658824)
 polygon = PackedVector2Array(-91, -95, -71, 813, 1402, 839, 1370, -139)
 
 [node name="settingsMenu" parent="GUI/paused" instance=ExtResource("23_fj41j")]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1059,25 +1129,6 @@ hframes = 3
 vframes = 3
 frame = 6
 
-[node name="hpbar" type="ProgressBar" parent="GUI"]
-offset_left = 12.0
-offset_top = 127.0
-offset_right = 81.0
-offset_bottom = 133.0
-scale = Vector2(2, 2)
-theme_override_styles/background = SubResource("StyleBoxFlat_d4unw")
-theme_override_styles/fill = SubResource("StyleBoxFlat_hu6rb")
-show_percentage = false
-
-[node name="hptxt" type="Label" parent="GUI/hpbar"]
-layout_mode = 0
-offset_top = -11.5
-offset_right = 49.0
-offset_bottom = 30.5
-scale = Vector2(0.3, 0.3)
-text = "HP:"
-label_settings = SubResource("LabelSettings_hu6rb")
-
 [node name="timer" parent="GUI" instance=ExtResource("23_12q0g")]
 offset_left = 640.0
 offset_top = 19.0
@@ -1088,7 +1139,7 @@ offset_bottom = 19.0
 unique_name_in_owner = true
 script = ExtResource("19_ufwy4")
 dumby = NodePath("..")
-ammo_bar = NodePath("../ammo")
+ammo_bar = NodePath("../bars/ammo")
 current_weapon = NodePath("rapid")
 
 [node name="muzzle_flash" type="Sprite2D" parent="weapons_parent"]
@@ -1142,6 +1193,26 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="ammo" type="ProgressBar" parent="bars"]
+layout_mode = 0
+offset_left = -102.0
+offset_top = -64.0
+offset_right = 102.0
+offset_bottom = -43.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_12q0g")
+theme_override_styles/fill = SubResource("StyleBoxFlat_baqsm")
+show_percentage = false
+
+[node name="ammo_txt" type="Label" parent="bars/ammo"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = -25.0
+offset_right = 64.0
+offset_bottom = 24.0
+text = "Ammo
+24 / 24"
+
 [node name="reload_bar" type="ProgressBar" parent="bars"]
 unique_name_in_owner = true
 z_index = 5
@@ -1190,11 +1261,21 @@ show_percentage = false
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = -48.0
-offset_top = -32.0
-offset_bottom = -27.0
-scale = Vector2(2, 2)
+offset_top = 77.0
+offset_right = 49.0
+offset_bottom = 93.0
 theme_override_styles/background = SubResource("StyleBoxFlat_d4unw")
-theme_override_styles/fill = SubResource("StyleBoxFlat_v6w3i")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pctjt")
+show_percentage = false
+
+[node name="hpbar" type="ProgressBar" parent="bars"]
+layout_mode = 0
+offset_left = -127.0
+offset_top = 41.0
+offset_right = 118.0
+offset_bottom = 65.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3gqex")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4s3yb")
 show_percentage = false
 
 [node name="ScreenFX" type="CanvasLayer" parent="."]
@@ -1290,6 +1371,61 @@ process_mode = 3
 layer = 4
 script = ExtResource("37_3gqex")
 
+[node name="upgUi" type="VBoxContainer" parent="LvlXPUpg"]
+custom_minimum_size = Vector2(500, 0)
+offset_left = 169.0
+offset_top = 195.0
+offset_right = 669.0
+offset_bottom = 361.0
+scale = Vector2(2, 2)
+
+[node name="upgButtons" type="PanelContainer" parent="LvlXPUpg/upgUi"]
+layout_mode = 2
+
+[node name="buttonContainer" type="HBoxContainer" parent="LvlXPUpg/upgUi/upgButtons"]
+layout_mode = 2
+
+[node name="description" type="PanelContainer" parent="LvlXPUpg/upgUi"]
+layout_mode = 2
+
+[node name="desc" type="Label" parent="LvlXPUpg/upgUi/description"]
+layout_mode = 2
+text = "Placeholder:
+
+Insert upgrade text description here
+IDFK man
+"
+
+[node name="choosettons" type="HBoxContainer" parent="LvlXPUpg/upgUi"]
+layout_mode = 2
+alignment = 1
+
+[node name="choose" type="Button" parent="LvlXPUpg/upgUi/choosettons"]
+layout_mode = 2
+text = "Choose"
+
+[node name="reroll" type="Button" parent="LvlXPUpg/upgUi/choosettons"]
+layout_mode = 2
+text = "Reroll
+"
+
+[node name="skip" type="Button" parent="LvlXPUpg/upgUi/choosettons"]
+layout_mode = 2
+text = "Skip
+"
+
+[node name="dir_to_turn" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="dir_to_plane_sprite" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="rollnim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_pctjt")
+}
+
 [connection signal="PlrHit" from="HurtboxComponent" to="weapons_parent" method="_on_hurtbox_component_plr_hit"]
 [connection signal="area_entered" from="ExpPickup" to="." method="_on_exp_pickup_area_entered"]
 [connection signal="pressed" from="GUI/yLost/buttons/play" to="GUI" method="_on_play_pressed"]
@@ -1297,3 +1433,6 @@ script = ExtResource("37_3gqex")
 [connection signal="pressed" from="GUI/paused/settingsMenu/butons/resume" to="GUI" method="_on_resume_pressed"]
 [connection signal="pressed" from="GUI/paused/settingsMenu/butons/quit" to="GUI" method="_on_quit_pressed"]
 [connection signal="pressed" from="GUI/paused/settingsMenu/butons/sure" to="GUI" method="_on_sure_pressed"]
+[connection signal="pressed" from="LvlXPUpg/upgUi/choosettons/choose" to="LvlXPUpg" method="_on_choose_pressed"]
+[connection signal="pressed" from="LvlXPUpg/upgUi/choosettons/reroll" to="LvlXPUpg" method="_on_reroll_pressed"]
+[connection signal="pressed" from="LvlXPUpg/upgUi/choosettons/skip" to="LvlXPUpg" method="_on_skip_pressed"]

@@ -16,13 +16,13 @@ func _on_area_entered(area : HurtboxComponent) -> void:
 	if area is HurtboxComponent:
 		Hit.emit()
 		if get_parent().is_in_group("Enemy"):
-			g.cam.apply_shake(10)
+			g.cam.screen_shake(5, 0.1)
 			
 			attack.ene_attack_damage = dmg
 			%player_hit.pitch_scale = 1 + randf_range(-.2,.2)
 			%player_hit.play()
 		else:
-			g.cam.apply_shake(20)
+			g.cam.screen_shake(15, 0.3)
 			attack.attack_damage = dmg
 			
 			%enemy_hit.pitch_scale = 0.5 + randf_range(-.1,.1)
@@ -44,6 +44,11 @@ func _on_area_entered(area : HurtboxComponent) -> void:
 				var enemy_hit_sfx : Node2D = enemy_hit_sfx_scn.instantiate()
 				g.game.add_child(enemy_hit_sfx)
 				get_parent().queue_free()
+		
+		if area.health_component.hp <= 0:
+			var rob_exp : Node2D = rob_exp_scn.instantiate()
+			g.game.add_child(rob_exp)
 
 const enemy_hit_sfx_scn : PackedScene = preload("res://spawned_sounds/enemy_hit_sfx.tscn")
 const plr_hit_sfx_scn : PackedScene = preload("res://spawned_sounds/plr_hit_sfx.tscn")
+const rob_exp_scn : PackedScene = preload("res://spawned_sounds/roblox_explode_sfx.tscn")

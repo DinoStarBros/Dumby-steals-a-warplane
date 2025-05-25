@@ -43,11 +43,12 @@ func spawn_bullet() -> void:
 	bullet.lifetime = stats.bullet_lifetime
 	g.game.add_child(bullet)
 	
-	dir_to_mouse = global_position.direction_to(get_global_mouse_position())
+	#dir_to_mouse = global_position.direction_to(get_global_mouse_position())
+	dir_to_mouse = p.dir_plane # The direction of the plane, not directly the mouse
 	
 	bullet.global_position = global_position + (dir_to_mouse * 50)
 	bullet.velocity = (dir_to_mouse + rand_spread_vector ) * stats.bullet_spd
-	bullet.look_at(get_global_mouse_position() + rand_spread_vector)
+	bullet.look_at((p.dir_plane + global_position) + rand_spread_vector)
 	bullet.lifetime = stats.bullet_lifetime
 
 func buffed_handling(delta: float) -> void:

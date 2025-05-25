@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj3v6mjexoc3h"]
+
+[ext_resource type="Script" uid="uid://cjrdqc0kgr0nu" path="res://juices/explosionSpawner/explosion_spawner.gd" id="1_cux0g"]
+
+[node name="explosionSpawner" type="Node2D"]
+script = ExtResource("1_cux0g")

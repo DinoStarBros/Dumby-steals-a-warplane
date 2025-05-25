@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var accelerate_spd : int = 50
+var accelerate_spd : int = 30
 var accelerate_limit : int = 800
 var accelerating : = true
 var dir_to_targ : Vector2
@@ -9,14 +9,13 @@ var dist_to_targ : float
 
 @onready var sprite: Sprite2D = %Icon
 
-func _ready():
+func _ready() -> void:
 	_on_target_deviat_timer_timeout()
 	%HitboxComponent.set_attack_properties(1)
-	
 	accelerate_spd += randi_range(-5, 5)
 
 var target_deviation : Vector2
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	move_and_slide()
 	target = g.player
 	
@@ -48,7 +47,7 @@ func lim_accel_y()->void:
 		velocity.y = accelerate_limit
 
 const tdev_range : = 10
-func _on_target_deviat_timer_timeout():
+func _on_target_deviat_timer_timeout() -> void:
 	target_deviation.x = randf_range(-tdev_range,tdev_range)
 	target_deviation.y = randf_range(-tdev_range,tdev_range)
 
@@ -58,6 +57,7 @@ func damage(_attack:Attack)->void:
 func Dead(_attack:Attack)->void:
 	g.score += 10
 	g.killscore += 1
+	#g.spawn_xp(global_position, 1)
 	g.spawn_txt("10", global_position)
 	set_physics_process(false)
 	%death.play("die")

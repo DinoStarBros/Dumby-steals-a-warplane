@@ -8,9 +8,8 @@ var target : CharacterBody2D
 
 func _ready() ->  void:
 	_on_target_deviat_timer_timeout()
-	
 	accelerate_spd += randi_range(-5, 5)
-	
+	%ShootTimer.start(randf_range(4,5))
 
 var target_deviation : Vector2
 func _physics_process(delta: float) -> void:
@@ -24,7 +23,7 @@ func _physics_process(delta: float) -> void:
 	%flameparticles.direction = -velocity
 	
 	
-	%Plane.look_at(target.global_position) 
+	%Plane.look_at(target.global_position)
 	%outline.look_at(target.global_position)
 	velocity.y += (980 * delta) / 2
 	if accelerating:
@@ -61,9 +60,12 @@ func Dead(_attack:Attack)->void:
 	set_physics_process(false)
 	%death.play("die")
 
-var bullet_spd : = 1500
+var bullet_spd : = 1000
 
 const bullet_scn : = preload("res://projectiles/ene_bullet/ene_bullet.tscn")
+var rand_spread_vector : Vector2
+const random_spread : float = 0.2
+const bullet_amnt : int = 4
 func spawn_bullet()->void:
 	
 	%shoot.pitch_scale = randf_range(.9,1.1)
@@ -72,12 +74,21 @@ func spawn_bullet()->void:
 	%shoot2.play(.2)
 	
 	var bullet : Projectile = bullet_scn.instantiate()
-	bullet.global_position = global_position
-	bullet.velocity = dir_to_targ * bullet_spd
-	bullet.pos_to_look = target.global_position
+
 	g.game.add_child(bullet)
-	bullet.velocity = dir_to_targ * bullet_spd
+	
+	rand_spread_vector.x = randf_range(-random_spread, random_spread)
+	rand_spread_vector.y = randf_range(-random_spread, random_spread)
+	
+	bullet.pos_to_look = target.global_position
+	
+	bullet.global_position = global_position + (dir_to_targ * 50)
+	bullet.velocity = (dir_to_targ + rand_spread_vector) * bullet_spd
+	
 	bullet.pos_to_look = target.global_position
 
 func _on_shoot_timer_timeout() -> void:
-	spawn_bullet()
+	for n in bullet_amnt:
+		spawn_bullet()
+	
+	%ShootTimer.start(randf_range(4,5))

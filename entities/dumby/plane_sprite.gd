@@ -1,11 +1,16 @@
 extends AnimatedSprite2D
+class_name PlaneSprite
 
 @export var max_frame : float = 6
 @onready var p : Dumby = get_parent() ## Reference to the Parent Node, Dumby
+#@onready var dir_to_m: Node2D = %dir_to_m
 
-func _process(_delta: float) -> void:
-	var rot : float = rotation_degrees
-	frame = _pose_matcher(rot)
+func _process(delta: float) -> void:
+	var rot : float = p.dir_to_plane_sprite.rotation_degrees
+	if p.rolling:
+		pass
+	else:
+		frame = _pose_matcher(rot)
 	%PlaneSprite.scale = Vector2(2,2)
 	
 	fx()

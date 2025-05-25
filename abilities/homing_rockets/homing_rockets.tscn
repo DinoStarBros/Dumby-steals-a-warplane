@@ -18,7 +18,7 @@ offset_bottom = 40.0
 script = ExtResource("1_wkddn")
 rocket_amount = 15
 cooldown_txt = NodePath("Label")
-cooldown = 20.0
+cooldown = 10.0
 sprite = NodePath("sprite")
 
 [node name="sprite" type="Sprite2D" parent="."]

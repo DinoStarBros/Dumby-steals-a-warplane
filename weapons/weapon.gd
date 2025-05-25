@@ -3,6 +3,8 @@ class_name Weapon
 
 @export var stats : WeaponStats
 
+@onready var p : Dumby = owner
+
 var can_shoot : bool = true
 var cooldown : float = 0
 

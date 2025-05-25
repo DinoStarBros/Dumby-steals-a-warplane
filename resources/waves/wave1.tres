@@ -1,16 +1,18 @@
-[gd_resource type="Resource" script_class="Wave" load_steps=4 format=3 uid="uid://s8xb5hmfqgnq"]
+[gd_resource type="Resource" script_class="Wave" load_steps=6 format=3 uid="uid://s8xb5hmfqgnq"]
 
 [ext_resource type="Script" uid="uid://d1crhjsum6w1o" path="res://resources/wave_resource.gd" id="1_a4hey"]
-[ext_resource type="PackedScene" uid="uid://bj5wj2g1r73gg" path="res://entities/chaser/chaser.tscn" id="1_w1tnr"]
-[ext_resource type="PackedScene" uid="uid://bhp7st34wqg3f" path="res://entities/shooter/shooter.tscn" id="2_vtds5"]
+[ext_resource type="PackedScene" uid="uid://bj5wj2g1r73gg" path="res://entities/chaser/chaser.tscn" id="2_wvy8a"]
+[ext_resource type="PackedScene" uid="uid://bhp7st34wqg3f" path="res://entities/shooter/shooter.tscn" id="3_f0uok"]
+[ext_resource type="PackedScene" uid="uid://bu4snhapwua1q" path="res://entities/shotgunner/shotgunner.tscn" id="3_vtds5"]
+[ext_resource type="PackedScene" uid="uid://dyirarspnmdqd" path="res://entities/spike_sphere/spike_sphere.tscn" id="4_ra2pg"]
 
 [resource]
 script = ExtResource("1_a4hey")
-enemies = Array[PackedScene]([ExtResource("1_w1tnr"), ExtResource("2_vtds5")])
+enemies = Array[PackedScene]([ExtResource("3_vtds5"), ExtResource("2_wvy8a"), ExtResource("3_f0uok"), ExtResource("3_vtds5"), ExtResource("4_ra2pg")])
 starting_spawn_time = 3.0
 minimum_spawn_time = 0.5
 spawn_time_increment = 0.01
-enemy_limit = 200.0
+enemy_limit = 30.0
 min_enemy_amount = 2
-max_enemy_amount = 4
+max_enemy_amount = 3
 metadata/_custom_type_script = "uid://d1crhjsum6w1o"

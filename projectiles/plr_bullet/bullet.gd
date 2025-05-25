@@ -4,13 +4,15 @@ extends Projectile
 
 func _ready() -> void:
 	hitbox_component.Hit.connect(hit)
-	
-	await get_tree().create_timer(lifetime).timeout
-	queue_free()
 
-func _physics_process(_delta:float)->void:
+var time : float = 0
+func _physics_process(delta:float)->void:
 	move_and_slide()
 	hitbox_component.set_attack_properties(dmg)
+	
+	time += delta
+	if time >= lifetime:
+		queue_free()
 
 func hit() -> void:
 	velocity = Vector2.ZERO

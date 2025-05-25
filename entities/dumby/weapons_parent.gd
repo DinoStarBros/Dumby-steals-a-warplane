@@ -11,6 +11,7 @@ var ammo_text : Label
 @onready var reload_bar: ProgressBar = %reload_bar
 @onready var max_ss_vis: ProgressBar = %max_ss_vis
 @onready var min_ss_vis: ProgressBar = %min_ss_vis
+@onready var p : Dumby = get_parent() ## Reference to the Parent Node, Dumby
 
 signal Tactical_Reload
 
@@ -18,7 +19,8 @@ func _ready() -> void:
 	ammo_text = ammo_bar.get_child(0)
 
 func _process(delta: float) -> void:
-	look_at(get_global_mouse_position())
+	#look_at(get_global_mouse_position())
+	look_at(p.dir_plane + global_position)
 	regen_bar.visible = not Input.is_action_pressed("shoot") and health_component.hp < health_component.max_hp and not current_weapon.reloading
 	ammo_handling(delta)
 	reload_bar.visible = current_weapon.reloading
@@ -42,7 +44,8 @@ func ammo_handling(delta: float) -> void:
 	
 	ammo_text.text = str("Ammo : \n", current_weapon.ammo, " / ", current_weapon.stats.max_ammo)
 	
-	#if (Input.is_action_just_pressed("reload") and current_weapon.ammo != current_weapon.stats.max_ammo and current_weapon.ammo <= current_weapon.stats.max_ammo / 2) or current_weapon.ammo <= 0:
+	ammo_bar.visible = current_weapon.ammo > 0
+	
 	if current_weapon.ammo <= 0:
 		if not current_weapon.reloading:
 			current_weapon.r_tact_pressed = false
@@ -60,7 +63,8 @@ func ammo_handling(delta: float) -> void:
 		reload_time += delta
 		reload_bar.value = reload_time
 		
-		if reload_time >= current_weapon.max_reload_duration: ## Finished reloading
+		if reload_time >= current_weapon.max_reload_duration: 
+			# Finished reloading
 			finished_reload()
 			current_weapon.buff_time = 0
 		

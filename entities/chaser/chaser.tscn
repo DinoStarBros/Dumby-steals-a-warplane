@@ -101,8 +101,8 @@ _data = {
 &"RESET": SubResource("Animation_bvk23")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iq0po"]
-size = Vector2(34, 18)
+[sub_resource type="CircleShape2D" id="CircleShape2D_tuvxo"]
+radius = 18.0
 
 [sub_resource type="Curve" id="Curve_tuvxo"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -271,8 +271,8 @@ _data = {
 &"die": SubResource("Animation_akvag")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbfv1"]
-size = Vector2(20, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_vc8fo"]
+radius = 15.0
 
 [node name="chaser" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 2
@@ -355,6 +355,7 @@ collision_layer = 2
 collision_mask = 2
 health_component = NodePath("../HealthComponent")
 ouchnim = NodePath("ouchnim")
+explosion_particles = true
 
 [node name="ouchnim" type="AnimationPlayer" parent="HurtboxComponent"]
 root_node = NodePath("../..")
@@ -363,9 +364,10 @@ libraries = {
 }
 
 [node name="hubc" type="CollisionShape2D" parent="HurtboxComponent"]
-shape = SubResource("RectangleShape2D_iq0po")
+shape = SubResource("CircleShape2D_tuvxo")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_74ld6")]
+max_hp = 30.0
 
 [node name="explode_particles" type="CPUParticles2D" parent="."]
 scale = Vector2(0.666667, 0.666667)
@@ -408,6 +410,6 @@ collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-shape = SubResource("RectangleShape2D_rbfv1")
+shape = SubResource("CircleShape2D_vc8fo")
 
 [connection signal="timeout" from="targetDeviatTimer" to="." method="_on_target_deviat_timer_timeout"]

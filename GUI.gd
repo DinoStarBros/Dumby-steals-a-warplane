@@ -3,6 +3,7 @@ extends CanvasLayer
 signal NewGun
 
 var are_you_sure : bool = false
+@onready var settings_menu: Settings = %settingsMenu
 
 func _ready() -> void:
 	g.score = 0
