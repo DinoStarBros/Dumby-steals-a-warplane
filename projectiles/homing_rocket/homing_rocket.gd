@@ -35,10 +35,12 @@ func _physics_process(delta:float)->void:
 	
 	time += delta
 	if time >= lifetime:
+		spawn_explosion()
 		queue_free()
 
 func hit() -> void:
 	velocity = Vector2.ZERO
+	spawn_explosion()
 	set_physics_process(false)
 	%anim.play("hit")
 
@@ -100,3 +102,11 @@ func new_homing_handle(delta: float) -> void: ## The new homing, gradually rotat
 	
 	look_at(global_position + (current_velocity.normalized()))
 	velocity = current_velocity
+
+const explosion_scn : PackedScene = preload("res://projectiles/explosion/explosion.tscn")
+func spawn_explosion() -> void:
+	var explosion : Explosion = explosion_scn.instantiate()
+	g.game.add_child(explosion)
+	explosion.dmg = 5
+	explosion.global_position = global_position
+	explosion.scale *= 0.5

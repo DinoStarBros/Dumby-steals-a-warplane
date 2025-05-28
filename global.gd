@@ -38,6 +38,7 @@ var music_volume : float
 var sfx_volume : float
 var screen_shake_value : bool 
 var frame_freeze_value : bool
+var resolution_index : int
 
 const exp_scn : PackedScene = preload("res://scenes/exp/exp.tscn")
 func spawn_xp(global_pos : Vector2, amount : int) -> void:

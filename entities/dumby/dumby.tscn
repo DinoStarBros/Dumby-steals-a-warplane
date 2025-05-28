@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://bfahxvjjxjylq"]
+[gd_scene load_steps=80 format=3 uid="uid://bfahxvjjxjylq"]
 
 [ext_resource type="Script" uid="uid://cbp023lkcpg5o" path="res://entities/dumby/dumby.gd" id="1_2ba6e"]
 [ext_resource type="PackedScene" uid="uid://gs3fdbhnlc5o" path="res://CompositionStuff/Hurtbox/hurtbox_component.tscn" id="2_5wgoi"]
@@ -38,6 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://cqr2md0ymsehj" path="res://abilities/homing_rockets/homing_rockets.tscn" id="32_gq83w"]
 [ext_resource type="PackedScene" uid="uid://uqxv3w86ie7g" path="res://abilities/ability_slot/ability_slot.tscn" id="32_lhj8b"]
 [ext_resource type="Script" uid="uid://b1ru8hk4kxiyh" path="res://entities/dumby/lvlxpupg.gd" id="37_3gqex"]
+[ext_resource type="Script" uid="uid://b3n1upwnl8fig" path="res://entities/dumby/evade_box.gd" id="39_pctjt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmt67"]
 size = Vector2(4, 4)
@@ -689,35 +690,6 @@ border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 
-[sub_resource type="Animation" id="Animation_4s3yb"]
-resource_name = "roll"
-length = 0.5
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlaneSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HurtboxComponent/hurbc:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
 [sub_resource type="Animation" id="Animation_pctjt"]
 length = 0.001
 tracks/0/type = "value"
@@ -744,12 +716,92 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlaneSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("evade_box/ebc:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_4s3yb"]
+resource_name = "roll"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlaneSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtboxComponent/hurbc:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlaneSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(3, 2), Vector2(2, 2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("evade_box/ebc:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pctjt"]
 _data = {
 &"RESET": SubResource("Animation_pctjt"),
 &"roll": SubResource("Animation_4s3yb")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4s3yb"]
+radius = 50.0
 
 [node name="dumby" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 4097
@@ -826,6 +878,7 @@ unique_name_in_owner = true
 position = Vector2(-17.5, 0)
 scale = Vector2(1.2, 1.2)
 amount = 100
+lifetime = 2.0
 direction = Vector2(0, 0)
 spread = 0.0
 gravity = Vector2(0, 0)
@@ -1014,12 +1067,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Your Warplane has Been Destroyed!"
 
-[node name="play" type="Button" parent="GUI/yLost/buttons"]
-visible = false
-layout_mode = 2
-focus_mode = 0
-text = "Replay"
-
 [node name="menu" type="Button" parent="GUI/yLost/buttons"]
 layout_mode = 2
 focus_mode = 0
@@ -1134,6 +1181,11 @@ offset_left = 640.0
 offset_top = 19.0
 offset_right = 640.0
 offset_bottom = 19.0
+
+[node name="Label" type="Label" parent="GUI"]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="weapons_parent" type="Node2D" parent="." node_paths=PackedStringArray("dumby", "ammo_bar", "current_weapon")]
 unique_name_in_owner = true
@@ -1286,6 +1338,7 @@ max_frame = 20
 [node name="speed_lines_parent" type="Node2D" parent="ScreenFX"]
 unique_name_in_owner = true
 visible = false
+modulate = Color(1, 1, 1, 0.514)
 position = Vector2(640, 360)
 
 [node name="sp1" parent="ScreenFX/speed_lines_parent" instance=ExtResource("28_baqsm")]
@@ -1426,9 +1479,18 @@ libraries = {
 &"": SubResource("AnimationLibrary_pctjt")
 }
 
+[node name="evade_box" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("39_pctjt")
+
+[node name="ebc" type="CollisionShape2D" parent="evade_box"]
+rotation = 1.5708
+shape = SubResource("CircleShape2D_4s3yb")
+disabled = true
+
 [connection signal="PlrHit" from="HurtboxComponent" to="weapons_parent" method="_on_hurtbox_component_plr_hit"]
 [connection signal="area_entered" from="ExpPickup" to="." method="_on_exp_pickup_area_entered"]
-[connection signal="pressed" from="GUI/yLost/buttons/play" to="GUI" method="_on_play_pressed"]
 [connection signal="pressed" from="GUI/yLost/buttons/menu" to="GUI" method="_on_menu_pressed"]
 [connection signal="pressed" from="GUI/paused/settingsMenu/butons/resume" to="GUI" method="_on_resume_pressed"]
 [connection signal="pressed" from="GUI/paused/settingsMenu/butons/quit" to="GUI" method="_on_quit_pressed"]
@@ -1436,3 +1498,5 @@ libraries = {
 [connection signal="pressed" from="LvlXPUpg/upgUi/choosettons/choose" to="LvlXPUpg" method="_on_choose_pressed"]
 [connection signal="pressed" from="LvlXPUpg/upgUi/choosettons/reroll" to="LvlXPUpg" method="_on_reroll_pressed"]
 [connection signal="pressed" from="LvlXPUpg/upgUi/choosettons/skip" to="LvlXPUpg" method="_on_skip_pressed"]
+[connection signal="Perfect_Roll" from="evade_box" to="weapons_parent" method="_on_evade_box_perfect_roll"]
+[connection signal="area_entered" from="evade_box" to="evade_box" method="_on_area_entered"]

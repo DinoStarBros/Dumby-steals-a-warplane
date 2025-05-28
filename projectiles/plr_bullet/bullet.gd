@@ -15,5 +15,6 @@ func _physics_process(delta:float)->void:
 		queue_free()
 
 func hit() -> void:
+	rotation_degrees += 180
 	velocity = Vector2.ZERO
 	%anim.play("hit")

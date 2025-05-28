@@ -2,9 +2,10 @@ extends Control
 class_name Settings
 
 func _ready()->void:
+	_on_load_pressed()
 	
-	_update_res()
-	_update_vol_val()
+	#_update_res()
+	#_update_vol_val()
 	
 	for n in %buttons.get_children():
 		if n is Button:
@@ -14,6 +15,7 @@ func _on_save_pressed()->void:
 	SaveLoad.SaveFileData.master_volume = g.master_volume
 	SaveLoad.SaveFileData.music_volume = g.music_volume
 	SaveLoad.SaveFileData.sfx_volume = g.sfx_volume
+	
 	SaveLoad.SaveFileData.screen_shake = g.screen_shake_value
 	SaveLoad.SaveFileData.frame_freeze = g.frame_freeze_value
 	
@@ -41,11 +43,13 @@ func _update_vol_val()->void:
 	g.sfx_volume = SaveLoad.SaveFileData.sfx_volume
 	%sfx_vol.value = g.sfx_volume
 	
+	g.screen_shake_value = SaveLoad.SaveFileData.screen_shake
 	if g.screen_shake_value:
 		%screen_shake.text = str("On")
 	else:
 		%screen_shake.text = str("Off")
 	
+	g.frame_freeze_value = SaveLoad.SaveFileData.frame_freeze
 	if g.frame_freeze_value:
 		%frame_freeze.text = str("On")
 	else:

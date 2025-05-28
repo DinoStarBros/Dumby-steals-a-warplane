@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 	for n in speed_lines:
 		n.rotation_degrees = (idx * (180 / max_frame) ) + 90
 	
-	# Checks if the player (Dumby) speed (magnitude/length of the Velocity Vector) ff it's less than 850
+	# Checks if the player (Dumby) speed (magnitude/length of the Velocity Vector) ff it's greater than 850
 	# also if the player's accelerating and for more than 1.2 seconds
 	# Doing so activates SICK ANIME SPEED LINES (inspired by YOMI Hustle) for da JUICE!
 	speed_lines_parent.visible = p.velocity.length() > 850 and p.accelerating and p.accelerate_time > 1.2

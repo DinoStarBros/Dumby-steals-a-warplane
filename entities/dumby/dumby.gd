@@ -4,8 +4,8 @@ class_name Dumby
 var half_viewport : Vector2
 var dir_to_mouse : Vector2
 var dist_to_mouse : float
-var accelerate_spd : int = 60
-var accelerate_limit : int = 700
+var accelerate_spd : int = 100
+var accelerate_limit : int = 1000
 var accelerate_time : float = 0
 
 @onready var health_component: HealthComponent = %HealthComponent
@@ -32,50 +32,42 @@ func _physics_process(delta: float) -> void:
 	dir_to_mouse = dir_plane
 	dist_to_mouse = global_position.distance_to(get_global_mouse_position())
 	
-	if not accelerating:
-		velocity.y += (980 * delta) / 2
+	#if not accelerating:
+	
+	other_velocity_handle(delta)
 	if accelerating:
-		velocity += accelerate_spd * dir_to_mouse
 		if not %jet.playing:
 			%jet.play()
 	else:
 		%jet.stop()
 	
-	lim_accel_x()
-	lim_accel_y()
 	if g.mobile:
 		pass
 	else:
 		if Input.is_action_just_pressed("accelerate"):
 			pass
 		accelerating = Input.is_action_pressed("accelerate")
-		
+	
 	plane_rotation_handling(delta)
 	
 	if accelerating:
+		
 		accelerate_time += delta
 		if accelerate_time > 5:
 			accelerate_time = 5
 	else:
 		accelerate_time = 0
+	
+	if controller:
+		aim_position = controller_joypad_vector * half_viewport
 
 var aim_position : Vector2
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		aim_position = (event.position - half_viewport)
+func _unhandled_input(event: InputEvent) -> void: ## For camera aiming, dynamic camera follow mouse
+	if not controller:
+		if event is InputEventMouseMotion:
+			aim_position = (event.position - half_viewport)
 
 var accelerating : bool = false
-
-func lim_accel_x()->void:
-	if velocity.x <= -accelerate_limit:
-		velocity.x = -accelerate_limit
-	if velocity.x >= accelerate_limit:
-		velocity.x = accelerate_limit
-func lim_accel_y()->void:
-	if velocity.y <= -accelerate_limit:
-		velocity.y = -accelerate_limit
-	if velocity.y >= accelerate_limit:
-		velocity.y = accelerate_limit
 
 func damage(_attack:Attack)->void:
 	g.cam.screen_shake(20, 0.3)
@@ -93,24 +85,20 @@ func Dead(_attack:Attack)->void:
 @onready var dir_to_plane_sprite: Node2D = %dir_to_plane_sprite
 
 var rot_deg_change : float
-const turn_speed : float = 10
+const turn_speed : float = 7
 var dir_plane : Vector2
+
+@export var controller : bool = false ## Set to true if using controller, false if Mouse
 func plane_rotation_handling(delta: float)->void:
-	#plane_sprite.look_at(get_global_mouse_position())
-	dir_to_m.look_at(get_global_mouse_position())
+	
+	if controller:
+		dir_to_m.look_at(global_position + (controller_joypad_vector * 50))
+	else:
+		dir_to_m.look_at(get_global_mouse_position())
+	
 	rot_deg_change = (
 		dir_to_m.rotation_degrees - plane_sprite.rotation_degrees
 		) * turn_speed
-	
-	#if plane_sprite.rotation_degrees > 180:
-	#	plane_sprite.rotation_degrees = -180
-	#if plane_sprite.rotation_degrees < -180:
-	#	plane_sprite.rotation_degrees = 180
-	
-	#if dir_to_m.rotation_degrees > 180:
-	#	dir_to_m.rotation_degrees = -180
-	#if dir_to_m.rotation_degrees < -180:
-	#	dir_to_m.rotation_degrees = 180
 	
 	if dir_to_plane_sprite.rotation_degrees > 180:
 		dir_to_plane_sprite.rotation_degrees = -180
@@ -133,7 +121,7 @@ func finish_collect() -> void:
 	%collect2.pitch_scale = randf_range(1.1, 1.3)
 	%collect2.play()
 
-var rolling : bool = false
+var rolling : bool = false ## If the player is rolling or not
 var roll_duration : float = 0.5 ## The amount of time the roll will last
 var roll_cooldown : float = 0.05 ## The amount of time you have to wait after a roll before being able to perform another
 var roll_time : float = 0 ## The amount of time that has passed since the start of the roll
@@ -161,3 +149,49 @@ func roll_handling(delta: float) -> void:
 	if roll_cd_time > 0:
 		roll_cd_time -= delta
  
+var desired_velocity : Vector2
+var current_velocity : Vector2
+var change_velocity : Vector2
+const drag_factor : float = 4
+func other_velocity_handle(delta: float) -> void: ## Improved movement for the ship
+	## More control, can fly in straight lines 
+	desired_velocity = dir_to_mouse * accelerate_limit
+	
+	change_velocity = (desired_velocity - current_velocity) * drag_factor
+	
+	velocity = current_velocity
+	if accelerating:
+		current_velocity += change_velocity * delta
+	else:
+		current_velocity.y += (980 * delta) / 2
+		velocity.y = clamp(velocity.y, -accelerate_limit, accelerate_limit)
+
+var controller_joypad_vector : Vector2 ## Vector of the left analog stick
+var cont_thing_x : Vector2 ## The strength of the left & right joystick axis
+var cont_thing_y : Vector2 ## The strength of the up & down joystick axis
+func _input(event: InputEvent) -> void: 
+	# This is for getting the vector of the left analog stick
+	if event is InputEventJoypadMotion:
+		cont_thing_x = Vector2(
+			# Gets the strength of the left & right of the left joystick
+			Input.get_action_strength("left_stick"),
+			Input.get_action_strength("right_stick")
+		)
+		
+		if cont_thing_x.x > 0: # Left joystick move left
+			controller_joypad_vector.x = -cont_thing_x.x
+		elif cont_thing_x.y > 0:# Left joystick move right
+			controller_joypad_vector.x = cont_thing_x.y
+		
+		cont_thing_y = Vector2(
+			# Gets the strength of the up & down of the left joystick
+			Input.get_action_strength("up_stick"),
+			Input.get_action_strength("down_stick")
+		)
+		
+		if cont_thing_y.x > 0: # Left joystick move up
+			controller_joypad_vector.y = -cont_thing_y.x
+		elif cont_thing_y.y > 0:# Left joystick move down
+			controller_joypad_vector.y = cont_thing_y.y
+		
+		%Label.text = str(controller_joypad_vector)

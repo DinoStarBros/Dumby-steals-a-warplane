@@ -72,7 +72,7 @@ autostart = true
 
 [node name="sprite" type="Sprite2D" parent="."]
 modulate = Color(1, 0.269531, 0.269531, 1)
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.4, 1.4)
 texture = ExtResource("3_0ogdf")
 hframes = 12
 

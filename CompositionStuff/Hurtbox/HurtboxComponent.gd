@@ -22,14 +22,23 @@ func damage(attack:Attack) -> void:
 	
 	if health_component.hp > 0:
 		get_parent().damage(attack)
-	if health_component.hp <= 0:
+		if get_parent().is_in_group("Player"):
+			PlrHit.emit(attack.attack_damage)
+			%hitsparkanim.play("spark")
+			g.frame_freeze(0.4, 1)
+		
+	elif health_component.hp <= 0:
 		get_parent().Dead(attack)
 		if explosion_particles:
-			for n in explosion_particle_amount + randi_range(0,2):
+			for n in explosion_particle_amount + randi_range(1,2):
 				spawn_explosion_particles(attack)
-	elif get_parent().is_in_group("Player"):
-		PlrHit.emit(attack.attack_damage)
-		%hitsparkanim.play("spark")
+		
+		if get_parent().is_in_group("Enemy"):
+			g.frame_freeze(0.5, 0.1)
+		else:
+			g.frame_freeze(0.2, 0.5)
+	
+
 	
 	if ouchnim:
 		ouchnim.play("Ouch")

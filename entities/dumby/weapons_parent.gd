@@ -72,13 +72,7 @@ func ammo_handling(delta: float) -> void:
 			current_weapon.r_tact_pressed = true
 			if reload_time > current_weapon.min_sweet_spot and reload_time < current_weapon.max_sweet_spot:
 				g.spawn_txt("Quick Reload", global_position)
-				Tactical_Reload.emit()
-				%tactical_reload_fx.rotation_degrees = randf_range(-180, 180)
-				%shing.pitch_scale = randf_range(0.8, 1.2)
-				%shing.play()
-				%tactical_reloadnim.play("zing")
-				current_weapon.buff_time = current_weapon.max_buff_time
-				finished_reload()
+				tactical_reload()
 			else:
 				g.spawn_txt("Womp Womp", global_position)
 				current_weapon.buff_time = 0
@@ -118,3 +112,17 @@ func heal()->void:
 func finished_reload() -> void:
 	current_weapon.reloading = false
 	current_weapon.ammo = current_weapon.stats.max_ammo
+
+func tactical_reload() -> void:
+	Tactical_Reload.emit()
+	%tactical_reload_fx.rotation_degrees = randf_range(-180, 180)
+	%shing.pitch_scale = randf_range(0.8, 1.2)
+	%shing.play()
+	%tactical_reloadnim.play("zing")
+	current_weapon.buff_time = current_weapon.max_buff_time
+	finished_reload()
+
+
+func _on_evade_box_perfect_roll() -> void:
+	g.spawn_txt("Dodge!", global_position)
+	tactical_reload()

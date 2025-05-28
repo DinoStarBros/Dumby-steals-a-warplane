@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b41x6404vpt5l"]
+[gd_scene load_steps=10 format=3 uid="uid://b41x6404vpt5l"]
 
 [ext_resource type="Script" uid="uid://n20om5nsigfl" path="res://projectiles/explosion/explosion.gd" id="1_dlq7l"]
 [ext_resource type="AudioStream" uid="uid://hbjph6hq0fu3" path="res://Audio/jetslash sfx/SFX/Roblox Explosion Sound Effect.wav" id="2_6vdkd"]
 [ext_resource type="PackedScene" uid="uid://cilaqubvkn2sv" path="res://CompositionStuff/Hitbox/hitbox_component.tscn" id="3_h4n0y"]
 [ext_resource type="Texture2D" uid="uid://cb00doqsxr2ay" path="res://Art/Stuff2/shockwave-Sheet.png" id="4_0e7qn"]
+[ext_resource type="PackedScene" uid="uid://bwxfc0m0x7yt7" path="res://juices/explosionParticle/explosion_particle.tscn" id="5_665e6"]
 
 [sub_resource type="Animation" id="Animation_715d2"]
 length = 0.001
@@ -71,7 +72,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_41h45"]
 radius = 134.612
 
-[node name="explosion" type="Node2D"]
+[node name="explosion" type="CharacterBody2D"]
 scale = Vector2(2, 2)
 script = ExtResource("1_dlq7l")
 
@@ -96,7 +97,6 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_41h45")
 
 [node name="Shockwave-sheet" type="Sprite2D" parent="."]
-modulate = Color(100, 100, 100, 1)
 scale = Vector2(2, 2)
 texture = ExtResource("4_0e7qn")
 hframes = 3
@@ -114,3 +114,18 @@ initial_velocity_min = 800.0
 initial_velocity_max = 1000.0
 scale_amount_min = 10.0
 scale_amount_max = 12.0
+
+[node name="explosion_particle" parent="." instance=ExtResource("5_665e6")]
+position = Vector2(-70.5, -44)
+
+[node name="explosion_particle2" parent="." instance=ExtResource("5_665e6")]
+position = Vector2(-52.5, 24.5)
+
+[node name="explosion_particle3" parent="." instance=ExtResource("5_665e6")]
+position = Vector2(5.5, 95)
+
+[node name="explosion_particle4" parent="." instance=ExtResource("5_665e6")]
+position = Vector2(77.5, 13.5)
+
+[node name="explosion_particle5" parent="." instance=ExtResource("5_665e6")]
+position = Vector2(16.5, -75.5)

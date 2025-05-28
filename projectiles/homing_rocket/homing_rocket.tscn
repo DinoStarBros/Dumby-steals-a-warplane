@@ -290,6 +290,5 @@ frame = 1
 unique_name_in_owner = true
 stream = ExtResource("7_8vt5m")
 volume_db = -15.0
-max_distance = 10000.0
 
 [connection signal="area_entered" from="detection_radius" to="." method="_on_detection_radius_area_entered"]
