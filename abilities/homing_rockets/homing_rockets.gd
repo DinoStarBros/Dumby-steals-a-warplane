@@ -7,7 +7,11 @@ var p : Dumby
 
 var trig_vector : Vector2
 var trig_deg : float
+
+var amount : int = 0
 func activate_ability() -> void:
+	usable = false
+	
 	p = g.player
 	cooldown_time = cooldown
 	

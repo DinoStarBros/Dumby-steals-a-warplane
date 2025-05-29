@@ -2,7 +2,7 @@ extends Weapon
 
 func _ready() -> void:
 	cooldown = stats.shoot_cooldown
-	ammo = stats.max_ammo
+	ammo = max_ammo
 
 func _process(delta: float) -> void:
 	buffed_handling(delta)

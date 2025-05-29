@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://5ok8ww27od1g" path="res://Art/planestuff/SEA.png" id="4_3mndk"]
 [ext_resource type="Resource" uid="uid://s8xb5hmfqgnq" path="res://resources/waves/wave1.tres" id="4_slubn"]
 [ext_resource type="Texture2D" uid="uid://ctfkn7tj5byx2" path="res://Art/STARS (2).png" id="5_ymunx"]
-[ext_resource type="AudioStream" uid="uid://bqwwqki11qjh8" path="res://Audio/planemusic/Mutronic Plague.mp3" id="7_slubn"]
+[ext_resource type="AudioStream" uid="uid://b2j2t1cx77pud" path="res://Audio/planemusic/DNA - Kendrick Lamar (AUDIO).mp3" id="7_slubn"]
 [ext_resource type="PackedScene" uid="uid://bbjqkmrcsybao" path="res://scenes/exp/exp.tscn" id="9_yjec7"]
 
 [sub_resource type="Curve2D" id="Curve2D_gy565"]
@@ -1011,10 +1011,10 @@ scale = Vector2(2, 2)
 texture = ExtResource("5_ymunx")
 
 [node name="music" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 process_mode = 3
 stream = ExtResource("7_slubn")
 volume_db = -5.0
-autoplay = true
 bus = &"music"
 
 [node name="airdef_spawner" type="Path2D" parent="."]
@@ -1034,10 +1034,6 @@ autostart = true
 
 [node name="exp" parent="enemy_container" instance=ExtResource("9_yjec7")]
 position = Vector2(-862, 312)
-
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
 
 [connection signal="timeout" from="dumby/enemy_spawner/spawnTimer" to="dumby/enemy_spawner" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="airdef_spawner/adftimer" to="." method="_on_adftimer_timeout"]

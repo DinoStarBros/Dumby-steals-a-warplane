@@ -8,5 +8,3 @@ class_name WeaponStats
 @export var bullet_lifetime : float = 1 ## How many secondes before the bulet is deleted
 
 @export var bullet_scn : PackedScene
-
-@export var max_ammo : int = 20 ## The max amount of ammo

@@ -17,6 +17,8 @@ func _ready() -> void:
 		%cloud_pos.global_position.y = randf_range(down_bound,up_bound)
 		%cloud_pos.global_position.x = randf_range(left_bound,right_bound)
 		spawn_cloud(%cloud_pos.global_position)
+	
+	%music.play(110)
 
 var cloud_parents : Array = []
 const cloud_scn : PackedScene = preload("res://scenes/cloud/cloud.tscn")

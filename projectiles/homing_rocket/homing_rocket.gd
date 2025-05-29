@@ -10,6 +10,7 @@ var max_speed : float = 1500
 var initial_velocity : Vector2
 
 func _ready() -> void:
+	
 	%explode.pitch_scale = randf_range(1, 1.3)
 	
 	hitbox_component.Hit.connect(hit)
@@ -109,4 +110,4 @@ func spawn_explosion() -> void:
 	g.game.add_child(explosion)
 	explosion.dmg = 5
 	explosion.global_position = global_position
-	explosion.scale *= 0.5
+	explosion.scale *= 0.6

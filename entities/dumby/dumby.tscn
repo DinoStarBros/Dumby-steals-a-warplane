@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://bfahxvjjxjylq"]
+[gd_scene load_steps=83 format=3 uid="uid://bfahxvjjxjylq"]
 
 [ext_resource type="Script" uid="uid://cbp023lkcpg5o" path="res://entities/dumby/dumby.gd" id="1_2ba6e"]
 [ext_resource type="PackedScene" uid="uid://gs3fdbhnlc5o" path="res://CompositionStuff/Hurtbox/hurtbox_component.tscn" id="2_5wgoi"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://cuqwajg7lthld" path="res://Art/planestuff/fx/effects-Sheet.png" id="13_12q0g"]
 [ext_resource type="AudioStream" uid="uid://oilja35cgsfb" path="res://Audio/hurt or laser.wav" id="13_pxqrg"]
 [ext_resource type="Script" uid="uid://ctjumrbw2yuxo" path="res://GUI.gd" id="15_0uce1"]
+[ext_resource type="Texture2D" uid="uid://dnp54j8h1op73" path="res://Art/Bitlytic/crosshair.png" id="15_1o3u8"]
 [ext_resource type="AudioStream" uid="uid://dspg81m7f74v2" path="res://Audio/splashtownSFX/pickupCoin.wav" id="15_6bsw8"]
 [ext_resource type="PackedScene" uid="uid://hekqvagsvs2e" path="res://weapons/rapid/rapid.tscn" id="18_23fr6"]
 [ext_resource type="Texture2D" uid="uid://bqubavsk5td7m" path="res://Art/newsprites.png" id="19_hu6rb"]
@@ -31,6 +32,8 @@
 [ext_resource type="AudioStream" uid="uid://nj64nd85rtql" path="res://Audio/splashtownSFX/Airdash.wav" id="23_4s3yb"]
 [ext_resource type="PackedScene" uid="uid://bj5jbn7aere7t" path="res://timer/timer.tscn" id="23_12q0g"]
 [ext_resource type="PackedScene" uid="uid://do3oy3lqr320g" path="res://settingsMenu/settings_menu.tscn" id="23_fj41j"]
+[ext_resource type="AudioStream" uid="uid://dgvuclkyptmjn" path="res://Audio/planesfx/1911-reload-6248.mp3" id="24_x02cb"]
+[ext_resource type="AudioStream" uid="uid://com3sylnquasf" path="res://Audio/planesfx/12-gauge-shell-drop-47604.mp3" id="25_bblbc"]
 [ext_resource type="PackedScene" uid="uid://2m2qt563w7ii" path="res://juices/spd_line/speed_line.tscn" id="28_baqsm"]
 [ext_resource type="AudioStream" uid="uid://cq1v7cgw8ngyk" path="res://Audio/tresure/slashParry.wav" id="28_n4tpm"]
 [ext_resource type="Script" uid="uid://b5aik354wenca" path="res://entities/dumby/screen_fx.gd" id="28_u8vb7"]
@@ -806,7 +809,9 @@ radius = 50.0
 [node name="dumby" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 4097
 collision_mask = 4097
+motion_mode = 1
 script = ExtResource("1_2ba6e")
+controller = true
 
 [node name="c" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qmt67")
@@ -942,6 +947,11 @@ frame = 1
 region_enabled = true
 region_rect = Rect2(2176, 0, 384, 64)
 
+[node name="Crosshair" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(2, 2)
+texture = ExtResource("15_1o3u8")
+
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 zoom = Vector2(0.6, 0.6)
 position_smoothing_speed = 20.0
@@ -1002,6 +1012,19 @@ bus = &"sfx"
 unique_name_in_owner = true
 stream = ExtResource("23_4s3yb")
 volume_db = -5.0
+bus = &"sfx"
+
+[node name="reload" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("24_x02cb")
+volume_db = -5.0
+pitch_scale = 1.2
+bus = &"sfx"
+
+[node name="reload2" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("25_bblbc")
+volume_db = 5.0
 bus = &"sfx"
 
 [node name="newgunim" type="AnimationPlayer" parent="sfx"]

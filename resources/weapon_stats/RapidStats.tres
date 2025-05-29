@@ -11,5 +11,4 @@ bullet_amnt = 1
 random_spread = 0.1
 bullet_lifetime = 2.0
 bullet_scn = ExtResource("1_wunjo")
-max_ammo = 100
 metadata/_custom_type_script = "uid://2egkgwj5n4iw"

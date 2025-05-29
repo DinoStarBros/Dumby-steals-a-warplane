@@ -22,6 +22,7 @@ func _physics_process(delta:float) -> void:
 	target_position = target.aim_position * sensitivity
 	position = position.lerp(target_position, 0.25)
 	
+	
 	if active_shake_time > 0:
 		shake_time += delta * shake_time_speed
 		active_shake_time -= delta

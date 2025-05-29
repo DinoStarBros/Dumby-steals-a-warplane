@@ -12,7 +12,7 @@ var accelerate_time : float = 0
 @onready var hurtbox_component: HurtboxComponent = %HurtboxComponent
 
 func _ready() -> void:
-	#gun_sequence.shuffle()
+	%Crosshair.visible = controller
 	g.player = self
 	%weapons_parent.process_mode = Node.PROCESS_MODE_INHERIT
 
@@ -44,8 +44,6 @@ func _physics_process(delta: float) -> void:
 	if g.mobile:
 		pass
 	else:
-		if Input.is_action_just_pressed("accelerate"):
-			pass
 		accelerating = Input.is_action_pressed("accelerate")
 	
 	plane_rotation_handling(delta)
@@ -58,14 +56,17 @@ func _physics_process(delta: float) -> void:
 	else:
 		accelerate_time = 0
 	
-	if controller:
-		aim_position = controller_joypad_vector * half_viewport
+
 
 var aim_position : Vector2
 func _unhandled_input(event: InputEvent) -> void: ## For camera aiming, dynamic camera follow mouse
-	if not controller:
+	if controller:
+		aim_position = dir_to_mouse * half_viewport * left_joystick_length
+		%Crosshair.position = aim_position
+	else:
 		if event is InputEventMouseMotion:
 			aim_position = (event.position - half_viewport)
+			#%Crosshair.position = aim_position * 2
 
 var accelerating : bool = false
 
@@ -123,11 +124,11 @@ func finish_collect() -> void:
 
 var rolling : bool = false ## If the player is rolling or not
 var roll_duration : float = 0.5 ## The amount of time the roll will last
-var roll_cooldown : float = 0.05 ## The amount of time you have to wait after a roll before being able to perform another
+var roll_cooldown : float = 0.1 ## The amount of time you have to wait after a roll before being able to perform another
 var roll_time : float = 0 ## The amount of time that has passed since the start of the roll
 var roll_cd_time : float = 0
 func roll_handling(delta: float) -> void:
-	if Input.is_action_pressed("roll") and roll_cd_time <= 0 and not rolling:
+	if Input.is_action_just_pressed("roll") and roll_cd_time <= 0 and not rolling:
 		%roll.pitch_scale = randf_range(0.8,1.2)
 		%roll.play()
 		
@@ -160,38 +161,19 @@ func other_velocity_handle(delta: float) -> void: ## Improved movement for the s
 	change_velocity = (desired_velocity - current_velocity) * drag_factor
 	
 	velocity = current_velocity
+	
 	if accelerating:
 		current_velocity += change_velocity * delta
 	else:
-		current_velocity.y += (980 * delta) / 2
+		current_velocity.y += (980 * delta) / 4
 		velocity.y = clamp(velocity.y, -accelerate_limit, accelerate_limit)
 
 var controller_joypad_vector : Vector2 ## Vector of the left analog stick
-var cont_thing_x : Vector2 ## The strength of the left & right joystick axis
-var cont_thing_y : Vector2 ## The strength of the up & down joystick axis
-func _input(event: InputEvent) -> void: 
-	# This is for getting the vector of the left analog stick
-	if event is InputEventJoypadMotion:
-		cont_thing_x = Vector2(
-			# Gets the strength of the left & right of the left joystick
-			Input.get_action_strength("left_stick"),
-			Input.get_action_strength("right_stick")
-		)
-		
-		if cont_thing_x.x > 0: # Left joystick move left
-			controller_joypad_vector.x = -cont_thing_x.x
-		elif cont_thing_x.y > 0:# Left joystick move right
-			controller_joypad_vector.x = cont_thing_x.y
-		
-		cont_thing_y = Vector2(
-			# Gets the strength of the up & down of the left joystick
-			Input.get_action_strength("up_stick"),
-			Input.get_action_strength("down_stick")
-		)
-		
-		if cont_thing_y.x > 0: # Left joystick move up
-			controller_joypad_vector.y = -cont_thing_y.x
-		elif cont_thing_y.y > 0:# Left joystick move down
-			controller_joypad_vector.y = cont_thing_y.y
-		
-		%Label.text = str(controller_joypad_vector)
+var left_joystick_length : float = 0
+func _input(_event: InputEvent) -> void: 
+	#old_controller_left_joystick_handling(event)
+	controller_joypad_vector = Input.get_vector(
+		"left_stick", "right_stick", "up_stick", "down_stick"
+	)
+	#%Label.text = str(controller_joypad_vector)
+	left_joystick_length = controller_joypad_vector.length()

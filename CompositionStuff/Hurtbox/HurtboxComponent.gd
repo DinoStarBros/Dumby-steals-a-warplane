@@ -25,7 +25,7 @@ func damage(attack:Attack) -> void:
 		if get_parent().is_in_group("Player"):
 			PlrHit.emit(attack.attack_damage)
 			%hitsparkanim.play("spark")
-			g.frame_freeze(0.4, 1)
+			g.frame_freeze(0.4, 0.3)
 		
 	elif health_component.hp <= 0:
 		get_parent().Dead(attack)
@@ -36,7 +36,8 @@ func damage(attack:Attack) -> void:
 		if get_parent().is_in_group("Enemy"):
 			g.frame_freeze(0.5, 0.1)
 		else:
-			g.frame_freeze(0.2, 0.5)
+			g.frame_freeze(0.4, 0.6)
+			
 	
 
 	

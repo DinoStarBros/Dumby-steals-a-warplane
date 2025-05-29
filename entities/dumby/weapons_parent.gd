@@ -39,15 +39,21 @@ func _process(delta: float) -> void:
 ### Below is stuff for ammo counts and reloading ###
 var reload_time : float = 0 ## The amount of time that has passed since the start of the reload
 func ammo_handling(delta: float) -> void:
-	ammo_bar.max_value = current_weapon.stats.max_ammo
+	ammo_bar.max_value = current_weapon.max_ammo
 	ammo_bar.value = current_weapon.ammo
 	
-	ammo_text.text = str("Ammo : \n", current_weapon.ammo, " / ", current_weapon.stats.max_ammo)
+	ammo_text.text = str("Ammo : \n", current_weapon.ammo, " / ", current_weapon.max_ammo)
 	
 	ammo_bar.visible = current_weapon.ammo > 0
 	
 	if current_weapon.ammo <= 0:
 		if not current_weapon.reloading:
+			%reload.pitch_scale = randf_range(1.1,1.3)
+			%reload.play()
+			
+			%reload2.pitch_scale = randf_range(1.5,1.7)
+			%reload2.play(1.2)
+			
 			current_weapon.r_tact_pressed = false
 			reload_time = 0
 			reload_bar.max_value = current_weapon.max_reload_duration
@@ -69,6 +75,7 @@ func ammo_handling(delta: float) -> void:
 			current_weapon.buff_time = 0
 		
 		if Input.is_action_just_pressed("shoot") and not current_weapon.r_tact_pressed:
+			# Handling of tactical reloading
 			current_weapon.r_tact_pressed = true
 			if reload_time > current_weapon.min_sweet_spot and reload_time < current_weapon.max_sweet_spot:
 				g.spawn_txt("Quick Reload", global_position)
@@ -76,7 +83,7 @@ func ammo_handling(delta: float) -> void:
 			else:
 				g.spawn_txt("Womp Womp", global_position)
 				current_weapon.buff_time = 0
-				
+		
 	else:
 		reload_time = 0
 
@@ -111,7 +118,7 @@ func heal()->void:
 
 func finished_reload() -> void:
 	current_weapon.reloading = false
-	current_weapon.ammo = current_weapon.stats.max_ammo
+	current_weapon.ammo = current_weapon.max_ammo
 
 func tactical_reload() -> void:
 	Tactical_Reload.emit()
@@ -122,7 +129,10 @@ func tactical_reload() -> void:
 	current_weapon.buff_time = current_weapon.max_buff_time
 	finished_reload()
 
-
 func _on_evade_box_perfect_roll() -> void:
 	g.spawn_txt("Dodge!", global_position)
-	tactical_reload()
+	%tactical_reload_fx.rotation_degrees = randf_range(-180, 180)
+	%shing.pitch_scale = randf_range(0.8, 1.2)
+	%shing.play()
+	%tactical_reloadnim.play("zing")
+	current_weapon.buff_time = current_weapon.max_buff_time
