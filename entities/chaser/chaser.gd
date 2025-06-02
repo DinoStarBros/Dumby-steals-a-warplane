@@ -7,6 +7,8 @@ var dir_to_targ : Vector2
 var target : CharacterBody2D
 var dist_to_targ : float
 
+@onready var velocity_component: VelocityComponent = %VelocityComponent
+
 func _ready() -> void:
 	_on_target_deviat_timer_timeout()
 	%HitboxComponent.set_attack_properties(1)

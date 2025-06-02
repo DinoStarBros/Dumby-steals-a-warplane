@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://bfahxvjjxjylq"]
+[gd_scene load_steps=84 format=3 uid="uid://bfahxvjjxjylq"]
 
 [ext_resource type="Script" uid="uid://cbp023lkcpg5o" path="res://entities/dumby/dumby.gd" id="1_2ba6e"]
 [ext_resource type="PackedScene" uid="uid://gs3fdbhnlc5o" path="res://CompositionStuff/Hurtbox/hurtbox_component.tscn" id="2_5wgoi"]
@@ -42,6 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://uqxv3w86ie7g" path="res://abilities/ability_slot/ability_slot.tscn" id="32_lhj8b"]
 [ext_resource type="Script" uid="uid://b1ru8hk4kxiyh" path="res://entities/dumby/lvlxpupg.gd" id="37_3gqex"]
 [ext_resource type="Script" uid="uid://b3n1upwnl8fig" path="res://entities/dumby/evade_box.gd" id="39_pctjt"]
+[ext_resource type="PackedScene" uid="uid://cbs0bmg6fong3" path="res://CompositionStuff/VelocityRotation/velocity_component.tscn" id="43_12dy5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmt67"]
 size = Vector2(4, 4)
@@ -809,9 +810,7 @@ radius = 50.0
 [node name="dumby" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 4097
 collision_mask = 4097
-motion_mode = 1
 script = ExtResource("1_2ba6e")
-controller = true
 
 [node name="c" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qmt67")
@@ -1410,6 +1409,7 @@ position = Vector2(-164, -320)
 position = Vector2(-338, -277)
 
 [node name="Abilities" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 script = ExtResource("31_5senk")
 
 [node name="abilities_row" type="HBoxContainer" parent="Abilities"]
@@ -1511,6 +1511,10 @@ script = ExtResource("39_pctjt")
 rotation = 1.5708
 shape = SubResource("CircleShape2D_4s3yb")
 disabled = true
+
+[node name="VelocityComponent" parent="." instance=ExtResource("43_12dy5")]
+unique_name_in_owner = true
+accelerate_speed = 2000
 
 [connection signal="PlrHit" from="HurtboxComponent" to="weapons_parent" method="_on_hurtbox_component_plr_hit"]
 [connection signal="area_entered" from="ExpPickup" to="." method="_on_exp_pickup_area_entered"]

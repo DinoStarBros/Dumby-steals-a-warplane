@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bj5wj2g1r73gg"]
+[gd_scene load_steps=23 format=3 uid="uid://bj5wj2g1r73gg"]
 
 [ext_resource type="Script" uid="uid://cn6d8a0upm6v5" path="res://entities/chaser/chaser.gd" id="1_b7csh"]
 [ext_resource type="Texture2D" uid="uid://b3hwhp3ky72y6" path="res://Art/planestuff/plane.png" id="2_fsmyf"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dydkhhqkwcgfw" path="res://CompositionStuff/Health/health_component.tscn" id="5_74ld6"]
 [ext_resource type="Texture2D" uid="uid://cb00doqsxr2ay" path="res://Art/Stuff2/shockwave-Sheet.png" id="6_0teo6"]
 [ext_resource type="PackedScene" uid="uid://cilaqubvkn2sv" path="res://CompositionStuff/Hitbox/hitbox_component.tscn" id="7_bngux"]
+[ext_resource type="PackedScene" uid="uid://cbs0bmg6fong3" path="res://CompositionStuff/VelocityRotation/velocity_component.tscn" id="8_vc8fo"]
 
 [sub_resource type="Curve" id="Curve_smpng"]
 _limits = [-360.0, 360.0, 0.0, 1.0]
@@ -411,5 +412,8 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_vc8fo")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("8_vc8fo")]
+unique_name_in_owner = true
 
 [connection signal="timeout" from="targetDeviatTimer" to="." method="_on_target_deviat_timer_timeout"]

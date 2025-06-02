@@ -4,12 +4,11 @@ class_name Dumby
 var half_viewport : Vector2
 var dir_to_mouse : Vector2
 var dist_to_mouse : float
-var accelerate_spd : int = 100
-var accelerate_limit : int = 1000
 var accelerate_time : float = 0
 
 @onready var health_component: HealthComponent = %HealthComponent
 @onready var hurtbox_component: HurtboxComponent = %HurtboxComponent
+@onready var velocity_component: VelocityComponent = %VelocityComponent
 
 func _ready() -> void:
 	%Crosshair.visible = controller
@@ -28,13 +27,11 @@ func _physics_process(delta: float) -> void:
 	
 	half_viewport = get_viewport_rect().size / 2.0
 	
-	#dir_to_mouse = (get_global_mouse_position() - global_position).normalized()
 	dir_to_mouse = dir_plane
 	dist_to_mouse = global_position.distance_to(get_global_mouse_position())
 	
-	#if not accelerating:
 	
-	other_velocity_handle(delta)
+	velocity_component.other_velocity_handle(delta, dir_to_mouse, accelerating)
 	if accelerating:
 		if not %jet.playing:
 			%jet.play()
@@ -55,8 +52,6 @@ func _physics_process(delta: float) -> void:
 			accelerate_time = 5
 	else:
 		accelerate_time = 0
-	
-
 
 var aim_position : Vector2
 func _unhandled_input(event: InputEvent) -> void: ## For camera aiming, dynamic camera follow mouse
@@ -80,13 +75,14 @@ func Dead(_attack:Attack)->void:
 	%explod.play(.4)
 	%death.play("die")
 	%weapons_parent.process_mode = Node.PROCESS_MODE_DISABLED
+	%Abilities.process_mode = Node.PROCESS_MODE_DISABLED
 
 @onready var plane_sprite: AnimatedSprite2D = %PlaneSprite
 @onready var dir_to_m: Node2D = %dir_to_turn
 @onready var dir_to_plane_sprite: Node2D = %dir_to_plane_sprite
 
 var rot_deg_change : float
-const turn_speed : float = 7
+@export var turn_speed : float = 7 ## How fast the plane can turn to face the mouse / aim
 var dir_plane : Vector2
 
 @export var controller : bool = false ## Set to true if using controller, false if Mouse
@@ -150,24 +146,6 @@ func roll_handling(delta: float) -> void:
 	if roll_cd_time > 0:
 		roll_cd_time -= delta
  
-var desired_velocity : Vector2
-var current_velocity : Vector2
-var change_velocity : Vector2
-const drag_factor : float = 4
-func other_velocity_handle(delta: float) -> void: ## Improved movement for the ship
-	## More control, can fly in straight lines 
-	desired_velocity = dir_to_mouse * accelerate_limit
-	
-	change_velocity = (desired_velocity - current_velocity) * drag_factor
-	
-	velocity = current_velocity
-	
-	if accelerating:
-		current_velocity += change_velocity * delta
-	else:
-		current_velocity.y += (980 * delta) / 4
-		velocity.y = clamp(velocity.y, -accelerate_limit, accelerate_limit)
-
 var controller_joypad_vector : Vector2 ## Vector of the left analog stick
 var left_joystick_length : float = 0
 func _input(_event: InputEvent) -> void: 
