@@ -835,7 +835,7 @@ libraries = {
 unique_name_in_owner = true
 scale = Vector2(1.5, 1.5)
 hp_bar = NodePath("../bars/hpbar")
-max_hp = 1000.0
+max_hp = 15.0
 
 [node name="VelocityComponent" parent="." instance=ExtResource("43_12dy5")]
 unique_name_in_owner = true
