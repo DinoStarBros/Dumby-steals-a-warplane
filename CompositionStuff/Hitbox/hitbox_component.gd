@@ -16,13 +16,14 @@ func _on_area_entered(area : HurtboxComponent) -> void:
 	if area is HurtboxComponent:
 		Hit.emit()
 		if get_parent().is_in_group("Enemy"):
-			g.cam.screen_shake(5, 0.1)
+			# An enemy hitbox that damages the player
 			
 			attack.ene_attack_damage = dmg
 			%player_hit.pitch_scale = 1 + randf_range(-.2,.2)
 			%player_hit.play()
 		else:
-			g.cam.screen_shake(15, 0.3)
+			# A player hitbox that damages enemies
+			
 			attack.attack_damage = dmg
 			
 			%enemy_hit.pitch_scale = 0.5 + randf_range(-.1,.1)
@@ -33,8 +34,8 @@ func _on_area_entered(area : HurtboxComponent) -> void:
 			
 			%enemy_hit3.pitch_scale = randf_range(1.4,1.6)
 			%enemy_hit3.play()
-			
 		area.damage(attack)
+		
 		if delete_after_hit:
 			if get_parent().is_in_group("Enemy"):
 				var plr_hit_sfx : Node2D = plr_hit_sfx_scn.instantiate()

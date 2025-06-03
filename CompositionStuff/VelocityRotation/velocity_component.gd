@@ -4,6 +4,7 @@ class_name VelocityComponent
 @onready var p : CharacterBody2D = get_parent()
 
 @export var accelerate_speed : int = 1000 ## How fast the plane can go
+@export var trail_particles : CPUParticles2D
 
 var desired_velocity : Vector2
 var current_velocity : Vector2
@@ -26,3 +27,6 @@ func other_velocity_handle(delta: float, direction: Vector2, accelerating: bool)
 	else:
 		current_velocity.y += (980 * delta) / 4
 		p.velocity.y = clamp(p.velocity.y, -accelerate_speed, accelerate_speed)
+	
+	if trail_particles:
+		trail_particles.emitting = accelerating

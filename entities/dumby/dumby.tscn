@@ -44,9 +44,6 @@
 [ext_resource type="Script" uid="uid://b3n1upwnl8fig" path="res://entities/dumby/evade_box.gd" id="39_pctjt"]
 [ext_resource type="PackedScene" uid="uid://cbs0bmg6fong3" path="res://CompositionStuff/VelocityRotation/velocity_component.tscn" id="43_12dy5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmt67"]
-size = Vector2(4, 4)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_3gqex"]
 radius = 40.0
 
@@ -87,8 +84,88 @@ _data = {
 &"RESET": SubResource("Animation_mt2ih")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4s3yb"]
+radius = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmt67"]
+size = Vector2(4, 4)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_rkk0x"]
 radius = 400.0
+
+[sub_resource type="Animation" id="Animation_5fg7b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("newGun:pitch_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+
+[sub_resource type="Animation" id="Animation_xyqg2"]
+resource_name = "newgun"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shoot:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("shoot2:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("newGun:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("newGun:pitch_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.3, 0.5, 0.7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wth8f"]
+_data = {
+&"RESET": SubResource("Animation_5fg7b"),
+&"newgun": SubResource("Animation_xyqg2")
+}
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fj41j"]
 animations = [{
@@ -264,80 +341,6 @@ tracks/4/keys = {
 _data = {
 &"RESET": SubResource("Animation_dq1xq"),
 &"flameLoop": SubResource("Animation_kvjl2")
-}
-
-[sub_resource type="Animation" id="Animation_5fg7b"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("newGun:pitch_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.5]
-}
-
-[sub_resource type="Animation" id="Animation_xyqg2"]
-resource_name = "newgun"
-length = 0.5
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("%shoot:playing")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.15),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("%shoot2:playing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("newGun:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, true, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("newGun:pitch_scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.3, 0.5, 0.7]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wth8f"]
-_data = {
-&"RESET": SubResource("Animation_5fg7b"),
-&"newgun": SubResource("Animation_xyqg2")
 }
 
 [sub_resource type="Animation" id="Animation_yoon2"]
@@ -804,16 +807,10 @@ _data = {
 &"roll": SubResource("Animation_4s3yb")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4s3yb"]
-radius = 50.0
-
 [node name="dumby" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 4097
 collision_mask = 4097
 script = ExtResource("1_2ba6e")
-
-[node name="c" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_qmt67")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component", "ouchnim") instance=ExtResource("2_5wgoi")]
 unique_name_in_owner = true
@@ -838,6 +835,29 @@ libraries = {
 unique_name_in_owner = true
 scale = Vector2(1.5, 1.5)
 hp_bar = NodePath("../bars/hpbar")
+max_hp = 1000.0
+
+[node name="VelocityComponent" parent="." instance=ExtResource("43_12dy5")]
+unique_name_in_owner = true
+
+[node name="evade_box" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("39_pctjt")
+
+[node name="ebc" type="CollisionShape2D" parent="evade_box"]
+rotation = 1.5708
+shape = SubResource("CircleShape2D_4s3yb")
+disabled = true
+
+[node name="dir_to_turn" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="dir_to_plane_sprite" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="c" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qmt67")
 
 [node name="ExpPickup" type="Area2D" parent="."]
 visible = false
@@ -846,6 +866,81 @@ collision_mask = 4096
 
 [node name="expcol" type="CollisionShape2D" parent="ExpPickup"]
 shape = SubResource("CircleShape2D_rkk0x")
+
+[node name="sfx" type="Node2D" parent="."]
+
+[node name="shoot" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("9_onvjk")
+volume_db = -10.0
+bus = &"sfx"
+
+[node name="shoot2" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("10_e8exh")
+volume_db = -15.0
+pitch_scale = 0.5
+bus = &"sfx"
+
+[node name="shoot3" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("13_pxqrg")
+volume_db = -5.0
+bus = &"sfx"
+
+[node name="jet" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("9_xd5q6")
+volume_db = 4.0
+bus = &"sfx"
+
+[node name="explod" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("12_xik33")
+bus = &"sfx"
+
+[node name="newGun" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource("15_6bsw8")
+volume_db = -10.0
+pitch_scale = 0.5
+bus = &"sfx"
+
+[node name="collect" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("22_sby2x")
+volume_db = -10.0
+bus = &"sfx"
+
+[node name="collect2" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("22_sby2x")
+volume_db = -5.0
+bus = &"sfx"
+
+[node name="roll" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("23_4s3yb")
+volume_db = -5.0
+bus = &"sfx"
+
+[node name="reload" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("24_x02cb")
+volume_db = -5.0
+pitch_scale = 1.2
+bus = &"sfx"
+
+[node name="reload2" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("25_bblbc")
+volume_db = 5.0
+bus = &"sfx"
+
+[node name="newgunim" type="AnimationPlayer" parent="sfx"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_wth8f")
+}
 
 [node name="PlaneSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
@@ -948,6 +1043,7 @@ region_rect = Rect2(2176, 0, 384, 64)
 
 [node name="Crosshair" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+z_index = 100
 scale = Vector2(2, 2)
 texture = ExtResource("15_1o3u8")
 
@@ -956,81 +1052,6 @@ zoom = Vector2(0.6, 0.6)
 position_smoothing_speed = 20.0
 script = ExtResource("6_tddd6")
 target = NodePath("..")
-
-[node name="sfx" type="Node2D" parent="."]
-
-[node name="shoot" type="AudioStreamPlayer" parent="sfx"]
-unique_name_in_owner = true
-stream = ExtResource("9_onvjk")
-volume_db = -10.0
-bus = &"sfx"
-
-[node name="shoot2" type="AudioStreamPlayer" parent="sfx"]
-unique_name_in_owner = true
-stream = ExtResource("10_e8exh")
-volume_db = -15.0
-pitch_scale = 0.5
-bus = &"sfx"
-
-[node name="shoot3" type="AudioStreamPlayer" parent="sfx"]
-unique_name_in_owner = true
-stream = ExtResource("13_pxqrg")
-volume_db = -5.0
-bus = &"sfx"
-
-[node name="jet" type="AudioStreamPlayer" parent="sfx"]
-unique_name_in_owner = true
-stream = ExtResource("9_xd5q6")
-volume_db = 4.0
-bus = &"sfx"
-
-[node name="explod" type="AudioStreamPlayer" parent="sfx"]
-unique_name_in_owner = true
-stream = ExtResource("12_xik33")
-bus = &"sfx"
-
-[node name="newGun" type="AudioStreamPlayer" parent="sfx"]
-stream = ExtResource("15_6bsw8")
-volume_db = -10.0
-pitch_scale = 0.5
-bus = &"sfx"
-
-[node name="collect" type="AudioStreamPlayer" parent="sfx"]
-unique_name_in_owner = true
-stream = ExtResource("22_sby2x")
-volume_db = -10.0
-bus = &"sfx"
-
-[node name="collect2" type="AudioStreamPlayer" parent="sfx"]
-unique_name_in_owner = true
-stream = ExtResource("22_sby2x")
-volume_db = -5.0
-bus = &"sfx"
-
-[node name="roll" type="AudioStreamPlayer" parent="sfx"]
-unique_name_in_owner = true
-stream = ExtResource("23_4s3yb")
-volume_db = -5.0
-bus = &"sfx"
-
-[node name="reload" type="AudioStreamPlayer" parent="sfx"]
-unique_name_in_owner = true
-stream = ExtResource("24_x02cb")
-volume_db = -5.0
-pitch_scale = 1.2
-bus = &"sfx"
-
-[node name="reload2" type="AudioStreamPlayer" parent="sfx"]
-unique_name_in_owner = true
-stream = ExtResource("25_bblbc")
-volume_db = 5.0
-bus = &"sfx"
-
-[node name="newgunim" type="AnimationPlayer" parent="sfx"]
-unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_wth8f")
-}
 
 [node name="death" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -1490,33 +1511,15 @@ layout_mode = 2
 text = "Skip
 "
 
-[node name="dir_to_turn" type="Node2D" parent="."]
-unique_name_in_owner = true
-
-[node name="dir_to_plane_sprite" type="Node2D" parent="."]
-unique_name_in_owner = true
-
 [node name="rollnim" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_pctjt")
 }
 
-[node name="evade_box" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 4
-script = ExtResource("39_pctjt")
-
-[node name="ebc" type="CollisionShape2D" parent="evade_box"]
-rotation = 1.5708
-shape = SubResource("CircleShape2D_4s3yb")
-disabled = true
-
-[node name="VelocityComponent" parent="." instance=ExtResource("43_12dy5")]
-unique_name_in_owner = true
-accelerate_speed = 2000
-
 [connection signal="PlrHit" from="HurtboxComponent" to="weapons_parent" method="_on_hurtbox_component_plr_hit"]
+[connection signal="Perfect_Roll" from="evade_box" to="weapons_parent" method="_on_evade_box_perfect_roll"]
+[connection signal="area_entered" from="evade_box" to="evade_box" method="_on_area_entered"]
 [connection signal="area_entered" from="ExpPickup" to="." method="_on_exp_pickup_area_entered"]
 [connection signal="pressed" from="GUI/yLost/buttons/menu" to="GUI" method="_on_menu_pressed"]
 [connection signal="pressed" from="GUI/paused/settingsMenu/butons/resume" to="GUI" method="_on_resume_pressed"]
@@ -1525,5 +1528,3 @@ accelerate_speed = 2000
 [connection signal="pressed" from="LvlXPUpg/upgUi/choosettons/choose" to="LvlXPUpg" method="_on_choose_pressed"]
 [connection signal="pressed" from="LvlXPUpg/upgUi/choosettons/reroll" to="LvlXPUpg" method="_on_reroll_pressed"]
 [connection signal="pressed" from="LvlXPUpg/upgUi/choosettons/skip" to="LvlXPUpg" method="_on_skip_pressed"]
-[connection signal="Perfect_Roll" from="evade_box" to="weapons_parent" method="_on_evade_box_perfect_roll"]
-[connection signal="area_entered" from="evade_box" to="evade_box" method="_on_area_entered"]

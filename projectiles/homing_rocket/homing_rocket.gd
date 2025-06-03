@@ -41,6 +41,7 @@ func _physics_process(delta:float)->void:
 
 func hit() -> void:
 	velocity = Vector2.ZERO
+	g.cam.screen_shake(15, 0.3)
 	spawn_explosion()
 	set_physics_process(false)
 	%anim.play("hit")
@@ -55,7 +56,6 @@ func _on_detection_radius_area_entered(enemy: Area2D) -> void:
 	
 	if enemy.get_parent().is_in_group("Enemy"):
 		target = enemy.get_parent()
-
 
 var rand_initial_dir : Vector2
 var dir_to_target : Vector2

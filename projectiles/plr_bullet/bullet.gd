@@ -17,4 +17,5 @@ func _physics_process(delta:float)->void:
 func hit() -> void:
 	rotation_degrees += 180
 	velocity = Vector2.ZERO
+	#g.cam.screen_shake(7, 0.1)
 	%anim.play("hit")

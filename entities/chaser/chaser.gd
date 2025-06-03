@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-var accelerate_spd : int = 40
-var accelerate_limit : int = 750
 var accelerating : = true
 var dir_to_targ : Vector2
 var target : CharacterBody2D
@@ -13,47 +11,31 @@ func _ready() -> void:
 	_on_target_deviat_timer_timeout()
 	%HitboxComponent.set_attack_properties(1)
 	
-	accelerate_spd += randi_range(-5, 5)
+	velocity_component.accelerate_speed += randf_range(-10, 10)
 
 var target_deviation : Vector2
+var direction : Vector2
 func _physics_process(delta : float) -> void:
 	move_and_slide()
 	target = g.player
 	
 	dist_to_targ = global_position.distance_to(target.global_position)
-	if dist_to_targ <= tdev_range + 20:
+	if dist_to_targ <= tdev_range + (tdev_range/5):
 		dir_to_targ = ((target.global_position + target_deviation) - global_position).normalized()
 	else:
 		dir_to_targ = (target.global_position - global_position).normalized()
-
-	#accelerating = Input.is_action_pressed("accelerate")
+	
 	%flamez.visible = accelerating
 	%flameparticles.emitting = accelerating
 	%flameparticles.direction = -velocity
 	
-	
-	%Plane.look_at(target.global_position) 
-	%outline.look_at(target.global_position)
-	velocity.y += (980 * delta) / 2
-	if accelerating:
-		velocity += accelerate_spd * dir_to_targ
-	
-	lim_accel_x()
-	lim_accel_y()
+	direction = global_position + velocity
+	%Plane.look_at(direction)
+	%outline.look_at(direction)
 
-func lim_accel_x()->void:
-	if velocity.x <= -accelerate_limit:
-		velocity.x = -accelerate_limit
-	if velocity.x >= accelerate_limit:
-		velocity.x = accelerate_limit
+	velocity_component.other_velocity_handle(delta, dir_to_targ, accelerating)
 
-func lim_accel_y()->void:
-	if velocity.y <= -accelerate_limit:
-		velocity.y = -accelerate_limit
-	if velocity.y >= accelerate_limit:
-		velocity.y = accelerate_limit
-
-const tdev_range : = 300
+const tdev_range : = 400
 func _on_target_deviat_timer_timeout() -> void:
 	target_deviation.x = randf_range(-tdev_range,tdev_range)
 	target_deviation.y = randf_range(-tdev_range,tdev_range)

@@ -22,7 +22,6 @@ func _physics_process(delta:float) -> void:
 	target_position = target.aim_position * sensitivity
 	position = position.lerp(target_position, 0.25)
 	
-	
 	if active_shake_time > 0:
 		shake_time += delta * shake_time_speed
 		active_shake_time -= delta
@@ -36,12 +35,22 @@ func _physics_process(delta:float) -> void:
 		shake_intensity = max(shake_intensity - shake_decay * delta, 0)
 	else:
 		offset = lerp(offset, Vector2.ZERO, 10.5 * delta)
+		shake_intensity = 0
 
 func screen_shake(intensity: int, time: float) -> void: ## Shakes the camera with an intensity, for some duration of time, Use for da juice
+	
 	randomize()
 	noise.seed = randi()
 	noise.frequency = 2.0
 	
-	shake_intensity = intensity
-	active_shake_time = time
+	if intensity > shake_intensity:
+		# It'll only apply if a stronger shake happens
+		# So that it doesn't get overidden by a weak shake
+		shake_intensity = intensity
+	
+	if time > active_shake_time:
+		# It'll only apply if a stronger shake happens
+		# So that it doesn't get overidden by a weak shake
+		active_shake_time = time
+	
 	shake_time = 0.0

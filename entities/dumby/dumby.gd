@@ -66,10 +66,11 @@ func _unhandled_input(event: InputEvent) -> void: ## For camera aiming, dynamic 
 var accelerating : bool = false
 
 func damage(_attack:Attack)->void:
-	g.cam.screen_shake(20, 0.3)
+	#g.cam.screen_shake(20, 0.3)
+	pass
 
 func Dead(_attack:Attack)->void:
-	g.cam.screen_shake(40, 0.6)
+	#g.cam.screen_shake(40, 1)
 	g.game_state = g.game_states.Lost
 	set_physics_process(false)
 	%explod.play(.4)

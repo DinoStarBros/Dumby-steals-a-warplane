@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bj5wj2g1r73gg"]
+[gd_scene load_steps=24 format=3 uid="uid://bj5wj2g1r73gg"]
 
 [ext_resource type="Script" uid="uid://cn6d8a0upm6v5" path="res://entities/chaser/chaser.gd" id="1_b7csh"]
 [ext_resource type="Texture2D" uid="uid://b3hwhp3ky72y6" path="res://Art/planestuff/plane.png" id="2_fsmyf"]
@@ -76,6 +76,11 @@ _data = {
 &"RESET": SubResource("Animation_dq1xq"),
 &"flameLoop": SubResource("Animation_kvjl2")
 }
+
+[sub_resource type="Curve" id="Curve_vc8fo"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, -304.615), 0.0, 0.0, 0, 0, Vector2(0.983146, 296.703), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Animation" id="Animation_2qnmu"]
 resource_name = "Ouch"
@@ -318,6 +323,20 @@ libraries = {
 autoplay = "flameLoop"
 speed_scale = 1.5
 
+[node name="trailparticle" type="CPUParticles2D" parent="Plane"]
+unique_name_in_owner = true
+position = Vector2(-17.5, 0)
+scale = Vector2(1.2, 1.2)
+amount = 25
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+angular_velocity_curve = SubResource("Curve_vc8fo")
+scale_amount_min = 4.0
+scale_amount_max = 10.0
+
 [node name="outline" type="Node2D" parent="."]
 unique_name_in_owner = true
 modulate = Color(100, 100, 100, 1)
@@ -413,7 +432,9 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_vc8fo")
 
-[node name="VelocityComponent" parent="." instance=ExtResource("8_vc8fo")]
+[node name="VelocityComponent" parent="." node_paths=PackedStringArray("trail_particles") instance=ExtResource("8_vc8fo")]
 unique_name_in_owner = true
+accelerate_speed = 900
+trail_particles = NodePath("../Plane/trailparticle")
 
 [connection signal="timeout" from="targetDeviatTimer" to="." method="_on_target_deviat_timer_timeout"]

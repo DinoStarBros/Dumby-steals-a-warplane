@@ -1,16 +1,13 @@
 extends CharacterBody2D
 
-var accelerate_spd : int = 30
-var accelerate_limit : int = 600
 var accelerating : = true
 var dir_to_targ : Vector2
 var target : CharacterBody2D
 
+@onready var velocity_component: VelocityComponent = %VelocityComponent
+
 func _ready() ->  void:
 	_on_target_deviat_timer_timeout()
-	
-	accelerate_spd += randi_range(-5, 5)
-	
 
 var target_deviation : Vector2
 func _physics_process(delta: float) -> void:
@@ -26,24 +23,7 @@ func _physics_process(delta: float) -> void:
 	
 	%Plane.look_at(target.global_position) 
 	%outline.look_at(target.global_position)
-	velocity.y += (980 * delta) / 2
-	if accelerating:
-		velocity += accelerate_spd * dir_to_targ
-	
-	lim_accel_x()
-	lim_accel_y()
-
-func lim_accel_x()->void:
-	if velocity.x <= -accelerate_limit:
-		velocity.x = -accelerate_limit
-	if velocity.x >= accelerate_limit:
-		velocity.x = accelerate_limit
-
-func lim_accel_y()->void:
-	if velocity.y <= -accelerate_limit:
-		velocity.y = -accelerate_limit
-	if velocity.y >= accelerate_limit:
-		velocity.y = accelerate_limit
+	velocity_component.other_velocity_handle(delta, dir_to_targ, accelerating)
 
 const tdev_range : = 500
 func _on_target_deviat_timer_timeout() -> void:

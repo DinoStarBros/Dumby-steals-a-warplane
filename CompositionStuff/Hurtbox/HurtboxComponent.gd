@@ -19,27 +19,21 @@ func damage(attack:Attack) -> void:
 	
 	if health_component:
 		health_component.damage(attack)
+		# Calls the function to reduce the health from an attack accordingly
 	
 	if health_component.hp > 0:
 		get_parent().damage(attack)
 		if get_parent().is_in_group("Player"):
 			PlrHit.emit(attack.attack_damage)
 			%hitsparkanim.play("spark")
-			g.frame_freeze(0.4, 0.3)
 		
 	elif health_component.hp <= 0:
 		get_parent().Dead(attack)
 		if explosion_particles:
 			for n in explosion_particle_amount + randi_range(1,2):
 				spawn_explosion_particles(attack)
-		
-		if get_parent().is_in_group("Enemy"):
-			g.frame_freeze(0.5, 0.1)
-		else:
-			g.frame_freeze(0.4, 0.6)
-			
 	
-
+	hit(get_parent().is_in_group("Player"), health_component.hp <= 0)
 	
 	if ouchnim:
 		ouchnim.play("Ouch")
@@ -51,3 +45,23 @@ func spawn_explosion_particles(attack: Attack) -> void:
 	explosion.direction = global_position.direction_to(attack.attack_pos)
 	explosion.lifetime = randf_range(0.5,0.7)
 	g.game.add_child(explosion)
+
+func hit(player : bool, dead : bool) -> void:
+	if player:
+		if dead:
+			# Dead Player
+			g.cam.screen_shake(40, 1)
+			g.frame_freeze(0.4, 0.6)
+		else:
+			# Hit Player
+			g.cam.screen_shake(20, 0.4)
+			g.frame_freeze(0.4, 0.3)
+	else:
+		if dead:
+			# Dead Enemy
+			g.cam.screen_shake(9, 0.1)
+			g.frame_freeze(0.6, 0.1)
+		else:
+			# Hit Enemy
+			g.cam.screen_shake(6, 0.1)
+			g.frame_freeze(0.7, 0.05)
