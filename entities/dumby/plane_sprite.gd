@@ -5,7 +5,7 @@ class_name PlaneSprite
 @onready var p : Dumby = get_parent() ## Reference to the Parent Node, Dumby
 #@onready var dir_to_m: Node2D = %dir_to_m
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var rot : float = p.dir_to_plane_sprite.rotation_degrees
 	if p.rolling:
 		pass
@@ -30,7 +30,6 @@ func _pose_matcher(_rot : float) -> int:
 func fx() -> void:
 	%flamez.visible = p.accelerating
 	%flameparticles.emitting = p.accelerating
-	%trailparticle.emitting = p.accelerating
 	%flameparticles.direction = -p.velocity
 	
 	%speedring.visible = p.velocity.length() > 800 and p.accelerating and p.accelerate_time > 1

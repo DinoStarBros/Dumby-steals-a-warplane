@@ -1,10 +1,11 @@
-[gd_scene load_steps=84 format=3 uid="uid://bfahxvjjxjylq"]
+[gd_scene load_steps=86 format=3 uid="uid://bfahxvjjxjylq"]
 
 [ext_resource type="Script" uid="uid://cbp023lkcpg5o" path="res://entities/dumby/dumby.gd" id="1_2ba6e"]
 [ext_resource type="PackedScene" uid="uid://gs3fdbhnlc5o" path="res://CompositionStuff/Hurtbox/hurtbox_component.tscn" id="2_5wgoi"]
 [ext_resource type="PackedScene" uid="uid://dydkhhqkwcgfw" path="res://CompositionStuff/Health/health_component.tscn" id="3_pin7m"]
 [ext_resource type="Texture2D" uid="uid://bioqj7i0sc7na" path="res://Art/planestuff/dumbplane_sprites/plane1.png" id="4_12q0g"]
 [ext_resource type="Texture2D" uid="uid://lbyik5wofkif" path="res://Art/planestuff/dumbplane_sprites/plane2.png" id="5_baqsm"]
+[ext_resource type="PackedScene" uid="uid://cwryohxgadl0g" path="res://CompositionStuff/Rotation/rotation_component.tscn" id="5_dufc2"]
 [ext_resource type="Texture2D" uid="uid://baj53ina6l1vj" path="res://Art/planestuff/plane-Sheet.png" id="5_rxwle"]
 [ext_resource type="Script" uid="uid://co2v0nsq3wytj" path="res://entities/dumby/camera.gd" id="6_tddd6"]
 [ext_resource type="Texture2D" uid="uid://cihbaed4tm366" path="res://Art/planestuff/dumbplane_sprites/plane3.png" id="6_u8vb7"]
@@ -42,7 +43,7 @@
 [ext_resource type="PackedScene" uid="uid://uqxv3w86ie7g" path="res://abilities/ability_slot/ability_slot.tscn" id="32_lhj8b"]
 [ext_resource type="Script" uid="uid://b1ru8hk4kxiyh" path="res://entities/dumby/lvlxpupg.gd" id="37_3gqex"]
 [ext_resource type="Script" uid="uid://b3n1upwnl8fig" path="res://entities/dumby/evade_box.gd" id="39_pctjt"]
-[ext_resource type="PackedScene" uid="uid://cbs0bmg6fong3" path="res://CompositionStuff/VelocityRotation/velocity_component.tscn" id="43_12dy5"]
+[ext_resource type="PackedScene" uid="uid://cbs0bmg6fong3" path="res://CompositionStuff/Velocity/velocity_component.tscn" id="43_12dy5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3gqex"]
 radius = 40.0
@@ -207,6 +208,10 @@ point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_12q0g"]
 colors = PackedColorArray(1, 0.66045, 0.401908, 1, 0.617522, 0.275872, 0, 1)
+
+[sub_resource type="Curve" id="Curve_12dy5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.733333, 0.820225), -0.796731, -0.796731, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Animation" id="Animation_dq1xq"]
 length = 0.001
@@ -837,7 +842,11 @@ scale = Vector2(1.5, 1.5)
 hp_bar = NodePath("../bars/hpbar")
 max_hp = 15.0
 
-[node name="VelocityComponent" parent="." instance=ExtResource("43_12dy5")]
+[node name="VelocityComponent" parent="." node_paths=PackedStringArray("trail_particles") instance=ExtResource("43_12dy5")]
+unique_name_in_owner = true
+trail_particles = NodePath("../PlaneSprite/trailparticle")
+
+[node name="RotationComponent" parent="." instance=ExtResource("5_dufc2")]
 unique_name_in_owner = true
 
 [node name="evade_box" type="Area2D" parent="."]
@@ -974,7 +983,7 @@ color_ramp = SubResource("Gradient_12q0g")
 
 [node name="trailparticle" type="CPUParticles2D" parent="PlaneSprite"]
 unique_name_in_owner = true
-position = Vector2(-17.5, 0)
+position = Vector2(-22.5, 0)
 scale = Vector2(1.2, 1.2)
 amount = 100
 lifetime = 2.0
@@ -984,8 +993,9 @@ gravity = Vector2(0, 0)
 angular_velocity_min = -180.0
 angular_velocity_max = 180.0
 angular_velocity_curve = SubResource("Curve_tualj")
-scale_amount_min = 4.0
-scale_amount_max = 10.0
+scale_amount_min = 7.0
+scale_amount_max = 11.0
+scale_amount_curve = SubResource("Curve_12dy5")
 
 [node name="fxLoop" type="AnimationPlayer" parent="PlaneSprite"]
 root_node = NodePath("../flamez")

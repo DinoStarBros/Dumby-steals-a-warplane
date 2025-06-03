@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dydkhhqkwcgfw" path="res://CompositionStuff/Health/health_component.tscn" id="5_74ld6"]
 [ext_resource type="Texture2D" uid="uid://cb00doqsxr2ay" path="res://Art/Stuff2/shockwave-Sheet.png" id="6_0teo6"]
 [ext_resource type="PackedScene" uid="uid://cilaqubvkn2sv" path="res://CompositionStuff/Hitbox/hitbox_component.tscn" id="7_bngux"]
-[ext_resource type="PackedScene" uid="uid://cbs0bmg6fong3" path="res://CompositionStuff/VelocityRotation/velocity_component.tscn" id="8_vc8fo"]
+[ext_resource type="PackedScene" uid="uid://cbs0bmg6fong3" path="res://CompositionStuff/Velocity/velocity_component.tscn" id="8_vc8fo"]
 
 [sub_resource type="Curve" id="Curve_smpng"]
 _limits = [-360.0, 360.0, 0.0, 1.0]

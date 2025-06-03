@@ -9,6 +9,7 @@ var accelerate_time : float = 0
 @onready var health_component: HealthComponent = %HealthComponent
 @onready var hurtbox_component: HurtboxComponent = %HurtboxComponent
 @onready var velocity_component: VelocityComponent = %VelocityComponent
+@onready var rotation_component: RotationComponent = %RotationComponent
 
 func _ready() -> void:
 	%Crosshair.visible = controller
@@ -31,8 +32,9 @@ func _physics_process(delta: float) -> void:
 	dir_to_mouse = dir_plane
 	dist_to_mouse = global_position.distance_to(get_global_mouse_position())
 	
-	
 	velocity_component.other_velocity_handle(delta, dir_to_mouse, accelerating)
+	
+	
 	if accelerating:
 		if not %jet.playing:
 			%jet.play()

@@ -20,7 +20,7 @@ func _physics_process(delta : float) -> void:
 	target = g.player
 	
 	dist_to_targ = global_position.distance_to(target.global_position)
-	if dist_to_targ <= tdev_range + (tdev_range/5):
+	if dist_to_targ >= tdev_range + (tdev_range/5):
 		dir_to_targ = ((target.global_position + target_deviation) - global_position).normalized()
 	else:
 		dir_to_targ = (target.global_position - global_position).normalized()
@@ -35,7 +35,7 @@ func _physics_process(delta : float) -> void:
 
 	velocity_component.other_velocity_handle(delta, dir_to_targ, accelerating)
 
-const tdev_range : = 400
+const tdev_range : = 300
 func _on_target_deviat_timer_timeout() -> void:
 	target_deviation.x = randf_range(-tdev_range,tdev_range)
 	target_deviation.y = randf_range(-tdev_range,tdev_range)

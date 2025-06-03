@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cb00doqsxr2ay" path="res://Art/Stuff2/shockwave-Sheet.png" id="6_uy5fh"]
 [ext_resource type="AudioStream" uid="uid://dtq0aduiy7nn4" path="res://Audio/gunshot.wav" id="7_npqfx"]
 [ext_resource type="AudioStream" uid="uid://rfxisnyv0d1i" path="res://Audio/pistol-shot-233473.mp3" id="8_o6t5e"]
-[ext_resource type="PackedScene" uid="uid://cbs0bmg6fong3" path="res://CompositionStuff/VelocityRotation/velocity_component.tscn" id="9_ckebl"]
+[ext_resource type="PackedScene" uid="uid://cbs0bmg6fong3" path="res://CompositionStuff/Velocity/velocity_component.tscn" id="9_ckebl"]
 
 [sub_resource type="Curve" id="Curve_smpng"]
 _limits = [-360.0, 360.0, 0.0, 1.0]
