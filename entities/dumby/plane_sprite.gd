@@ -5,8 +5,11 @@ class_name PlaneSprite
 @onready var p : Dumby = get_parent() ## Reference to the Parent Node, Dumby
 #@onready var dir_to_m: Node2D = %dir_to_m
 
+@onready var rotation_component: RotationComponent = %RotationComponent
+
 func _process(_delta: float) -> void:
-	var rot : float = p.dir_to_plane_sprite.rotation_degrees
+	#var rot : float = %PlaneSprite.rotation_degrees
+	var rot : float = rotation_component.plane_sprite_rotation_degrees
 	if p.rolling:
 		pass
 	else:

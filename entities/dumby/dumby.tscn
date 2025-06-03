@@ -812,10 +812,11 @@ _data = {
 &"roll": SubResource("Animation_4s3yb")
 }
 
-[node name="dumby" type="CharacterBody2D" groups=["Player"]]
+[node name="dumby" type="CharacterBody2D" node_paths=PackedStringArray("thing_to_rotate") groups=["Player"]]
 collision_layer = 4097
 collision_mask = 4097
 script = ExtResource("1_2ba6e")
+thing_to_rotate = NodePath("PlaneSprite")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component", "ouchnim") instance=ExtResource("2_5wgoi")]
 unique_name_in_owner = true
@@ -846,8 +847,9 @@ max_hp = 15.0
 unique_name_in_owner = true
 trail_particles = NodePath("../PlaneSprite/trailparticle")
 
-[node name="RotationComponent" parent="." instance=ExtResource("5_dufc2")]
+[node name="RotationComponent" parent="." node_paths=PackedStringArray("thing_to_rotate") instance=ExtResource("5_dufc2")]
 unique_name_in_owner = true
+thing_to_rotate = NodePath("../PlaneSprite")
 
 [node name="evade_box" type="Area2D" parent="."]
 collision_layer = 4
@@ -860,9 +862,6 @@ shape = SubResource("CircleShape2D_4s3yb")
 disabled = true
 
 [node name="dir_to_turn" type="Node2D" parent="."]
-unique_name_in_owner = true
-
-[node name="dir_to_plane_sprite" type="Node2D" parent="."]
 unique_name_in_owner = true
 
 [node name="c" type="CollisionShape2D" parent="."]

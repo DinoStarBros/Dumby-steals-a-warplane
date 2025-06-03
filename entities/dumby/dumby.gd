@@ -29,11 +29,14 @@ func _physics_process(delta: float) -> void:
 	
 	half_viewport = get_viewport_rect().size / 2.0
 	
-	dir_to_mouse = dir_plane
+	dir_to_mouse = global_position.direction_to(get_global_mouse_position())
 	dist_to_mouse = global_position.distance_to(get_global_mouse_position())
 	
-	velocity_component.other_velocity_handle(delta, dir_to_mouse, accelerating)
-	
+	velocity_component.other_velocity_handle(delta, dir_plane, accelerating)
+	if controller:
+		rotation_component.plane_rotation_handling(delta, global_position + (controller_joypad_vector * 50))
+	else:
+		rotation_component.plane_rotation_handling(delta, get_global_mouse_position())
 	
 	if accelerating:
 		if not %jet.playing:
@@ -46,7 +49,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		accelerating = Input.is_action_pressed("accelerate")
 	
-	plane_rotation_handling(delta)
+
+	
+	dir_plane = rotation_component.direction
 	
 	if accelerating:
 		
@@ -57,9 +62,10 @@ func _physics_process(delta: float) -> void:
 		accelerate_time = 0
 
 var aim_position : Vector2
+var dir_plane : Vector2
 func _unhandled_input(event: InputEvent) -> void: ## For camera aiming, dynamic camera follow mouse
 	if controller:
-		aim_position = dir_to_mouse * half_viewport * left_joystick_length
+		aim_position = dir_plane * half_viewport * left_joystick_length
 		%Crosshair.position = aim_position
 	else:
 		if event is InputEventMouseMotion:
@@ -85,32 +91,35 @@ func Dead(_attack:Attack)->void:
 @onready var dir_to_m: Node2D = %dir_to_turn
 @onready var dir_to_plane_sprite: Node2D = %dir_to_plane_sprite
 
-var rot_deg_change : float
-@export var turn_speed : float = 7 ## How fast the plane can turn to face the mouse / aim
-var dir_plane : Vector2
-
 @export var controller : bool = false ## Set to true if using controller, false if Mouse
-func plane_rotation_handling(delta: float)->void:
+
+@export var turn_speed : float = 7 ## How fast the plane can turn to face the mouse / aim
+@export var thing_to_rotate : Node2D
+var plane_sprite_rotation_degrees : float ## Used for determining the frame for the ship sprite
+var direction : Vector2 = Vector2.ZERO ## The vector of the rotation of the rotated node
+var rot_deg_change : float
+func plane_rotation_handling(delta: float, desired_target: Vector2)->void:
 	
-	if controller:
-		dir_to_m.look_at(global_position + (controller_joypad_vector * 50))
-	else:
-		dir_to_m.look_at(get_global_mouse_position())
+	dir_to_m.look_at(desired_target)
+	var desired_rotation : float = dir_to_m.rotation_degrees
 	
 	rot_deg_change = (
-		dir_to_m.rotation_degrees - plane_sprite.rotation_degrees
+		desired_rotation - plane_sprite.rotation_degrees
 		) * turn_speed
 	
-	if dir_to_plane_sprite.rotation_degrees > 180:
-		dir_to_plane_sprite.rotation_degrees = -180
-	if dir_to_plane_sprite.rotation_degrees < -180:
-		dir_to_plane_sprite.rotation_degrees = 180
+	if plane_sprite_rotation_degrees > 180:
+		plane_sprite_rotation_degrees = -180
+	if plane_sprite_rotation_degrees < -180:
+		plane_sprite_rotation_degrees = 180
 	
-	plane_sprite.rotation_degrees += rot_deg_change * delta
-	dir_to_plane_sprite.rotation_degrees += rot_deg_change * delta
+	thing_to_rotate.rotation_degrees += rot_deg_change * delta
+	# Sets the rotation of the node you want rotated
+	# Affected by the gradual turning speed stuff
 	
-	dir_plane.x = cos(plane_sprite.rotation)
-	dir_plane.y = sin(plane_sprite.rotation)
+	plane_sprite_rotation_degrees += rot_deg_change * delta
+	
+	direction.x = cos(thing_to_rotate.rotation)
+	direction.y = sin(thing_to_rotate.rotation)
 
 func _on_exp_pickup_area_entered(area: Area2D) -> void:
 	if area is XpOrb:
