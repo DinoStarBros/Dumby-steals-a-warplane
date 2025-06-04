@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bhp7st34wqg3f"]
+[gd_scene load_steps=24 format=3 uid="uid://bhp7st34wqg3f"]
 
 [ext_resource type="Script" uid="uid://bsinn15v5ma8t" path="res://entities/shooter/shooter.gd" id="1_kg2ur"]
 [ext_resource type="Texture2D" uid="uid://b3hwhp3ky72y6" path="res://Art/planestuff/plane.png" id="2_bvc85"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://dtq0aduiy7nn4" path="res://Audio/gunshot.wav" id="7_npqfx"]
 [ext_resource type="AudioStream" uid="uid://rfxisnyv0d1i" path="res://Audio/pistol-shot-233473.mp3" id="8_o6t5e"]
 [ext_resource type="PackedScene" uid="uid://cbs0bmg6fong3" path="res://CompositionStuff/Velocity/velocity_component.tscn" id="9_ckebl"]
+[ext_resource type="PackedScene" uid="uid://cwryohxgadl0g" path="res://CompositionStuff/Rotation/rotation_component.tscn" id="10_d1p5d"]
 
 [sub_resource type="Curve" id="Curve_smpng"]
 _limits = [-360.0, 360.0, 0.0, 1.0]
@@ -135,7 +136,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("outline:visible")
+tracks/2/path = NodePath("Plane/outline:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -213,7 +214,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("outline:visible")
+tracks/3/path = NodePath("Plane/outline:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -316,29 +317,29 @@ libraries = {
 autoplay = "flameLoop"
 speed_scale = 1.5
 
-[node name="outline" type="Node2D" parent="."]
+[node name="outline" type="Node2D" parent="Plane"]
 unique_name_in_owner = true
 modulate = Color(100, 100, 100, 1)
 
-[node name="1" type="Sprite2D" parent="outline"]
+[node name="1" type="Sprite2D" parent="Plane/outline"]
 modulate = Color(0.587035, 0.722509, 1, 1)
 z_index = -1
 position = Vector2(0, -1)
 texture = ExtResource("2_bvc85")
 
-[node name="2" type="Sprite2D" parent="outline"]
+[node name="2" type="Sprite2D" parent="Plane/outline"]
 modulate = Color(0.587035, 0.722509, 1, 1)
 z_index = -1
 position = Vector2(1, 0)
 texture = ExtResource("2_bvc85")
 
-[node name="3" type="Sprite2D" parent="outline"]
+[node name="3" type="Sprite2D" parent="Plane/outline"]
 modulate = Color(0.587035, 0.722509, 1, 1)
 z_index = -1
 position = Vector2(0, 1)
 texture = ExtResource("2_bvc85")
 
-[node name="4" type="Sprite2D" parent="outline"]
+[node name="4" type="Sprite2D" parent="Plane/outline"]
 modulate = Color(0.587035, 0.722509, 1, 1)
 z_index = -1
 position = Vector2(-1, 0)
@@ -424,6 +425,10 @@ autostart = true
 
 [node name="VelocityComponent" parent="." instance=ExtResource("9_ckebl")]
 unique_name_in_owner = true
+
+[node name="RotationComponent" parent="." node_paths=PackedStringArray("thing_to_rotate") instance=ExtResource("10_d1p5d")]
+unique_name_in_owner = true
+thing_to_rotate = NodePath("../Plane")
 
 [connection signal="timeout" from="targetDeviatTimer" to="." method="_on_target_deviat_timer_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

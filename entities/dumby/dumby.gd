@@ -29,14 +29,19 @@ func _physics_process(delta: float) -> void:
 	
 	half_viewport = get_viewport_rect().size / 2.0
 	
+	# Mouse stuff
 	dir_to_mouse = global_position.direction_to(get_global_mouse_position())
 	dist_to_mouse = global_position.distance_to(get_global_mouse_position())
+	
+	# Handling the Velocity and Rotation Component stuff
+	dir_plane = rotation_component.direction
 	
 	velocity_component.other_velocity_handle(delta, dir_plane, accelerating)
 	if controller:
 		rotation_component.plane_rotation_handling(delta, global_position + (controller_joypad_vector * 50))
 	else:
 		rotation_component.plane_rotation_handling(delta, get_global_mouse_position())
+	
 	
 	if accelerating:
 		if not %jet.playing:
@@ -48,10 +53,6 @@ func _physics_process(delta: float) -> void:
 		pass
 	else:
 		accelerating = Input.is_action_pressed("accelerate")
-	
-
-	
-	dir_plane = rotation_component.direction
 	
 	if accelerating:
 		

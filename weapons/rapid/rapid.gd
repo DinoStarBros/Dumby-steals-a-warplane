@@ -28,7 +28,7 @@ func shooting_handling(delta:float) -> void:
 		for n in stats.bullet_amnt:
 			spawn_bullet()
 	if buffed:
-		cooldown -= delta * 3 ## Increases the firerate when buffed
+		cooldown -= delta * 2 # Increases the firerate when buffed
 	else:
 		cooldown -= delta
 	if cooldown <= 0:

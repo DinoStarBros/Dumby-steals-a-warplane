@@ -64,4 +64,4 @@ func hit(player : bool, dead : bool) -> void:
 		else:
 			# Hit Enemy
 			g.cam.screen_shake(6, 0.1)
-			g.frame_freeze(0.7, 0.05)
+			#g.frame_freeze(0.7, 0.05)

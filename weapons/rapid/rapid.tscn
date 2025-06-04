@@ -9,6 +9,7 @@
 script = ExtResource("1_ojx54")
 stats = ExtResource("2_7cnad")
 max_ammo = 100
+min_sweet_spot = 0.55
 max_sweet_spot = 0.9
 max_buff_time = 3.0
 

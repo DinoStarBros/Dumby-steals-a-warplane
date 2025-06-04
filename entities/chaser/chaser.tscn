@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bj5wj2g1r73gg"]
+[gd_scene load_steps=25 format=3 uid="uid://bj5wj2g1r73gg"]
 
 [ext_resource type="Script" uid="uid://cn6d8a0upm6v5" path="res://entities/chaser/chaser.gd" id="1_b7csh"]
 [ext_resource type="Texture2D" uid="uid://b3hwhp3ky72y6" path="res://Art/planestuff/plane.png" id="2_fsmyf"]
@@ -8,6 +8,38 @@
 [ext_resource type="Texture2D" uid="uid://cb00doqsxr2ay" path="res://Art/Stuff2/shockwave-Sheet.png" id="6_0teo6"]
 [ext_resource type="PackedScene" uid="uid://cilaqubvkn2sv" path="res://CompositionStuff/Hitbox/hitbox_component.tscn" id="7_bngux"]
 [ext_resource type="PackedScene" uid="uid://cbs0bmg6fong3" path="res://CompositionStuff/Velocity/velocity_component.tscn" id="8_vc8fo"]
+[ext_resource type="PackedScene" uid="uid://cwryohxgadl0g" path="res://CompositionStuff/Rotation/rotation_component.tscn" id="9_b36b3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vc8fo"]
+radius = 15.0
+
+[sub_resource type="Animation" id="Animation_2qnmu"]
+resource_name = "Ouch"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Plane:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(100, 100, 100, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bvk23"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d56he"]
+_data = {
+&"Ouch": SubResource("Animation_2qnmu"),
+&"RESET": SubResource("Animation_bvk23")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tuvxo"]
+radius = 18.0
 
 [sub_resource type="Curve" id="Curve_smpng"]
 _limits = [-360.0, 360.0, 0.0, 1.0]
@@ -82,34 +114,6 @@ _limits = [-360.0, 360.0, 0.0, 1.0]
 _data = [Vector2(0, -304.615), 0.0, 0.0, 0, 0, Vector2(0.983146, 296.703), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Animation" id="Animation_2qnmu"]
-resource_name = "Ouch"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Plane:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(100, 100, 100, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_bvk23"]
-length = 0.001
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_d56he"]
-_data = {
-&"Ouch": SubResource("Animation_2qnmu"),
-&"RESET": SubResource("Animation_bvk23")
-}
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_tuvxo"]
-radius = 18.0
-
 [sub_resource type="Curve" id="Curve_tuvxo"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -147,7 +151,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("outline:visible")
+tracks/2/path = NodePath("Plane/outline:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -225,7 +229,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("outline:visible")
+tracks/3/path = NodePath("Plane/outline:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -277,13 +281,50 @@ _data = {
 &"die": SubResource("Animation_akvag")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vc8fo"]
-radius = 15.0
-
 [node name="chaser" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 2
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_b7csh")
+
+[node name="VelocityComponent" parent="." node_paths=PackedStringArray("trail_particles") instance=ExtResource("8_vc8fo")]
+unique_name_in_owner = true
+accelerate_speed = 900
+drag_factor = 3.0
+trail_particles = NodePath("../Plane/trailparticle")
+
+[node name="RotationComponent" parent="." node_paths=PackedStringArray("thing_to_rotate") instance=ExtResource("9_b36b3")]
+unique_name_in_owner = true
+turn_speed = 5.0
+thing_to_rotate = NodePath("../Plane")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("7_bngux")]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_vc8fo")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component", "ouchnim") instance=ExtResource("4_on2tx")]
+collision_layer = 2
+collision_mask = 2
+health_component = NodePath("../HealthComponent")
+ouchnim = NodePath("ouchnim")
+explosion_particles = true
+
+[node name="ouchnim" type="AnimationPlayer" parent="HurtboxComponent"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_d56he")
+}
+
+[node name="hubc" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_tuvxo")
+
+[node name="targetDeviatTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+autostart = true
 
 [node name="Plane" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -337,54 +378,33 @@ angular_velocity_curve = SubResource("Curve_vc8fo")
 scale_amount_min = 4.0
 scale_amount_max = 10.0
 
-[node name="outline" type="Node2D" parent="."]
+[node name="outline" type="Node2D" parent="Plane"]
 unique_name_in_owner = true
 modulate = Color(100, 100, 100, 1)
 
-[node name="1" type="Sprite2D" parent="outline"]
+[node name="1" type="Sprite2D" parent="Plane/outline"]
 modulate = Color(0.587035, 0.722509, 1, 1)
 z_index = -1
 position = Vector2(0, -1)
 texture = ExtResource("2_fsmyf")
 
-[node name="2" type="Sprite2D" parent="outline"]
+[node name="2" type="Sprite2D" parent="Plane/outline"]
 modulate = Color(0.587035, 0.722509, 1, 1)
 z_index = -1
 position = Vector2(1, 0)
 texture = ExtResource("2_fsmyf")
 
-[node name="3" type="Sprite2D" parent="outline"]
+[node name="3" type="Sprite2D" parent="Plane/outline"]
 modulate = Color(0.587035, 0.722509, 1, 1)
 z_index = -1
 position = Vector2(0, 1)
 texture = ExtResource("2_fsmyf")
 
-[node name="4" type="Sprite2D" parent="outline"]
+[node name="4" type="Sprite2D" parent="Plane/outline"]
 modulate = Color(0.587035, 0.722509, 1, 1)
 z_index = -1
 position = Vector2(-1, 0)
 texture = ExtResource("2_fsmyf")
-
-[node name="targetDeviatTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 2.0
-autostart = true
-
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component", "ouchnim") instance=ExtResource("4_on2tx")]
-collision_layer = 2
-collision_mask = 2
-health_component = NodePath("../HealthComponent")
-ouchnim = NodePath("ouchnim")
-explosion_particles = true
-
-[node name="ouchnim" type="AnimationPlayer" parent="HurtboxComponent"]
-root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_d56he")
-}
-
-[node name="hubc" type="CollisionShape2D" parent="HurtboxComponent"]
-shape = SubResource("CircleShape2D_tuvxo")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_74ld6")]
 max_hp = 30.0
@@ -423,18 +443,5 @@ texture = ExtResource("6_0teo6")
 hframes = 3
 vframes = 3
 frame = 1
-
-[node name="HitboxComponent" parent="." instance=ExtResource("7_bngux")]
-unique_name_in_owner = true
-collision_layer = 4
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-shape = SubResource("CircleShape2D_vc8fo")
-
-[node name="VelocityComponent" parent="." node_paths=PackedStringArray("trail_particles") instance=ExtResource("8_vc8fo")]
-unique_name_in_owner = true
-accelerate_speed = 900
-trail_particles = NodePath("../Plane/trailparticle")
 
 [connection signal="timeout" from="targetDeviatTimer" to="." method="_on_target_deviat_timer_timeout"]

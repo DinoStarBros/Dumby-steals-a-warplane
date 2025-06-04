@@ -5,6 +5,7 @@ var dir_to_targ : Vector2
 var target : CharacterBody2D
 
 @onready var velocity_component: VelocityComponent = %VelocityComponent
+@onready var rotation_component: RotationComponent = %RotationComponent
 
 func _ready() ->  void:
 	_on_target_deviat_timer_timeout()
@@ -20,10 +21,9 @@ func _physics_process(delta: float) -> void:
 	%flameparticles.emitting = accelerating
 	%flameparticles.direction = -velocity
 	
-	
-	%Plane.look_at(target.global_position) 
-	%outline.look_at(target.global_position)
-	velocity_component.other_velocity_handle(delta, dir_to_targ, accelerating)
+	rotation_component.plane_rotation_handling(delta, target.global_position)
+	var direction : Vector2 = rotation_component.direction
+	velocity_component.other_velocity_handle(delta, direction, accelerating)
 
 const tdev_range : = 500
 func _on_target_deviat_timer_timeout() -> void:
