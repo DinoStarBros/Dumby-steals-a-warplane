@@ -11,6 +11,8 @@ func _ready() ->  void:
 	_on_target_deviat_timer_timeout()
 
 var target_deviation : Vector2
+var direction : Vector2
+var dir_to_target_deviate_pos : Vector2
 func _physics_process(delta: float) -> void:
 	move_and_slide()
 	target = g.player
@@ -21,11 +23,12 @@ func _physics_process(delta: float) -> void:
 	%flameparticles.emitting = accelerating
 	%flameparticles.direction = -velocity
 	
+	dir_to_target_deviate_pos = global_position.direction_to(target.global_position + target_deviation)
 	rotation_component.plane_rotation_handling(delta, target.global_position)
-	var direction : Vector2 = rotation_component.direction
-	velocity_component.other_velocity_handle(delta, direction, accelerating)
+	direction = rotation_component.direction
+	velocity_component.other_velocity_handle(delta, dir_to_target_deviate_pos, accelerating)
 
-const tdev_range : = 500
+const tdev_range : = 200
 func _on_target_deviat_timer_timeout() -> void:
 	target_deviation.x = randf_range(-tdev_range,tdev_range)
 	target_deviation.y = randf_range(-tdev_range,tdev_range)
@@ -41,9 +44,8 @@ func Dead(_attack:Attack)->void:
 	set_physics_process(false)
 	%death.play("die")
 
-var bullet_spd : = 1500
-
-const bullet_scn : = preload("res://projectiles/ene_bullet/ene_bullet.tscn")
+@export var bullet_spd : float = 2000
+const bullet_scn : PackedScene= preload("res://projectiles/ene_bullet/ene_bullet.tscn")
 func spawn_bullet()->void:
 	
 	%shoot.pitch_scale = randf_range(.9,1.1)
@@ -53,11 +55,11 @@ func spawn_bullet()->void:
 	
 	var bullet : Projectile = bullet_scn.instantiate()
 	bullet.global_position = global_position
-	bullet.velocity = dir_to_targ * bullet_spd
-	bullet.pos_to_look = target.global_position
+	
+	bullet.velocity = direction * bullet_spd
+	bullet.pos_to_look = global_position + direction
+	
 	g.game.add_child(bullet)
-	bullet.velocity = dir_to_targ * bullet_spd
-	bullet.pos_to_look = target.global_position
 
 func _on_shoot_timer_timeout() -> void:
 	spawn_bullet()

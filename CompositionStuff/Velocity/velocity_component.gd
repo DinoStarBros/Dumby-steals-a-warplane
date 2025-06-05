@@ -34,5 +34,6 @@ func other_velocity_handle(delta: float, direction: Vector2, accelerating: bool)
 		trail_particles.emitting = accelerating
 	
 
+
 func _get_velocity_angle_deg() -> float:
 	return rad_to_deg(p.velocity.angle())

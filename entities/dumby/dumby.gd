@@ -90,7 +90,6 @@ func Dead(_attack:Attack)->void:
 
 @onready var plane_sprite: AnimatedSprite2D = %PlaneSprite
 @onready var dir_to_m: Node2D = %dir_to_turn
-@onready var dir_to_plane_sprite: Node2D = %dir_to_plane_sprite
 
 @export var controller : bool = false ## Set to true if using controller, false if Mouse
 

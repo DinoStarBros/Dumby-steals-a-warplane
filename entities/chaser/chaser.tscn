@@ -294,7 +294,7 @@ trail_particles = NodePath("../Plane/trailparticle")
 
 [node name="RotationComponent" parent="." node_paths=PackedStringArray("thing_to_rotate") instance=ExtResource("9_b36b3")]
 unique_name_in_owner = true
-turn_speed = 5.0
+turn_speed = 4.0
 thing_to_rotate = NodePath("../Plane")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("7_bngux")]
@@ -366,6 +366,7 @@ speed_scale = 1.5
 
 [node name="trailparticle" type="CPUParticles2D" parent="Plane"]
 unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.498039)
 position = Vector2(-17.5, 0)
 scale = Vector2(1.2, 1.2)
 amount = 25
