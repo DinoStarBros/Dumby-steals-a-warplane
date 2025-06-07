@@ -7,6 +7,7 @@ var target_position : Vector2
 
 func _ready() -> void:
 	g.cam = self
+	g.camRect = %camRect
 
 var shake_intensity: float = 0.0
 var active_shake_time:float = 0.0
@@ -19,6 +20,9 @@ var shake_time_speed: float = 20.0
 var noise : FastNoiseLite = FastNoiseLite.new()
 
 func _physics_process(delta:float) -> void:
+	g.screen_corners.position = g.camRect.global_position
+	g.screen_corners.end = g.camRect.global_position + g.camRect.size
+	
 	target_position = target.aim_position * sensitivity
 	position = position.lerp(target_position, 0.25)
 	

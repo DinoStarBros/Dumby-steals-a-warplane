@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bj5wj2g1r73gg"]
+[gd_scene load_steps=26 format=3 uid="uid://bj5wj2g1r73gg"]
 
 [ext_resource type="Script" uid="uid://cn6d8a0upm6v5" path="res://entities/chaser/chaser.gd" id="1_b7csh"]
 [ext_resource type="Texture2D" uid="uid://b3hwhp3ky72y6" path="res://Art/planestuff/plane.png" id="2_fsmyf"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cilaqubvkn2sv" path="res://CompositionStuff/Hitbox/hitbox_component.tscn" id="7_bngux"]
 [ext_resource type="PackedScene" uid="uid://cbs0bmg6fong3" path="res://CompositionStuff/Velocity/velocity_component.tscn" id="8_vc8fo"]
 [ext_resource type="PackedScene" uid="uid://cwryohxgadl0g" path="res://CompositionStuff/Rotation/rotation_component.tscn" id="9_b36b3"]
+[ext_resource type="PackedScene" uid="uid://i0iht2frjgtv" path="res://scenes/enemyArrow/enemy_arrow.tscn" id="10_760n7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vc8fo"]
 radius = 15.0
@@ -444,5 +445,8 @@ texture = ExtResource("6_0teo6")
 hframes = 3
 vframes = 3
 frame = 1
+
+[node name="enemyArrow" parent="." instance=ExtResource("10_760n7")]
+unique_name_in_owner = true
 
 [connection signal="timeout" from="targetDeviatTimer" to="." method="_on_target_deviat_timer_timeout"]

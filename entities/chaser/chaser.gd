@@ -13,6 +13,9 @@ func _ready() -> void:
 	%HitboxComponent.set_attack_properties(1)
 	
 	velocity_component.accelerate_speed += randf_range(-10, 10)
+	
+	#await get_tree().create_timer(0.1).timeout
+	#spawn_arrow()
 
 var target_deviation : Vector2
 var direction : Vector2
@@ -37,7 +40,7 @@ func _physics_process(delta : float) -> void:
 	direction = rotation_component.direction
 	velocity_component.other_velocity_handle(delta, direction, accelerating)
 
-const tdev_range : = 300
+const tdev_range : = 1000
 func _on_target_deviat_timer_timeout() -> void:
 	target_deviation.x = randf_range(-tdev_range,tdev_range)
 	target_deviation.y = randf_range(-tdev_range,tdev_range)
@@ -52,3 +55,9 @@ func Dead(_attack:Attack)->void:
 	#g.spawn_xp(global_position, 1)
 	set_physics_process(false)
 	%death.play("die")
+
+const enemy_arrow_scn : PackedScene = preload("res://scenes/enemyArrow/enemy_arrow.tscn")
+var enemy_arrow : EnemyArrow
+func spawn_arrow() -> void:
+	enemy_arrow = enemy_arrow_scn.instantiate()
+	g.enemy_arrows.add_child(enemy_arrow)

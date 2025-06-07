@@ -2,7 +2,10 @@ extends Node
 
 var game : Game 
 var cam : PlrCamera
+var camRect : ColorRect
+var screen_corners : Rect2
 var player : CharacterBody2D
+var enemy_arrows : Node
 
 var attack : Attack = Attack.new()
 
@@ -31,6 +34,7 @@ func spawn_txt(text: String, global_pos: Vector2)->void: ## Spawns a splash text
 	game.add_child(txt)
 
 func _ready() -> void:
+	
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 var master_volume : float

@@ -8,7 +8,6 @@ class_name PlaneSprite
 @onready var rotation_component: RotationComponent = %RotationComponent
 
 func _process(_delta: float) -> void:
-	#var rot : float = %PlaneSprite.rotation_degrees
 	var rot : float = rotation_component.plane_sprite_rotation_degrees
 	if p.rolling:
 		pass

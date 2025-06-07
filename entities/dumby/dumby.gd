@@ -17,8 +17,10 @@ func _ready() -> void:
 	%weapons_parent.process_mode = Node.PROCESS_MODE_INHERIT
 
 var attack : Attack = Attack.new()
-func _physics_process(delta: float) -> void:
 
+var position_sensitive_rect : Rect2
+func _physics_process(delta: float) -> void:
+	
 	if is_on_floor() and health_component.hp > 0:
 		attack.ene_attack_damage = 999
 		hurtbox_component.damage(attack)

@@ -1064,6 +1064,15 @@ position_smoothing_speed = 20.0
 script = ExtResource("6_tddd6")
 target = NodePath("..")
 
+[node name="camRect" type="ColorRect" parent="Camera2D"]
+unique_name_in_owner = true
+visible = false
+offset_left = -1067.0
+offset_top = -600.0
+offset_right = 1067.0
+offset_bottom = 600.0
+mouse_filter = 2
+
 [node name="death" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {

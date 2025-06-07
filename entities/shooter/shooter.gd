@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 	direction = rotation_component.direction
 	velocity_component.other_velocity_handle(delta, dir_to_target_deviate_pos, accelerating)
 
-const tdev_range : = 200
+const tdev_range : = 1000
 func _on_target_deviat_timer_timeout() -> void:
 	target_deviation.x = randf_range(-tdev_range,tdev_range)
 	target_deviation.y = randf_range(-tdev_range,tdev_range)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bhp7st34wqg3f"]
+[gd_scene load_steps=26 format=3 uid="uid://bhp7st34wqg3f"]
 
 [ext_resource type="Script" uid="uid://bsinn15v5ma8t" path="res://entities/shooter/shooter.gd" id="1_kg2ur"]
 [ext_resource type="Texture2D" uid="uid://b3hwhp3ky72y6" path="res://Art/planestuff/plane.png" id="2_bvc85"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://rfxisnyv0d1i" path="res://Audio/pistol-shot-233473.mp3" id="8_o6t5e"]
 [ext_resource type="PackedScene" uid="uid://cbs0bmg6fong3" path="res://CompositionStuff/Velocity/velocity_component.tscn" id="9_ckebl"]
 [ext_resource type="PackedScene" uid="uid://cwryohxgadl0g" path="res://CompositionStuff/Rotation/rotation_component.tscn" id="10_d1p5d"]
+[ext_resource type="PackedScene" uid="uid://i0iht2frjgtv" path="res://scenes/enemyArrow/enemy_arrow.tscn" id="11_wqul4"]
 
 [sub_resource type="Animation" id="Animation_2qnmu"]
 resource_name = "Ouch"
@@ -453,6 +454,8 @@ trail_particles = NodePath("../Plane/trailparticle")
 unique_name_in_owner = true
 turn_speed = 9.0
 thing_to_rotate = NodePath("../Plane")
+
+[node name="enemyArrow" parent="." instance=ExtResource("11_wqul4")]
 
 [connection signal="timeout" from="targetDeviatTimer" to="." method="_on_target_deviat_timer_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

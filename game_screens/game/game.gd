@@ -13,6 +13,8 @@ func _ready() -> void:
 	#print(320*15)
 	SceneManager.fade_in()
 	g.game = self
+	g.enemy_arrows = %EnemyArrows
+	
 	for n in cloud_amnt:
 		%cloud_pos.global_position.y = randf_range(down_bound,up_bound)
 		%cloud_pos.global_position.x = randf_range(left_bound,right_bound)
