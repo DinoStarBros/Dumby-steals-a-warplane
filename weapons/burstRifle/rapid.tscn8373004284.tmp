@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://hekqvagsvs2e"]
+
+[ext_resource type="Script" uid="uid://j7pbmf85cwmv" path="res://weapons/rapid/rapid.gd" id="1_ojx54"]
+[ext_resource type="Resource" uid="uid://0sigb3nq6ncr" path="res://resources/weapon_stats/RapidStats.tres" id="2_7cnad"]
+
+[node name="rapid" type="Node2D"]
+script = ExtResource("1_ojx54")
+stats = ExtResource("2_7cnad")

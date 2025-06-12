@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cuqwajg7lthld" path="res://Art/planestuff/fx/effects-Sheet.png" id="3_xfjqn"]
 [ext_resource type="Texture2D" uid="uid://cb00doqsxr2ay" path="res://Art/Stuff2/shockwave-Sheet.png" id="5_mjjml"]
 [ext_resource type="PackedScene" uid="uid://cg1j2ioabubjc" path="res://juices/trail/trail_fx.tscn" id="6_727k3"]
-[ext_resource type="AudioStream" uid="uid://hbjph6hq0fu3" path="res://Audio/jetslash sfx/SFX/Roblox Explosion Sound Effect.wav" id="7_8vt5m"]
+[ext_resource type="AudioStream" uid="uid://c05eac572q51" path="res://Audio/amalgun/MissileExplode.wav" id="7_8vt5m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mjjml"]
 atlas = ExtResource("3_xfjqn")
@@ -224,7 +224,7 @@ _data = {
 script = ExtResource("1_cvdho")
 
 [node name="Bulletweffect-sheet" type="Sprite2D" parent="."]
-scale = Vector2(3, 3)
+scale = Vector2(5, 5)
 texture = ExtResource("2_jexvt")
 hframes = 12
 frame = 10
@@ -251,6 +251,7 @@ collision_mask = 2
 unique_name_in_owner = true
 position = Vector2(4.5, 0)
 shape = SubResource("RectangleShape2D_xfjqn")
+disabled = true
 
 [node name="detection_radius" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -273,13 +274,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_mjjml")
 }
 autoplay = "start"
-speed_scale = 5.0
 
 [node name="pointer" type="Node2D" parent="."]
 unique_name_in_owner = true
 
 [node name="Shockwave-sheet" type="Sprite2D" parent="."]
-visible = false
 texture = ExtResource("5_mjjml")
 hframes = 3
 vframes = 3
@@ -290,7 +289,8 @@ frame = 1
 [node name="explode" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("7_8vt5m")
-volume_db = -15.0
+volume_db = 5.0
+pitch_scale = 0.8
 max_distance = 3000.0
 bus = &"sfx"
 

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://1i3gk7oanohg"]
+
+[ext_resource type="Script" uid="uid://2egkgwj5n4iw" path="res://resources/weapon_stats_resource.gd" id="1_5gggi"]
+[ext_resource type="PackedScene" uid="uid://c4npyu2732suj" path="res://projectiles/plr_bullet/bullet.tscn" id="1_b7wv1"]
+
+[resource]
+script = ExtResource("1_5gggi")
+shoot_cooldown = 0.35
+bullet_spd = 2000
+bullet_amnt = 3
+random_spread = 0.0
+bullet_lifetime = 1.0
+shoot_delay = 0.075
+bullet_scn = ExtResource("1_b7wv1")
+metadata/_custom_type_script = "uid://2egkgwj5n4iw"

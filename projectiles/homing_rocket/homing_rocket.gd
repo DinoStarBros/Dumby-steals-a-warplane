@@ -10,8 +10,7 @@ var max_speed : float = 1500
 var initial_velocity : Vector2
 
 func _ready() -> void:
-	
-	%explode.pitch_scale = randf_range(1, 1.3)
+	%explode.pitch_scale = randf_range(0.8, 1)
 	
 	hitbox_component.Hit.connect(hit)
 	

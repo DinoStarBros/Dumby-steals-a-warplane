@@ -2,7 +2,7 @@ extends Weapon
 
 func _ready() -> void:
 	cooldown = stats.shoot_cooldown
-	ammo = stats.max_ammo
+	ammo = max_ammo
 
 func _process(delta: float) -> void:
 	buffed_handling(delta)
@@ -17,23 +17,20 @@ func shooting_handling(delta:float) -> void:
 	if Input.is_action_pressed("shoot") and can_shoot:
 		can_shoot = false
 		cooldown = stats.shoot_cooldown
-		%shootsfx.pitch_scale = randf_range(0.6, 0.8)
-		%shootsfx2.pitch_scale = randf_range(1.0, 1.2)
-		
-		%shootsfx.play()
-		%shootsfx2.play(0.2)
 		
 		ammo -= 1
 		
 		if buffed:
 			for n in stats.bullet_amnt + 3:
 				spawn_bullet() # Adds 3 extra bullets when buffed
+				await get_tree().create_timer(stats.shoot_delay).timeout
 		else:
 			for n in stats.bullet_amnt:
 				spawn_bullet()
+				await get_tree().create_timer(stats.shoot_delay).timeout
 	
 	if buffed:
-		cooldown -= delta * 1.4 # Firerate is slightly faster when buffed
+		cooldown -= delta * 1.2 # Firerate is slightly faster when buffed
 	else:
 		cooldown -= delta
 	
@@ -42,6 +39,12 @@ func shooting_handling(delta:float) -> void:
 		can_shoot = true
 
 func spawn_bullet() -> void:
+	%shootsfx.pitch_scale = randf_range(0.6, 0.8)
+	%shootsfx2.pitch_scale = randf_range(1.0, 1.2)
+	
+	%shootsfx.play()
+	%shootsfx2.play(0.2)
+	
 	rand_spread_vector.x = randf_range(-stats.random_spread, stats.random_spread)
 	rand_spread_vector.y = randf_range(-stats.random_spread, stats.random_spread)
 	

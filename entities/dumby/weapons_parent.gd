@@ -4,7 +4,8 @@ class_name WeaponsParent
 @export var dumby : Dumby
 @export var ammo_bar : ProgressBar
 var ammo_text : Label
-@export var current_weapon : Weapon
+var current_weapon : Weapon
+var weapons : Array
 
 @onready var regen_bar: ProgressBar = %regen_bar
 @onready var health_component: HealthComponent = %HealthComponent
@@ -17,9 +18,12 @@ signal Tactical_Reload
 
 func _ready() -> void:
 	ammo_text = ammo_bar.get_child(0)
+	for weapon in get_children():
+		if weapon is Weapon:
+			weapons.append(weapon)
+			current_weapon = weapon
 
 func _process(delta: float) -> void:
-	#look_at(get_global_mouse_position())
 	look_at(p.dir_plane + global_position)
 	regen_bar.visible = not Input.is_action_pressed("shoot") and health_component.hp < health_component.max_hp and not current_weapon.reloading
 	ammo_handling(delta)
@@ -81,6 +85,10 @@ func ammo_handling(delta: float) -> void:
 				g.spawn_txt("Quick Reload", global_position)
 				tactical_reload()
 			else:
+				# Failed tactical reload
+				%reloadfail.pitch_scale = randf_range(1, 1.2)
+				%reloadfail.play()
+				
 				g.spawn_txt("Womp Womp", global_position)
 				current_weapon.buff_time = 0
 		

@@ -10,6 +10,6 @@ bullet_spd = 1500
 bullet_amnt = 5
 random_spread = 0.2
 bullet_lifetime = 1.0
+shoot_delay = 0.0
 bullet_scn = ExtResource("1_yo2f7")
-max_ammo = 50
 metadata/_custom_type_script = "uid://2egkgwj5n4iw"

@@ -13,6 +13,7 @@ var dir_to_mouse : Vector2 ## Normalized direction vector from the player to the
 var rand_spread_vector : Vector2
 
 @export var max_ammo : int = 10 ## Max amount of ammo
+@export var ammo_use : int = 1 ## Amount of ammo that gets used up per shot
 var ammo : int
 
 var reloading : bool = false ## Checks if the weapon is reloading, if so, it disables shooting

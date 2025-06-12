@@ -13,7 +13,7 @@ func _process(_delta: float) -> void:
 	dir_to_parent = arrow.global_position.direction_to(parent.global_position)
 	arrow.rotation = dir_to_parent.angle()
 
-const aseg : float = 2 #arrow_screen_edge_gap
+const aseg : float = 3 #arrow_screen_edge_gap
 func set_marker_position(bounds : Rect2) -> void:
 	arrow.global_position.x = clamp(global_position.x, 
 	bounds.position.x + arrow.size.x * aseg, 

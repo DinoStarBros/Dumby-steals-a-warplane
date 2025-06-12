@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://bfahxvjjxjylq"]
+[gd_scene load_steps=87 format=3 uid="uid://bfahxvjjxjylq"]
 
 [ext_resource type="Script" uid="uid://cbp023lkcpg5o" path="res://entities/dumby/dumby.gd" id="1_2ba6e"]
 [ext_resource type="PackedScene" uid="uid://gs3fdbhnlc5o" path="res://CompositionStuff/Hurtbox/hurtbox_component.tscn" id="2_5wgoi"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://ctjumrbw2yuxo" path="res://GUI.gd" id="15_0uce1"]
 [ext_resource type="Texture2D" uid="uid://dnp54j8h1op73" path="res://Art/Bitlytic/crosshair.png" id="15_1o3u8"]
 [ext_resource type="AudioStream" uid="uid://dspg81m7f74v2" path="res://Audio/splashtownSFX/pickupCoin.wav" id="15_6bsw8"]
+[ext_resource type="AudioStream" uid="uid://bhpeunpkd55xc" path="res://Audio/planesfx/empty-gun-shot-6209.mp3" id="17_v3j65"]
 [ext_resource type="PackedScene" uid="uid://hekqvagsvs2e" path="res://weapons/rapid/rapid.tscn" id="18_23fr6"]
 [ext_resource type="Texture2D" uid="uid://bqubavsk5td7m" path="res://Art/newsprites.png" id="19_hu6rb"]
 [ext_resource type="Script" uid="uid://0245wd4r0bun" path="res://entities/dumby/weapons_parent.gd" id="19_ufwy4"]
@@ -944,6 +945,13 @@ stream = ExtResource("25_bblbc")
 volume_db = 5.0
 bus = &"sfx"
 
+[node name="reloadfail" type="AudioStreamPlayer" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("17_v3j65")
+volume_db = 5.0
+pitch_scale = 1.2
+bus = &"sfx"
+
 [node name="newgunim" type="AnimationPlayer" parent="sfx"]
 unique_name_in_owner = true
 libraries = {
@@ -1250,12 +1258,11 @@ unique_name_in_owner = true
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="weapons_parent" type="Node2D" parent="." node_paths=PackedStringArray("dumby", "ammo_bar", "current_weapon")]
+[node name="weapons_parent" type="Node2D" parent="." node_paths=PackedStringArray("dumby", "ammo_bar")]
 unique_name_in_owner = true
 script = ExtResource("19_ufwy4")
 dumby = NodePath("..")
 ammo_bar = NodePath("../bars/ammo")
-current_weapon = NodePath("rapid")
 
 [node name="muzzle_flash" type="Sprite2D" parent="weapons_parent"]
 visible = false
@@ -1278,8 +1285,6 @@ color = Color(1, 0.70897, 0.147944, 1)
 texture = ExtResource("20_hu6rb")
 texture_scale = 0.4
 
-[node name="rapid" parent="weapons_parent" instance=ExtResource("18_23fr6")]
-
 [node name="tactical_reload_fx" type="Sprite2D" parent="weapons_parent"]
 unique_name_in_owner = true
 visible = false
@@ -1301,6 +1306,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_n4tpm")
 }
 speed_scale = 2.0
+
+[node name="rapid" parent="weapons_parent" instance=ExtResource("18_23fr6")]
 
 [node name="bars" type="Control" parent="."]
 layout_mode = 3

@@ -18,22 +18,32 @@ func shooting_handling(delta:float) -> void:
 		cooldown = stats.shoot_cooldown
 		can_shoot = false
 		
+		%shootsfx2.pitch_scale = randf_range(0.8, 0.85)
+		%shootsfx2.play(0.07)
+		
 		for n in stats.bullet_amnt:
 			spawn_bullet()
 			
 			if buffed:
 				await get_tree().create_timer(stats.shoot_delay / 1.5).timeout
+				# Decrease burst cooldown when buffed
 			else:
 				await get_tree().create_timer(stats.shoot_delay).timeout
 		
 	if buffed:
-		cooldown -= delta * 2 # Increases the firerate when buffed
+		cooldown -= delta * 1.2 
+		# Increases the firerate when buffed
 	else:
 		cooldown -= delta
 	
 	if cooldown <= 0:
 		cooldown = 0
 		can_shoot = true
+	
+	if buffed:
+		stats.bullet_spd = 2500
+	else:
+		stats.bullet_spd = 2000
 
 func spawn_bullet() -> void:
 	ammo -= ammo_use
@@ -64,7 +74,4 @@ func buffed_handling(delta: float) -> void:
 
 func play_sfx() -> void:
 	%shootsfx.pitch_scale = randf_range(0.5, 0.7)
-	%shootsfx2.pitch_scale = randf_range(1.1, 1.3)
-	
 	%shootsfx.play()
-	%shootsfx2.play(0.2)
