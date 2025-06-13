@@ -8,7 +8,7 @@
 [node name="burstRifle" type="Node2D"]
 script = ExtResource("1_70ogn")
 stats = ExtResource("2_gpuok")
-max_ammo = 100
+max_ammo = 99
 min_sweet_spot = 0.55
 max_sweet_spot = 0.9
 max_buff_time = 3.0
@@ -23,6 +23,5 @@ bus = &"sfx"
 [node name="shootsfx2" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("4_gpuok")
-volume_db = -15.0
-pitch_scale = 0.8
+volume_db = -20.0
 bus = &"sfx"

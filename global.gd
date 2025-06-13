@@ -27,6 +27,10 @@ var gs_string : Array = [
 	"Title", "Combat", "Lost", "LevelUp"
 ]
 const txt_scn : PackedScene = preload("res://scenes/DmgNum/dmg_num.tscn")
+
+func _init() -> void:
+	volume_handle()
+
 func spawn_txt(text: String, global_pos: Vector2)->void: ## Spawns a splash text effect, can be used for damage numbers, or score
 	var txt : DmgNum = txt_scn.instantiate()
 	txt.text = text
@@ -52,6 +56,15 @@ func spawn_xp(global_pos : Vector2, amount : int) -> void:
 	xpn.global_position = global_pos
 
 func _process(_delta:float)->void:
+	volume_handle()
+
+func frame_freeze(timescale: float, duration: float) -> void: ## Slows down the engine's time scale, slowing down the time, for a certain duration. Use for da juice
+	if frame_freeze_value:
+		Engine.time_scale = timescale
+		await get_tree().create_timer(duration, true, false, true).timeout
+		Engine.time_scale = 1.0
+
+func volume_handle() -> void:
 	AudioServer.set_bus_volume_db(
 		0,
 		linear_to_db(master_volume)
@@ -65,8 +78,4 @@ func _process(_delta:float)->void:
 		linear_to_db(sfx_volume)
 	)
 
-func frame_freeze(timescale: float, duration: float) -> void: ## Slows down the engine's time scale, slowing down the time, for a certain duration. Use for da juice
-	if frame_freeze_value:
-		Engine.time_scale = timescale
-		await get_tree().create_timer(duration, true, false, true).timeout
-		Engine.time_scale = 1.0
+var switch_acc_roll : bool = false

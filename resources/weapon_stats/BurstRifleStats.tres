@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_5gggi")
 shoot_cooldown = 0.35
-bullet_spd = 2000
+bullet_spd = 2500
 bullet_amnt = 3
 random_spread = 0.0
 bullet_lifetime = 1.0

@@ -60,3 +60,16 @@ func _on_sure_pressed() -> void:
 	scene_change("res://game_screens/title/title.tscn")
 	g.game_state = g.game_states.Title
 	settings_menu._on_save_pressed()
+
+
+@onready var switch_acc_roll_button: Button = %switch_acc_roll
+
+func _on_switch_acc_roll_pressed() -> void:
+	g.switch_acc_roll = not g.switch_acc_roll
+	
+	switch_acc_roll_button.text = str(
+		
+		"Switch Accelerate & Roll : \n",
+		g.switch_acc_roll
+		
+		)

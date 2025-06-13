@@ -1145,7 +1145,6 @@ text = "Menu"
 
 [node name="paused" type="Control" parent="GUI"]
 unique_name_in_owner = true
-visible = false
 z_index = 3
 layout_mode = 3
 anchors_preset = 8
@@ -1208,6 +1207,18 @@ layout_mode = 2
 focus_mode = 0
 text = "Are You Sure?
 "
+
+[node name="switch_acc_roll" type="Button" parent="GUI/paused"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -237.0
+offset_top = -73.0
+offset_right = -43.0
+offset_bottom = -42.0
+scale = Vector2(1.5, 1.5)
+focus_mode = 0
+text = "Switch Accelerate & Roll:
+false"
 
 [node name="score" type="Label" parent="GUI"]
 unique_name_in_owner = true
@@ -1552,6 +1563,7 @@ libraries = {
 [connection signal="pressed" from="GUI/paused/settingsMenu/butons/resume" to="GUI" method="_on_resume_pressed"]
 [connection signal="pressed" from="GUI/paused/settingsMenu/butons/quit" to="GUI" method="_on_quit_pressed"]
 [connection signal="pressed" from="GUI/paused/settingsMenu/butons/sure" to="GUI" method="_on_sure_pressed"]
+[connection signal="pressed" from="GUI/paused/switch_acc_roll" to="GUI" method="_on_switch_acc_roll_pressed"]
 [connection signal="pressed" from="LvlXPUpg/upgUi/choosettons/choose" to="LvlXPUpg" method="_on_choose_pressed"]
 [connection signal="pressed" from="LvlXPUpg/upgUi/choosettons/reroll" to="LvlXPUpg" method="_on_reroll_pressed"]
 [connection signal="pressed" from="LvlXPUpg/upgUi/choosettons/skip" to="LvlXPUpg" method="_on_skip_pressed"]

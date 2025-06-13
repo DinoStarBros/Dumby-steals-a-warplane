@@ -18,7 +18,7 @@ func shooting_handling(delta:float) -> void:
 		cooldown = stats.shoot_cooldown
 		can_shoot = false
 		
-		%shootsfx2.pitch_scale = randf_range(0.8, 0.85)
+		%shootsfx2.pitch_scale = randf_range(0.9, 1.1)
 		%shootsfx2.play(0.07)
 		
 		for n in stats.bullet_amnt:
@@ -41,9 +41,9 @@ func shooting_handling(delta:float) -> void:
 		can_shoot = true
 	
 	if buffed:
-		stats.bullet_spd = 2500
+		stats.bullet_spd = 3000
 	else:
-		stats.bullet_spd = 2000
+		stats.bullet_spd = 2500
 
 func spawn_bullet() -> void:
 	ammo -= ammo_use

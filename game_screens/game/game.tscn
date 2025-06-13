@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://5ok8ww27od1g" path="res://Art/planestuff/SEA.png" id="4_3mndk"]
 [ext_resource type="Resource" uid="uid://s8xb5hmfqgnq" path="res://resources/waves/wave1.tres" id="4_slubn"]
 [ext_resource type="Texture2D" uid="uid://ctfkn7tj5byx2" path="res://Art/STARS (2).png" id="5_ymunx"]
-[ext_resource type="AudioStream" uid="uid://djpnk4x0gd6y" path="res://Audio/planemusic/DnB stuffs.wav" id="7_gy565"]
+[ext_resource type="AudioStream" uid="uid://b2j2t1cx77pud" path="res://Audio/planemusic/DNA - Kendrick Lamar (AUDIO).mp3" id="7_gy565"]
 
 [sub_resource type="Curve2D" id="Curve2D_gy565"]
 _data = {

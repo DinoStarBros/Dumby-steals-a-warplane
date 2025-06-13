@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://hyn8wpq0do5d" path="res://CompositionStuff/Hitbox/hitbox_component.gd" id="1_nvbwq"]
 [ext_resource type="AudioStream" uid="uid://crwvnwtgketcd" path="res://Audio/cardtowersfx/enemy_hit.wav" id="2_w85rt"]
-[ext_resource type="AudioStream" uid="uid://nj64nd85rtql" path="res://Audio/splashtownSFX/Airdash.wav" id="3_e2wpu"]
+[ext_resource type="AudioStream" uid="uid://e7fgtf2ti3ki" path="res://Audio/41randsfx/15.wav" id="4_361qo"]
 [ext_resource type="AudioStream" uid="uid://cw0s6bkxlwn2b" path="res://Audio/splashtownSFX/Jump.wav" id="4_xevjv"]
 [ext_resource type="AudioStream" uid="uid://blcay1tfimw0e" path="res://Audio/cardtowersfx/player_hit.wav" id="5_47pvi"]
-[ext_resource type="AudioStream" uid="uid://hbjph6hq0fu3" path="res://Audio/jetslash sfx/SFX/Roblox Explosion Sound Effect.wav" id="6_361qo"]
+[ext_resource type="AudioStream" uid="uid://cvbv6cd7xmnjx" path="res://Audio/41randsfx/16.wav" id="6_361qo"]
 
 [node name="HitboxComponent" type="Area2D"]
 collision_layer = 0
@@ -21,15 +21,15 @@ bus = &"sfx"
 
 [node name="enemy_hit2" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("3_e2wpu")
+stream = ExtResource("4_xevjv")
 volume_db = -10.0
-pitch_scale = 0.5
+pitch_scale = 1.5
 bus = &"sfx"
 
 [node name="enemy_hit3" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("4_xevjv")
-volume_db = -5.0
+stream = ExtResource("4_361qo")
+volume_db = -10.0
 bus = &"sfx"
 
 [node name="player_hit" type="AudioStreamPlayer" parent="."]
@@ -41,7 +41,7 @@ bus = &"sfx"
 [node name="enemy_killshot" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("6_361qo")
-volume_db = -10.0
+volume_db = -5.0
 bus = &"sfx"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

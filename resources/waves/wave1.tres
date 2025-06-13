@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_a4hey")
 enemies = Array[PackedScene]([ExtResource("1_1102q"), ExtResource("2_wvy8a")])
-starting_spawn_time = 1.0
+starting_spawn_time = 3.0
 minimum_spawn_time = 0.5
 spawn_time_increment = 0.01
 enemy_limit = 10.0

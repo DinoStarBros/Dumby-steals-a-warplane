@@ -22,7 +22,7 @@ var position_sensitive_rect : Rect2
 func _physics_process(delta: float) -> void:
 	
 	if is_on_floor() and health_component.hp > 0:
-		attack.ene_attack_damage = 999
+		attack.ene_attack_damage = 2
 		hurtbox_component.damage(attack)
 	
 	roll_handling(delta)
@@ -54,7 +54,10 @@ func _physics_process(delta: float) -> void:
 	if g.mobile:
 		pass
 	else:
-		accelerating = Input.is_action_pressed("accelerate")
+		if g.switch_acc_roll:
+			accelerating = Input.is_action_pressed("roll")
+		else:
+			accelerating = Input.is_action_pressed("accelerate")
 	
 	if accelerating:
 		
@@ -139,16 +142,13 @@ var roll_cooldown : float = 0.1 ## The amount of time you have to wait after a r
 var roll_time : float = 0 ## The amount of time that has passed since the start of the roll
 var roll_cd_time : float = 0
 func roll_handling(delta: float) -> void:
-	if Input.is_action_just_pressed("roll") and roll_cd_time <= 0 and not rolling:
-		%roll.pitch_scale = randf_range(0.8,1.2)
-		%roll.play()
-		
-		%rollnim.play("roll")
-		
-		roll_time = 0
-		rolling = true
-		
-		plane_sprite.frame = 0
+	if roll_cd_time <= 0 and not rolling:
+		if g.switch_acc_roll:
+			if Input.is_action_just_pressed("accelerate"):
+				roll()
+		else:
+			if Input.is_action_just_pressed("roll"):
+				roll()
 	
 	if rolling:
 		roll_time += delta
@@ -170,3 +170,14 @@ func _input(_event: InputEvent) -> void:
 	)
 	#%Label.text = str(controller_joypad_vector)
 	left_joystick_length = controller_joypad_vector.length()
+
+func roll() -> void:
+	%roll.pitch_scale = randf_range(0.8,1.2)
+	%roll.play()
+	
+	%rollnim.play("roll")
+		
+	roll_time = 0
+	rolling = true
+		
+	plane_sprite.frame = 0

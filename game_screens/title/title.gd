@@ -27,3 +27,12 @@ func _process(delta: float) -> void:
 	%buttons.global_position.y += (sin_val * delta) * 20
 	#%Dumbynplane.global_position.y += (sin_val * delta) * -30
 	%Txt.global_position.y += (sin_val * delta) * -10
+
+func _on_options_pressed() -> void:
+	pass # Replace with function body.
+
+func _on_about_pressed() -> void:
+	pass # Replace with function body.
+
+func _on_credits_pressed() -> void:
+	pass # Replace with function body.

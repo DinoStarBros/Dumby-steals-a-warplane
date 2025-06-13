@@ -95,7 +95,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 1, 1.5),
 "transitions": PackedFloat32Array(0.5, 0.5, 1),
 "update": 0,
-"values": [Vector2(270, 500), Vector2(270, 500), Vector2(270, 137)]
+"values": [Vector2(270, 500), Vector2(270, 500), Vector2(270, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5qlgw"]
@@ -137,18 +137,30 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 317.0
-offset_top = 500.0
-offset_right = 359.0
-offset_bottom = 566.0
+offset_left = -33.0
+offset_top = -152.0
+offset_right = 37.0
+offset_bottom = 19.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(3, 3)
+scale = Vector2(2, 2)
 
 [node name="play" type="Button" parent="stuff/buttons"]
 layout_mode = 2
 text = "Play
 "
+
+[node name="options" type="Button" parent="stuff/buttons"]
+layout_mode = 2
+text = "Options"
+
+[node name="about" type="Button" parent="stuff/buttons"]
+layout_mode = 2
+text = "About"
+
+[node name="credits" type="Button" parent="stuff/buttons"]
+layout_mode = 2
+text = "Credits"
 
 [node name="quit" type="Button" parent="stuff/buttons"]
 layout_mode = 2
@@ -157,7 +169,7 @@ text = "Quit
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_5qlgw")
+&"": SubResource("AnimationLibrary_5qlgw")
 }
 autoplay = "intro"
 
@@ -165,7 +177,6 @@ autoplay = "intro"
 
 [node name="woosh" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource("3_86k6m")
-volume_db = -10.0
 pitch_scale = 0.7
 bus = &"sfx"
 
@@ -190,4 +201,7 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("6_7rbsw")
 
 [connection signal="pressed" from="stuff/buttons/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="stuff/buttons/options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="stuff/buttons/about" to="." method="_on_about_pressed"]
+[connection signal="pressed" from="stuff/buttons/credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="stuff/buttons/quit" to="." method="_on_quit_pressed"]

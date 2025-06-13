@@ -29,10 +29,10 @@ func _on_area_entered(area : HurtboxComponent) -> void:
 			%enemy_hit.pitch_scale = 0.5 + randf_range(-.1,.1)
 			%enemy_hit.play()
 			
-			%enemy_hit2.pitch_scale = randf_range(.4,.6)
+			%enemy_hit2.pitch_scale = randf_range(1.4,1.6)
 			%enemy_hit2.play()
 			
-			%enemy_hit3.pitch_scale = randf_range(1.4,1.6)
+			%enemy_hit3.pitch_scale = randf_range(1.3,1.7)
 			%enemy_hit3.play()
 		area.damage(attack)
 		
