@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="DumbyStealsAWarplane"
+config/name="DumbyStealsAWarplaneBiggerVer"
 config/tags=PackedStringArray("bigproject", "important")
 run/main_scene="uid://djxndtog5nfd5"
 config/features=PackedStringArray("4.6", "GL Compatibility")
